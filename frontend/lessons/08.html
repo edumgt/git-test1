@@ -1,1 +1,1263 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>학습 08 | 투자 분석 포털</title><link rel="stylesheet" href="lesson-page.css?v=4"></head><body><main class="lesson-main"><header class="lesson-gnb"><a class="lesson-brand" href="/?view=home">투자 분석 포털</a><nav><a href="/?view=home">대시보드</a><a href="/?view=learn">RAG</a><a href="/?view=investment-practice">투자 실습</a></nav></header><div class="lesson-content"><header class="lesson-title"><b>학습 08 · 거래 전략 · LEAN · 선물·옵션</b><span>규칙 검증과 파생상품 위험</span></header><article class="lesson-doc"><h2>전략 검증</h2><p>백테스트는 과거 데이터에서 규칙을 검토하는 절차입니다. 수수료·슬리피지·생존자 편향·과적합을 고려하지 않은 성과는 실제 운용 결과와 다를 수 있습니다.</p><h2>선물과 옵션</h2><p>선물은 미래 가격과 연결된 계약이고, 옵션은 정한 가격으로 사고팔 수 있는 권리입니다. 증거금·만기·변동성 때문에 현물보다 손익이 빠르게 확대될 수 있습니다.</p><p class="note">LEAN 결과는 교육용 검증 자료이며 미래 수익을 보장하지 않습니다.</p></article></div></main></body></html>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>학습 08 | 투자 분석 포털</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"><link rel="stylesheet" href="lesson-page.css?v=7"><script>if(new URLSearchParams(location.search).get("embedded")==="1")document.documentElement.classList.add("embedded");</script></head><body><div class="lesson-layout"><aside class="lesson-lnb"><div class="lesson-lnb-head"><b>EDUMGT Finance</b><span>투자 분석 · 금융 학습 · RAG 실습</span></div><nav><p>통합 학습 과정 · 10개</p><a href="01.html"><b>01</b>법인과 회사 구조 1</a><a href="02.html"><b>02</b>법인과 회사 구조 2</a><a href="03.html"><b>03</b>법인과 회사 구조 3</a><a href="04.html"><b>04</b>거시경제와 주식시장</a><a href="05.html"><b>05</b>주식 기초</a><a href="06.html"><b>06</b>주식 분석</a><a href="07.html"><b>07</b>가치와 재무</a><a href="08.html" aria-current="page"><b>08</b>거래 전략 · LEAN</a><a href="09.html"><b>09</b>펀드 · ETF · 채권</a><a href="10.html"><b>10</b>자산배분 · 퀀트</a></nav></aside><main class="lesson-main"><header class="lesson-gnb"><a class="lesson-brand" href="/?view=home">투자 분석 포털</a><nav><a href="/?view=home">대시보드</a><a href="/?view=minute-chart">시장정보</a><a href="/?view=chart-drawing">드로잉 차트</a><a href="/?view=quiz">퀴즈</a><a href="/?view=data-visualization">데이터 시각화</a><a href="/?view=learn">RAG</a><a href="/?view=investment-practice">투자 실습</a></nav></header><div class="lesson-content"><header class="lesson-title"><b>학습 08 · 거래 전략 · LEAN · 선물·옵션</b><span>규칙 검증과 파생상품 위험</span></header><article class="lesson-doc"><h2>전략 검증</h2><p>백테스트는 과거 데이터에서 규칙을 검토하는 절차입니다. 수수료·슬리피지·생존자 편향·과적합을 고려하지 않은 성과는 실제 운용 결과와 다를 수 있습니다.</p><h2>선물과 옵션</h2><p>선물은 미래 가격과 연결된 계약이고, 옵션은 정한 가격으로 사고팔 수 있는 권리입니다. 증거금·만기·변동성 때문에 현물보다 손익이 빠르게 확대될 수 있습니다.</p><p class="note">LEAN 결과는 교육용 검증 자료이며 미래 수익을 보장하지 않습니다.</p></article><section class="lesson-core" aria-labelledby="core-title"><header class="lesson-supplement-head lesson-core-head"><p class="lesson-kicker">학습 본문</p><h2 id="core-title">주식 4</h2></header><nav class="lesson-toc" aria-label="학습 본문 목차"><b>학습 본문 목차</b><ol><li><a href="#삼성전자-과거-데이터를-활용한-퀀트-분석-사례">삼성전자 과거 데이터를 활용한 퀀트 분석 사례</a></li><li><a href="#백데이터historical-data와-백테스팅backtesting은-퀀트-투자나-매매-전략을-개발할-때-과거-데이터를-기반으로-내-투자-아이디어가-실제로-수익을-냈을지-시뮬레이션하고-검증하는-핵심-프로세스입니다">백데이터(Historical Data)와 백테스팅(Backtesting)은 퀀트 투자나 매매 전략을 개발할 때 &quot;과거 데이터를 기반으로 내 투자 아이디어가 실제로 수익을 냈을지 시뮬레이션하고 검증하는 핵심 프로세스&quot;입니다.</a></li><li><a href="#1-백데이터-backdata-과거-데이터">1. 백데이터 (Backdata / 과거 데이터)</a></li><li><a href="#2-백테스팅-backtesting-과거-검증">2. 백테스팅 (Backtesting / 과거 검증)</a></li><li><a href="#3-백테스팅-시-빠지기-쉬운-3대-함정">3. 백테스팅 시 빠지기 쉬운 3대 함정</a></li><li><a href="#부록-docker-compose로-삼성전자-lean-백테스트-실행하기">부록: Docker Compose로 삼성전자 LEAN 백테스트 실행하기</a></li><li><a href="#httpshubdockercomrquantconnectlean">https://hub.docker.com/r/quantconnect/lean</a></li><li><a href="#1-lean의-핵심-프레임워크-구조">1. LEAN의 핵심 프레임워크 구조</a></li><li><a href="#2-lean-엔진의-주요-특징">2. LEAN 엔진의 주요 특징</a></li><li><a href="#3-lean-사용-시-장단점">3. LEAN 사용 시 장단점</a></li></ol></nav><article class="lesson-doc lesson-core-doc">
+<h2 id="삼성전자-과거-데이터를-활용한-퀀트-분석-사례">삼성전자 과거 데이터를 활용한 퀀트 분석 사례</h2>
+<p>삼성전자 과거 데이터를 활용해 **“3일 연속 주가 하락 후 반등(상승)”**하는 패턴을 퀀트 시스템 관점에서 분석하는 실제 사례 예시를 소개합니다.</p>
+<h3 id="1-가상의-분석-아이디어-가설-수립">1. 가상의 분석 아이디어 (가설 수립)</h3>
+<blockquote>
+<p>“주가가 3일 연속 떨어지면 단기 과매도 상태일 확률이 높으니, 4일째에는 기술적 반등이 나오지 않을까?”</p>
+</blockquote>
+<ul>
+<li><strong>조건 A (3일 연속 하락)</strong>: <code>t-3</code>, <code>t-2</code>, <code>t-1</code>일의 종가가 전일 종가 대비 모두 하락</li>
+<li><strong>조건 B (매수 시점)</strong>: <code>t</code>일 시가(Open) 또는 장 시작 후 매수</li>
+<li><strong>분석 목표</strong>: <code>t</code>일 종가가 <code>t-1</code>일 종가 대비 상승하는 비율(승률)과 평균 수익률을 측정</li>
+</ul>
+<h3 id="2-데이터-분석-흐름-workflow">2. 데이터 분석 흐름 (Workflow)</h3>
+<pre><code>[데이터 수집] → [3일 연속 하락 패턴 추출] → [4일차 반등 수익률 측정] → [결과 평가]
+</code></pre>
+<h4>① 데이터 수집 (5년치 예시)</h4>
+<ul>
+<li><strong>기간</strong>: 2021년~2025년 (약 1,230~1,250 거래일)</li>
+<li><strong>수집 항목</strong>: 삼성전자 일별 종가(Close), 시가(Open), 고가(High), 저가(Low), 거래량</li>
+</ul>
+<h4>② 조건 검색 (패턴 시뮬레이션)</h4>
+<p>약 1,250일의 데이터 중 “3일 연속 음봉(또는 종가 하락)”이 발생한 날을 모두 골라냅니다. 일반적인 대형주 기준으로 5년(약 1,200거래일) 동안 ‘3일 연속 하락’ 패턴은 약 80~120회 내외 발생할 수 있습니다.</p>
+<h3 id="3-예시-데이터로-보는-작동-흐름-3일-연속-하락-후-반등">3. 예시 데이터로 보는 작동 흐름 (3일 연속 하락 후 반등)</h3>
+<p>이해를 돕기 위해 5년 데이터 중 특정 구간을 추출한 백테스트 예시입니다.</p>
+<table>
+<thead>
+<tr>
+<th>날짜</th>
+<th>종가</th>
+<th>전일 대비</th>
+<th>조건 만족 여부</th>
+<th>매수/매도 실행</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Day 1</td>
+<td>71,000원</td>
+<td>-1.2%</td>
+<td>하락 1일차</td>
+<td>대기</td>
+</tr>
+<tr>
+<td>Day 2</td>
+<td>70,100원</td>
+<td>-1.3%</td>
+<td>하락 2일차</td>
+<td>대기</td>
+</tr>
+<tr>
+<td>Day 3</td>
+<td>69,000원</td>
+<td>-1.6%</td>
+<td>하락 3일차 달성</td>
+<td>장 마감 후 매수 신호(Signal) 발생</td>
+</tr>
+<tr>
+<td>Day 4</td>
+<td>70,200원</td>
+<td>+1.7%</td>
+<td>4일차 상승 전환</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="백데이터historical-data와-백테스팅backtesting은-퀀트-투자나-매매-전략을-개발할-때-과거-데이터를-기반으로-내-투자-아이디어가-실제로-수익을-냈을지-시뮬레이션하고-검증하는-핵심-프로세스입니다">백데이터(Historical Data)와 백테스팅(Backtesting)은 퀀트 투자나 매매 전략을 개발할 때 "과거 데이터를 기반으로 내 투자 아이디어가 실제로 수익을 냈을지 시뮬레이션하고 검증하는 핵심 프로세스"입니다.</h2>
+<p>삼성전자 ‘3일 연속 하락 후 반등’이라는 구체적인 가설의 예시는 이 문서의 <a href="#%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-%EA%B3%BC%EA%B1%B0-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%ED%80%80%ED%8A%B8-%EB%B6%84%EC%84%9D-%EC%82%AC%EB%A1%80">삼성전자 과거 데이터를 활용한 퀀트 분석 사례</a>에서 먼저 볼 수 있습니다. 이 문서는 그 사례를 포함한 모든 전략에 공통으로 적용할 데이터·성과지표·편향 점검 기준을 기준 내용으로 삼습니다.</p>
+<hr>
+<h2 id="1-백데이터-backdata-과거-데이터">1. 백데이터 (Backdata / 과거 데이터)</h2>
+<p>백테스팅을 수행하기 위해 사용되는 <strong>과거의 모든 금융/경제 데이터</strong>를 의미합니다.</p>
+<ul>
+<li>
+<p><strong>주요 종류:</strong></p>
+</li>
+<li>
+<p><strong>시세 데이터:</strong> 일봉, 분봉, 틱 데이터(시가, 고가, 저가, 종가, 거래량).</p>
+</li>
+<li>
+<p><strong>재무 데이터:</strong> 매출액, 영업이익 등 기업의 재무제표 항목.</p>
+</li>
+<li>
+<p><strong>대안 데이터:</strong> 매매 주체별 동향(개인/기관/외인), 뉴스 감성 분석, 구글 트렌드 검색량 등.</p>
+</li>
+<li>
+<p><strong>백데이터 구축 시 필수 고려사항:</strong></p>
+</li>
+<li>
+<p><strong>수정주가(Adjusted Price):</strong> 액면분할, 배당 등이 반영된 주가를 사용해야 착시 현상을 막을 수 있습니다.</p>
+</li>
+<li>
+<p><strong>데이터 정제(Cleaning):</strong> 결측치, 이상치, 장 시작/마감 시점의 오류 데이터를 사전 제거해야 합니다.</p>
+</li>
+</ul>
+<hr>
+<h2 id="2-백테스팅-backtesting-과거-검증">2. 백테스팅 (Backtesting / 과거 검증)</h2>
+<p>수립한 매매 규칙(알고리즘)을 백데이터에 적용하여 <strong>과거 특정 기간 동안 실행했을 때의 수익률과 리스크를 계산하는 시뮬레이션 과정</strong>입니다.</p>
+<h3 id="백테스팅의-주요-성과-평가-지표">백테스팅의 주요 성과 평가 지표</h3>
+<table>
+<thead>
+<tr>
+<th>지표명</th>
+<th>설명</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CAGR</strong> (연평균 성장률)</td>
+<td>투자 기간 동안의 복리 연평균 수익률</td>
+<td>전략의 장기 수익성 평가</td>
+</tr>
+<tr>
+<td><strong>MDD</strong> (최대 낙폭)</td>
+<td>전고점 대비 가장 많이 하락했던 비율</td>
+<td>전략이 견뎌야 하는 최대 손실(심리적 버팀 한계)</td>
+</tr>
+<tr>
+<td><strong>Sharpe Ratio</strong> (샤프 지수)</td>
+<td>초과 수익률을 변동성(위험)으로 나눈 값</td>
+<td>위험 1단위를 감수할 때 얻는 수익(높을수록 우수)</td>
+</tr>
+<tr>
+<td><strong>Win Rate / Profit Factor</strong></td>
+<td>승률 및 총이익/총손실 비율</td>
+<td>매매 타이밍 전략의 유효성 검증</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+<h2 id="3-백테스팅-시-빠지기-쉬운-3대-함정">3. 백테스팅 시 빠지기 쉬운 3대 함정</h2>
+<ol>
+<li><strong>과적합 (Overfitting / Curve Fitting)</strong></li>
+</ol>
+<ul>
+<li>과거 데이터에 맞춰 파라미터를 너무 세밀하게 조정하여, 과거 데이터에서는 완벽하지만 <strong>미래 실전 매매(Forward Testing)에서는 손실을 보는 현상</strong>입니다.</li>
+</ul>
+<ol>
+<li><strong>생존 편향 (Survivorship Bias)</strong></li>
+</ol>
+<ul>
+<li>현재 상장되어 있는 종목만 대상으로 백테스팅을 진행하는 오류입니다. 과거에 상장폐지되거나 부도난 종목을 제외하면 수익률이 지나치게 높게 왜곡됩니다.</li>
+</ul>
+<ol>
+<li><strong>실제 거래 비용 미반영 (Cost &amp; Slippage)</strong></li>
+</ol>
+<ul>
+<li>증권사 수수료, 거래세, 그리고 주문 제출 가격과 체결 가격의 차이를 반영하지 않으면 백테스팅 상으로만 수익이 나는 "환상 전략"이 되기 쉽습니다.</li>
+</ul>
+<hr>
+<h2 id="부록-docker-compose로-삼성전자-lean-백테스트-실행하기">부록: Docker Compose로 삼성전자 LEAN 백테스트 실행하기</h2>
+<h2 id="httpshubdockercomrquantconnectlean">https://hub.docker.com/r/quantconnect/lean</h2>
+<p>LEAN(Lean Algorithmic Trading Engine)은 글로벌 퀀트 투자 플랫폼인 <strong>QuantConnect</strong>에서 개발하고 사용하는 <strong>오픈소스 알리고리즘 매매 및 백테스팅 엔진</strong>입니다.</p>
+<p>C# 기반으로 작성되었으며, Python과 C# 모두를 지원합니다. 기관급 퀀트 투자자들이 사용하는 수준의 정밀도와 속도를 갖추고 있으며, 클라우드 환경과 로컬 PC(Docker 기반 LEAN CLI) 모두에서 동일하게 구동할 수 있다는 것이 큰 장점입니다.</p>
+<hr>
+<h2 id="1-lean의-핵심-프레임워크-구조">1. LEAN의 핵심 프레임워크 구조</h2>
+<p>LEAN 엔진은 퀀트 매매 전략을 5가지 독립된 모듈로 분리하여 다룰 수 있도록 구조화되어 있습니다. 이를 통해 각 모듈을 따로 교체하거나 재사용하기 쉽습니다.</p>
+<hr>
+<ol>
+<li><strong>Universe Selection (유니버스 선정):</strong> 거래할 종목군을 필터링합니다. (예: 시가총액 상위 50개, 거래량 급증 종목 등)</li>
+<li><strong>Alpha Creation (알파 생성):</strong> 매수/매도 신호(Insight)를 예측하여 생성합니다.</li>
+<li><strong>Portfolio Construction (포트폴리오 구성):</strong> 생성된 신호를 바탕으로 각 종목의 비중(Weight)을 산정합니다.</li>
+<li><strong>Execution Module (주문 집행):</strong> 포트폴리오 비중에 맞춰 실제 주문(Share Count)을 분할하거나 브로커에 전송합니다.</li>
+<li><strong>Risk Management (리스크 관리):</strong> 손절(Stop-Loss), 익절, 최대 낙폭 제한 등 계좌 전체의 위험 관리 규칙을 집행합니다.</li>
+</ol>
+<hr>
+<h2 id="2-lean-엔진의-주요-특징">2. LEAN 엔진의 주요 특징</h2>
+<ul>
+<li><strong>멀티 자산(Multi-Asset) 지원:</strong> 주식(Equities), FX(외환), 암호화폐(Crypto), 선물(Futures), 옵션(Options), CFD 등 다양한 금융 상품을 단일 엔지니어링 환경에서 백테스팅할 수 있습니다.</li>
+<li><strong>이벤트 기반(Event-Driven) 시뮬레이션:</strong> 과거 데이터의 각 틱/분/일 단위 시점을 실제 실시간 매매 환경과 동일하게 마이크로초 단위로 재현하여 시뮬레이션의 정확도가 높습니다.</li>
+<li><strong>동일한 코드로 백테스킹과 실전 매매 전환:</strong> 백테스팅용 코드와 실전 거래(Live Trading)용 코드가 거의 동일하여, 검증을 마친 전략을 손쉽게 실제 브로커리지(Interactive Brokers, Binance, Alpaca 등) 계좌와 연동할 수 있습니다.</li>
+<li><strong>로컬 환경(LEAN CLI) 제공:</strong> 클라우드가 아닌 자신의 데이터 및 파이썬 IDE(PyCharm, VS Code)를 활용하여 개인 컴퓨터에서 무료로 로컬 백테스팅을 실행할 수 있습니다.</li>
+</ul>
+<hr>
+<h2 id="3-lean-사용-시-장단점">3. LEAN 사용 시 장단점</h2>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>장점</th>
+<th>단점/한계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LEAN Framework</strong></td>
+<td>• 기관 수준의 대용량 데이터 처리 및 확장성<br></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br>• 모듈화가 잘 되어 있어 대형 전략 관리에 유리<br></p>
+<p><br>• C# 기반의 빠른 처리 속도와 Python 인터페이스 제공 | • Python 전용 라이브러리(Backtrader 등)에 비해 학습 곡선이 높음<br></p>
+<p><br>• C# 엔진 위에서 Python을 래핑(PythonNet)하는 방식이라 단순 파이썬 백테스터보다 환경 설정이 약간 까다로움 |</p>
+<p>이 저장소에는 QuantConnect LEAN 엔진을 Docker로 실행 예제가 포함되어 있습니다. 삼성전자 보통주(<code>005930.KS</code>)의 일봉 데이터를 받아, 첫 거래 가능 시점에 1주를 매수한 뒤 연말까지 보유하는 <strong>동작 확인용 백테스트</strong>입니다. 기존 학습 웹앱의 <code>docker-compose.yml</code>과는 분리되어 있으므로, 웹앱·MongoDB·Qdrant를 시작하지 않고도 실행할 수 있습니다.</p>
+<h3 id="무엇이-실행되나요">무엇이 실행되나요?</h3>
+<p>실행 흐름은 다음과 같습니다.</p>
+<pre><code>docker compose
+  └─ samsung-lean-module:local (사용자 정의 이미지)
+       └─ quantconnect/lean:latest (LEAN 엔진 기반 이미지)
+            ├─ Yahoo Finance에서 005930.KS 일봉 다운로드
+            ├─ Custom Data CSV로 변환·적재
+            ├─ SamsungBuyAndHold.py 전략 실행
+            └─ 결과를 ./lean-results/에 저장
+</code></pre>
+<p><code>quantconnect/lean:latest</code>는 Python과 .NET 런타임, LEAN 엔진 및 관련 라이브러리를 포함한 이미지입니다. 첫 다운로드는 약 10GB 이상일 수 있으므로 인터넷 연결, Docker 저장 공간, 충분한 시간을 미리 확보하세요. 이후에는 Docker 캐시를 사용하므로 같은 PC에서의 재실행은 훨씬 빨라집니다.</p>
+<h3 id="1-준비-사항">1. 준비 사항</h3>
+<p>다음 두 명령이 실행되는지 확인합니다.</p>
+<pre><code>docker --version
+docker compose version
+</code></pre>
+<p>Windows와 macOS에서는 Docker Desktop을 설치하면 됩니다. Ubuntu 등 Linux에서는 Docker Engine과 Docker Compose 플러그인을 설치해야 합니다. Docker 권한이 없는 Linux 사용자라면 명령 앞에 <code>sudo</code>를 붙이거나 Docker의 post-installation 안내에 따라 현재 사용자를 <code>docker</code> 그룹에 추가합니다.</p>
+<p>저장 공간은 최소 20GB 이상 여유를 권장합니다. LEAN 베이스 이미지가 크고, Docker는 이미지 레이어·빌드 캐시·컨테이너 파일 시스템을 별도로 저장합니다.</p>
+<h3 id="2-파일-구성">2. 파일 구성</h3>
+<p>LEAN 관련 파일은 저장소 루트의 다음 위치에 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>파일 또는 폴더</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker-compose.lean.yml</code></td>
+<td>LEAN 전용 Compose 서비스 정의입니다. 기존 웹앱 Compose와 독립적입니다.</td>
+</tr>
+<tr>
+<td><code>lean-samsung/Dockerfile</code></td>
+<td><code>quantconnect/lean:latest</code>를 기반으로 전략·설정·시작 스크립트를 포함한 <code>samsung-lean-module:local</code> 이미지를 만듭니다.</td>
+</tr>
+<tr>
+<td><code>lean-samsung/entrypoint.sh</code></td>
+<td>가격 데이터 다운로드, LEAN 설정 복사, 엔진 시작을 순서대로 수행합니다.</td>
+</tr>
+<tr>
+<td><code>lean-samsung/download_samsung_data.py</code></td>
+<td>Yahoo Finance의 <code>005930.KS</code> 일봉 OHLCV 데이터를 <code>/Lean/Data/samsung.csv</code>로 저장합니다.</td>
+</tr>
+<tr>
+<td><code>lean-samsung/SamsungBuyAndHold.py</code></td>
+<td>CSV를 LEAN <code>PythonData</code> Custom Data로 읽고 1주 매수·보유하는 예제 전략입니다.</td>
+</tr>
+<tr>
+<td><code>lean-samsung/config.json</code></td>
+<td>Python 알고리즘, 로컬 데이터 폴더, Backtesting 핸들러를 지정하는 LEAN 설정입니다.</td>
+</tr>
+<tr>
+<td><code>lean-results/</code></td>
+<td>실행 후 호스트 PC에 생성되는 로그·주문·요약 결과 폴더입니다.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-첫-실행">3. 첫 실행</h3>
+<p>저장소 최상위 폴더에서 이미지를 빌드한 뒤 백테스트를 실행합니다.</p>
+<pre><code>docker compose -f docker-compose.lean.yml build samsung-backtest
+docker compose -f docker-compose.lean.yml run --rm samsung-backtest
+</code></pre>
+<p>한 번에 실행하려면 다음 명령도 사용할 수 있습니다.</p>
+<pre><code>docker compose -f docker-compose.lean.yml run --build --rm samsung-backtest
+</code></pre>
+<p><code>--rm</code>은 실행이 끝난 컨테이너만 자동 제거합니다. 호스트에 마운트한 <code>lean-results/</code>와 Docker 이미지 캐시는 제거하지 않으므로 결과를 확인할 수 있습니다.</p>
+<p>정상적으로 끝나면 로그에 아래와 비슷한 내용이 나타납니다.</p>
+<pre><code>Downloaded 244 daily bars to /Lean/Data/samsung.csv
+Samsung Electronics buy test: 79,600
+STATISTICS:: Total Orders 1
+</code></pre>
+<h3 id="4-기간-변경">4. 기간 변경</h3>
+<p>기본 기간은 2024-01-01부터 2025-01-01 전까지입니다. 시작일과 종료일은 환경 변수로 바꿉니다. 종료일은 포함하지 않는 방식으로 생각하면 됩니다.</p>
+<pre><code>SAMSUNG_START_DATE=2023-01-01 \
+SAMSUNG_END_DATE=2024-01-01 \
+docker compose -f docker-compose.lean.yml run --rm samsung-backtest
+</code></pre>
+<p>Windows PowerShell에서는 다음처럼 설정합니다.</p>
+<pre><code>$env:SAMSUNG_START_DATE = "2023-01-01"
+$env:SAMSUNG_END_DATE = "2024-01-01"
+docker compose -f docker-compose.lean.yml run --rm samsung-backtest
+</code></pre>
+<p>전략 코드와 데이터 수집 스크립트는 같은 환경 변수를 읽으므로, 내려받는 CSV 기간과 LEAN 백테스트 기간이 함께 바뀝니다.</p>
+<h3 id="5-결과-확인">5. 결과 확인</h3>
+<p>실행 뒤 <code>lean-results/</code>에 주요 파일이 생성됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>파일</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>orders.csv</code></td>
+<td>체결된 주문의 시각, 종목, 매수·매도, 수량, 가격입니다.</td>
+</tr>
+<tr>
+<td><code>SamsungBuyAndHold-summary.json</code></td>
+<td>주문 수, 수익률, 낙폭, Sharpe Ratio 등의 요약 통계입니다.</td>
+</tr>
+<tr>
+<td><code>SamsungBuyAndHold.json</code></td>
+<td>차트와 상세 백테스트 결과가 포함된 원본 JSON입니다.</td>
+</tr>
+<tr>
+<td><code>SamsungBuyAndHold-log.txt</code>, <code>log.txt</code></td>
+<td>LEAN 실행 로그와 오류 진단 정보입니다.</td>
+</tr>
+<tr>
+<td><code>failed-data-requests-*.txt</code></td>
+<td>LEAN이 찾지 못한 데이터 요청 목록입니다. 비어 있으면 데이터 요청 실패가 없었다는 뜻입니다.</td>
+</tr>
+</tbody>
+</table>
+<p>예를 들어 주문 내역과 핵심 통계를 확인하려면 다음을 실행합니다.</p>
+<pre><code>cat lean-results/orders.csv
+rg '"(Total Orders|Net Profit|End Equity|Drawdown|Sharpe Ratio)"' \
+  lean-results/SamsungBuyAndHold-summary.json
+</code></pre>
+<h3 id="6-전략을-바꾸는-방법">6. 전략을 바꾸는 방법</h3>
+<p>매매 규칙은 <code>lean-samsung/SamsungBuyAndHold.py</code>의 <code>on_data</code> 메서드에 있습니다. 현재 코드는 처음으로 데이터가 들어오는 날 한 번만 <code>market_order(..., 1)</code>을 실행합니다.</p>
+<pre><code>if not self.bought:
+    self.market_order(self.samsung, 1)
+    self.bought = True
+</code></pre>
+<p>예를 들어 매수 수량을 10주로 바꾸려면 <code>1</code>을 <code>10</code>으로 수정합니다. 소스 파일이나 <code>entrypoint.sh</code>, <code>config.json</code>, Dockerfile을 수정했다면 기존 이미지에는 변경 사항이 들어 있지 않으므로 다시 빌드해야 합니다.</p>
+<pre><code>docker compose -f docker-compose.lean.yml build samsung-backtest
+docker compose -f docker-compose.lean.yml run --rm samsung-backtest
+</code></pre>
+<p>실행 결과를 이전 결과와 구분하려면 먼저 <code>lean-results/</code>의 파일을 다른 폴더로 옮기거나, Compose 파일의 결과 마운트 경로를 원하는 폴더로 변경합니다.</p>
+<h3 id="7-이-예제의-한계와-주의-사항">7. 이 예제의 한계와 주의 사항</h3>
+<p>이 구성은 LEAN Docker 실행과 Custom Data 연결을 학습하기 위한 예제입니다. 실제 투자 성과 분석이나 실거래 준비 용도로 사용하면 안 됩니다.</p>
+<ul>
+<li>Yahoo Finance 데이터는 제공 시점·정정·조정 방식에 따라 달라질 수 있으며, 데이터 제공자의 이용 조건도 별도로 확인해야 합니다.</li>
+<li><code>005930.KS</code> 가격을 Custom Data로 읽기 때문에 LEAN의 KRX 거래일, 호가 단위, 상·하한가, 거래정지, 배당, 액면분할, 상장·상장폐지 처리를 자동으로 제공하지 않습니다.</li>
+<li>포트폴리오의 기본 통화와 삼성전자 가격 단위(KRW)를 정확히 환산하는 환율 모델을 넣지 않았습니다. 따라서 <code>Net Profit</code>, <code>End Equity</code>, Sharpe Ratio 등의 숫자는 엔진 동작 검증용일 뿐 실제 원화 투자 수익률이 아닙니다.</li>
+<li>수수료, 세금, 슬리피지, 시장 충격 비용도 반영하지 않았습니다.</li>
+<li>현재 이미지는 <code>quantconnect/lean:latest</code>를 사용합니다. 재현성을 중시하는 프로젝트라면 검증한 이미지 태그 또는 digest로 Dockerfile의 베이스 이미지를 고정하세요.</li>
+</ul>
+<h3 id="8-자주-발생하는-문제">8. 자주 발생하는 문제</h3>
+<table>
+<thead>
+<tr>
+<th>증상</th>
+<th>확인·해결 방법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>첫 실행이 오래 걸림</td>
+<td>LEAN 베이스 이미지가 매우 큽니다. 다운로드가 끝날 때까지 기다리고, 디스크 여유 공간을 확인합니다.</td>
+</tr>
+<tr>
+<td><code>permission denied while trying to connect to the Docker daemon socket</code></td>
+<td>Linux에서 Docker 권한이 없는 상태입니다. <code>sudo</code>를 사용하거나 현재 사용자의 Docker 그룹 설정을 확인합니다.</td>
+</tr>
+<tr>
+<td><code>Downloaded ... daily bars</code> 전에 네트워크 오류</td>
+<td>컨테이너가 Yahoo Finance에 접근할 수 있는지, 회사망·프록시가 HTTPS를 차단하지 않는지 확인합니다.</td>
+</tr>
+<tr>
+<td>결과 폴더에 파일이 없음</td>
+<td><code>docker compose ... run</code>의 전체 로그에서 LEAN 오류를 확인하고, 저장소 최상위 폴더에서 실행했는지 확인합니다.</td>
+</tr>
+<tr>
+<td>전략을 수정했는데 이전 코드가 실행됨</td>
+<td><code>docker compose -f docker-compose.lean.yml build samsung-backtest</code>로 사용자 정의 이미지를 다시 빌드합니다.</td>
+</tr>
+<tr>
+<td>이전 결과를 지우고 싶음</td>
+<td><code>lean-results/</code> 안의 결과 파일만 필요한 범위에서 정리합니다. Docker 이미지까지 제거하려면 이미지 이름과 사용 여부를 먼저 <code>docker images</code>로 확인합니다.</td>
+</tr>
+</tbody>
+</table>
+<p>이 구조를 다른 국내 종목으로 확장하려면 데이터 다운로드 스크립트의 티커, 전략의 종목 이름, 기간·수수료·환율·거래시간 모델을 함께 검토해야 합니다. 단순히 티커만 바꾸는 것만으로 실제 거래 환경이 재현되지는 않습니다.</p>
+<h3 id="9-lean으로-매수-규칙을-검증하는-예시">9. LEAN으로 매수 규칙을 검증하는 예시</h3>
+<p>LEAN은 “삼성전자를 오늘 사야 하나요?”에 자동으로 답하거나 실제 주문을 내는 추천 서비스가 아닙니다. 사람이 먼저 투자 가설과 위험 한도를 정하면, LEAN은 그 규칙이 <strong>과거 데이터에서 어떻게 동작했는지</strong> 계산하는 엔진입니다. 따라서 백테스트 결과는 규칙의 과거 성과 기록이지 미래 수익의 약속이 아닙니다.</p>
+<p>현재 예제의 규칙은 가장 단순합니다.</p>
+<pre><code>데이터가 처음 도착하면 삼성전자 1주를 매수하고,
+백테스트 종료일까지 보유한다.
+</code></pre>
+<p>이 규칙은 <code>lean-samsung/SamsungBuyAndHold.py</code>의 다음 부분에 구현되어 있습니다.</p>
+<pre><code>def on_data(self, data):
+    if self.samsung not in data:
+        return
+
+    close = data[self.samsung].value
+    self.plot("Samsung Electronics", "Close", close)
+
+    if not self.bought:
+        self.market_order(self.samsung, 1)
+        self.bought = True
+</code></pre>
+<p><code>on_data</code>는 일봉 데이터가 들어올 때마다 호출됩니다. <code>self.bought</code>는 이미 매수했는지 기록하는 변수이고, <code>market_order</code>는 백테스트 안에서만 체결을 시뮬레이션합니다. 이 예제는 증권사 계좌나 한국거래소에 연결되지 않으므로 실제 주식 매수나 출금은 발생하지 않습니다.</p>
+<h4>예시: 이동평균을 이용해 “분할 매수 조건”을 연구하기</h4>
+<p>아래 예시는 <strong>투자 권유가 아닌 연구용 규칙</strong>입니다. <code>종가가 20일 이동평균 위에 있고, 아직 목표 수량을 다 채우지 않았을 때 1주씩 매수한다</code>는 가설을 과거 데이터로 검사하는 방식입니다.</p>
+<p>이 예제를 사용하려면 현재 파일의 <code>SamsungBuyAndHold</code> 클래스에서 <code>initialize</code>와 <code>on_data</code>를 아래처럼 바꿉니다. Custom Data 예제는 가격 값을 직접 보관해 이동평균을 계산합니다.</p>
+<pre><code>class SamsungBuyAndHold(QCAlgorithm):
+    def initialize(self):
+        start = date.fromisoformat(os.getenv("SAMSUNG_START_DATE", "2024-01-01"))
+        end = date.fromisoformat(os.getenv("SAMSUNG_END_DATE", "2025-01-01"))
+        self.set_start_date(start.year, start.month, start.day)
+        self.set_end_date(end.year, end.month, end.day)
+        self.set_cash(1_000_000)
+
+        self.samsung = self.add_data(SamsungDaily, "005930", Resolution.DAILY).symbol
+        self.closes = []
+        self.target_quantity = 3
+
+    def on_data(self, data):
+        if self.samsung not in data:
+            return
+
+        close = data[self.samsung].value
+        self.closes.append(close)
+        self.plot("Samsung Electronics", "Close", close)
+
+        # 20개 일봉이 쌓이기 전에는 판단하지 않습니다.
+        if len(self.closes) &lt; 20:
+            return
+
+        sma20 = sum(self.closes[-20:]) / 20
+        quantity = self.portfolio[self.samsung].quantity
+
+        # 종가가 20일 평균 위이고 목표 보유량보다 적으면 1주 추가 매수합니다.
+        if close &gt; sma20 and quantity &lt; self.target_quantity:
+            self.market_order(self.samsung, 1)
+            self.debug(f"Buy test: close={close:,.0f}, SMA20={sma20:,.0f}")
+</code></pre>
+<p>수정한 뒤에는 이미지를 다시 만들고 실행합니다.</p>
+<pre><code>docker compose -f docker-compose.lean.yml build samsung-backtest
+docker compose -f docker-compose.lean.yml run --rm samsung-backtest
+</code></pre>
+<p>실행이 끝나면 <code>lean-results/orders.csv</code>에서 언제 몇 주가 체결됐는지 확인하고, <code>SamsungBuyAndHold-summary.json</code>에서 주문 수·낙폭·수익률을 확인합니다. 연구할 때는 한 기간의 수익률만 보고 결론을 내리지 말고, 서로 겹치지 않는 여러 기간을 나누어 검사해야 합니다.</p>
+<h4>백테스트 결과를 해석하는 순서</h4>
+<ol>
+<li><strong>전략이 의도대로 실행됐는지 먼저 확인합니다.</strong> <code>orders.csv</code>의 날짜·수량·가격이 작성한 규칙과 맞는지 확인합니다. 규칙 오류를 수익률로 해석하면 안 됩니다.</li>
+<li><strong>수익률뿐 아니라 최대 낙폭을 봅니다.</strong> 높은 수익률이라도 중간에 감당하기 어려운 손실이 있었다면 실제로 지키기 어려운 전략일 수 있습니다.</li>
+<li><strong>기간을 나누어 검증합니다.</strong> 상승장 하나에서만 잘 된 규칙은 하락장이나 횡보장에서 실패할 수 있습니다. 예를 들어 2020~2022년, 2023~2024년처럼 구간을 나누어 비교합니다.</li>
+<li><strong>매수 기준을 사전에 고정합니다.</strong> 백테스트 결과가 좋게 나올 때까지 이동평균 기간·수량·시작일을 반복해서 바꾸면 과거 데이터에만 맞춘 규칙이 될 위험이 큽니다. 이를 과최적화라고 합니다.</li>
+<li><strong>현실 비용을 넣습니다.</strong> 실제 분석에는 거래 수수료, 세금, 슬리피지, 호가 단위, KRW 환율, 액면분할·배당을 포함해야 합니다.</li>
+</ol>
+<h4>“현재 사도 되는가”에 LEAN을 사용하는 올바른 방식</h4>
+<p>현재 시점의 매수 여부는 LEAN 결과 하나로 결정하지 않습니다. 더 안전한 흐름은 다음과 같습니다.</p>
+<pre><code>투자 목표·보유 기간·손실 한도 결정
+        ↓
+명확한 매수·매도 규칙 작성
+        ↓
+LEAN으로 과거 여러 기간을 검증
+        ↓
+현재 실적·공시·업황·밸류에이션·포트폴리오 비중 확인
+        ↓
+분할매수·관망·비중 축소 등 본인의 위험 한도에 맞는 결정
+</code></pre>
+<p>예를 들어 장기 투자자라면 실적과 메모리 업황의 개선 여부, 현재 보유 비중, 목표 투자 기간을 먼저 확인한 뒤, LEAN으로 “정한 분할매수 규칙이 과거 급락 구간에서도 감당 가능한 낙폭을 보였는가”를 검토할 수 있습니다. 단기 가격 방향을 맞히거나 백테스트 수익률만으로 실제 매수를 정당화하는 용도는 적절하지 않습니다.</p>
+<h3 id="10-실제-전략-연구의-설계-사례">10. 실제 전략 연구의 설계 사례</h3>
+<p>아래는 삼성전자 한 종목을 대상으로 한 <strong>학습용 연구 설계 사례</strong>입니다. 특정 종목의 매수를 권하는 예시가 아니며, 전략이 과거에 잘 보였더라도 미래 성과를 보장하지 않습니다. 핵심은 수익률이 좋아 보이는 규칙을 즉석에서 찾는 것이 아니라, 실행 전에 규칙·비용·중단 기준을 문서로 고정하는 것입니다.</p>
+<h4>연구 질문과 사전 규칙</h4>
+<p>먼저 한 문장으로 검증할 질문을 씁니다.</p>
+<blockquote>
+<p>“삼성전자가 장기 추세 위에 있고 단기 조정 후 회복할 때만 분할매수하면, 단순 보유보다 낙폭을 줄이면서 장기 수익을 유지할 수 있는가?”</p>
+</blockquote>
+<p>이 질문을 코드로 옮기기 전에 다음과 같이 수치 규칙을 정합니다. 아래 숫자는 예시이며 정답이 아닙니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>예시 규칙</th>
+<th>연구할 때 확인할 점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>투자 대상</td>
+<td>삼성전자 보통주 1개</td>
+<td>한 종목 전략이므로 집중 위험을 별도로 관리합니다.</td>
+</tr>
+<tr>
+<td>초기 자금</td>
+<td>1,000만 원</td>
+<td>실제 투자에 쓸 수 있는 금액과 구분합니다.</td>
+</tr>
+<tr>
+<td>매수 조건</td>
+<td>종가가 120일 평균 위에 있고, 20일 평균이 60일 평균을 상향 돌파</td>
+<td>신호가 발생한 당일 종가를 미래에 미리 알았다고 가정하지 않도록 다음 거래일 체결로 처리합니다.</td>
+</tr>
+<tr>
+<td>매수 방법</td>
+<td>조건 발생 시 목표 자금의 25%씩, 최대 4회</td>
+<td>한 번의 신호에 전액을 넣지 않으며 최대 보유 비중을 정합니다.</td>
+</tr>
+<tr>
+<td>매도 조건</td>
+<td>종가가 120일 평균 아래에서 5거래일 연속 유지하거나, 보유 기간이 12개월 초과</td>
+<td>손실 회피만을 위한 임의의 매도 기준인지 점검합니다.</td>
+</tr>
+<tr>
+<td>위험 한도</td>
+<td>종목 비중 25% 초과 금지, 포트폴리오 기준 최대 낙폭 15%에서 신규 매수 중단</td>
+<td>손실 한도에 닿았을 때 무엇을 할지 사전에 정합니다.</td>
+</tr>
+<tr>
+<td>재진입</td>
+<td>매도 뒤 20거래일 동안 재매수 금지</td>
+<td>잦은 매매와 수수료 누적을 줄입니다.</td>
+</tr>
+</tbody>
+</table>
+<p>이처럼 매수와 매도 기준을 모두 적어야 합니다. “좋은 회사라서 산다”만으로는 백테스트 가능한 규칙이 되지 않습니다. 반대로 기준을 너무 많이 추가하면 과거 데이터에만 맞는 규칙이 될 수 있으므로, 각 규칙에는 경제적 이유를 한 줄로 적어 두는 것이 좋습니다.</p>
+<h4>LEAN 전략의 의사 코드</h4>
+<p>실제 LEAN 코드로 작성할 때의 구조는 아래와 같습니다. 이것은 흐름을 보여 주는 의사 코드이며, 바로 복사해 실거래에 사용하면 안 됩니다.</p>
+<pre><code>def on_daily_bar(close):
+    update_sma_20_60_120(close)
+
+    if not indicators_ready():
+        return
+
+    long_trend = close &gt; sma_120
+    recovery = crossed_above(sma_20, sma_60)
+    exit_signal = close_below_sma120_for(5)
+
+    if exit_signal:
+        sell_all_next_session()
+        start_cooldown(days=20)
+        return
+
+    if long_trend and recovery and not in_cooldown():
+        if portfolio_weight("005930") &lt; 0.25:
+            buy_next_session(amount=initial_cash * 0.25)
+</code></pre>
+<p>실제 구현에서는 다음 항목을 반드시 결정해야 합니다.</p>
+<ol>
+<li><strong>신호 시점과 체결 시점</strong>: 일봉 종가로 조건을 계산했다면 그 종가에 이미 체결됐다고 가정하지 않고, 보통 다음 거래일 시가 또는 지정한 가격에서 체결되도록 해야 합니다. 그렇지 않으면 미래 정보를 미리 사용한 결과가 됩니다.</li>
+<li><strong>수량 계산</strong>: <code>1주</code>처럼 고정 수량을 쓰기보다, 투자 가능 현금·최대 종목 비중·주가·호가 단위를 반영해 수량을 계산합니다.</li>
+<li><strong>주문 실패 처리</strong>: 거래정지, 상·하한가, 호가 공백, 현금 부족, 주문 단위 미달일 때 주문을 내지 않거나 다음 거래일에 다시 시도할 규칙이 필요합니다.</li>
+<li><strong>기록</strong>: 매수·매도할 때 어떤 조건이 충족됐는지, 가격·수량·수수료·잔여 현금을 로그와 결과 파일에 남깁니다.</li>
+</ol>
+<h4>비용·환율·배당을 넣는 방법</h4>
+<p>현재 저장소의 <code>SamsungDaily</code> 예제는 CSV를 <code>PythonData</code> Custom Data로 읽습니다. 이 방식은 데이터 연결과 이벤트 처리 학습에는 좋지만, 실제 한국 주식의 거래 모델을 완전하게 제공하지 않습니다. 특히 가격을 기본 USD 포트폴리오에 단순 적용하므로 결과의 원화 수익률로 해석하면 안 됩니다.</p>
+<p>실제 연구에서는 다음 중 하나를 선택해야 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>필요한 처리</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>가격</td>
+<td>수정주가 또는 원시 가격·액면분할·배당 데이터를 일관된 기준으로 사용합니다. 수정주가를 쓰면서 배당금을 다시 더하면 배당을 두 번 반영할 수 있습니다.</td>
+</tr>
+<tr>
+<td>통화</td>
+<td>시작 현금과 종목 가격을 KRW 기준으로 두고, USD 성과와 비교할 때만 해당 날짜의 KRW/USD 환율로 환산합니다.</td>
+</tr>
+<tr>
+<td>수수료</td>
+<td>증권사 수수료율, 유관기관 비용, 최소 수수료가 있다면 주문 금액별로 계산합니다. 수수료 정책은 바뀔 수 있으므로 연구 시점의 조건을 기록합니다.</td>
+</tr>
+<tr>
+<td>세금</td>
+<td>매도 시점의 세금·거래세 규칙을 별도 비용으로 반영합니다. 세금 제도는 변할 수 있으므로 최신 규정을 확인해야 합니다.</td>
+</tr>
+<tr>
+<td>슬리피지</td>
+<td>일봉 종가와 실제 체결가의 차이를 보수적으로 가정합니다. 거래량이 적거나 변동성이 큰 날에는 더 크게 잡습니다.</td>
+</tr>
+<tr>
+<td>기업행사</td>
+<td>배당락, 액면분할, 무상증자, 거래정지, 상장폐지 등을 데이터와 포지션에 일관되게 반영합니다.</td>
+</tr>
+</tbody>
+</table>
+<p>가장 단순한 연구 단계에서는 먼저 <strong>비용을 제외한 신호의 방향성</strong>을 확인한 다음, 별도 계산 또는 LEAN의 증권·수수료·슬리피지 모델을 사용해 비용을 하나씩 추가하는 편이 오류를 줄입니다. 단, 비용을 제외한 결과를 실전 기대수익으로 제시하면 안 됩니다.</p>
+<h4>여러 기간으로 검증하는 예시</h4>
+<p>좋은 전략처럼 보이려면 하나의 기간에서 높은 수익률을 내는 것만으로는 부족합니다. 규칙과 파라미터를 먼저 고정한 뒤, 서로 성격이 다른 기간에서 동일한 규칙을 실행합니다.</p>
+<table>
+<thead>
+<tr>
+<th>검증 구간 예시</th>
+<th>시장 상황의 예</th>
+<th>무엇을 보는가</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2020-01-01 ~ 2020-12-31</td>
+<td>급락과 빠른 반등</td>
+<td>급락 시 손실 한도와 재진입 규칙이 작동하는지</td>
+</tr>
+<tr>
+<td>2021-01-01 ~ 2022-12-31</td>
+<td>추세 변화와 하락 구간</td>
+<td>추세 추종 규칙이 잦은 손절을 만들지 않는지</td>
+</tr>
+<tr>
+<td>2023-01-01 ~ 2024-12-31</td>
+<td>반도체 업황 회복 구간</td>
+<td>상승장에서 단순 보유 대비 어떤 차이가 있는지</td>
+</tr>
+<tr>
+<td>최근 데이터 구간</td>
+<td>아직 전략을 조정하지 않은 검증용 구간</td>
+<td>과거에 맞춘 파라미터가 최근에도 과도하게 무너지지 않는지</td>
+</tr>
+</tbody>
+</table>
+<p>각 구간을 실행할 때는 앞서 설명한 환경 변수를 사용합니다.</p>
+<pre><code>SAMSUNG_START_DATE=2020-01-01 SAMSUNG_END_DATE=2021-01-01 \
+  docker compose -f docker-compose.lean.yml run --rm samsung-backtest
+</code></pre>
+<p>현재 Compose 구성은 결과를 모두 <code>lean-results/</code>에 저장하므로, 다음 구간을 실행하기 전에 결과 폴더를 예를 들어 <code>lean-results-2020/</code>처럼 별도 보관해야 비교할 수 있습니다. 더 발전시킬 때는 Compose의 결과 마운트 경로를 실행 구간별 폴더로 바꾸거나, 전략이 출력 폴더 이름에 기간·전략 버전을 포함하도록 수정합니다.</p>
+<h4>결과를 통과·보류·폐기하는 기준</h4>
+<p>연구 시작 전에 최소 기준을 적어 두면 좋은 결과만 골라 보는 편향을 줄일 수 있습니다. 예시는 아래와 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>판정</th>
+<th>예시 기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>통과 후보</td>
+<td>여러 독립 구간에서 비용 반영 후의 성과가 단순 보유와 비교 가능하고, 최대 낙폭이 사전에 정한 손실 한도 안에 있습니다.</td>
+</tr>
+<tr>
+<td>보류</td>
+<td>수익률은 높지만 한두 구간에서 낙폭이 너무 크거나, 거래 횟수가 지나치게 많아 비용에 민감합니다.</td>
+</tr>
+<tr>
+<td>폐기</td>
+<td>특정 한 기간에서만 성과가 좋거나, 파라미터를 조금만 바꿔도 성과가 크게 무너집니다.</td>
+</tr>
+</tbody>
+</table>
+<p><code>Sharpe Ratio</code>나 <code>Net Profit</code> 하나만으로 통과를 정하지 않습니다. 매매 횟수, 최대 낙폭, 보유 기간, 비용 전후 성과, 단순 보유 대비 성과, 그리고 실제로 본인이 그 손실을 감당할 수 있는지를 함께 봐야 합니다.</p>
+<h4>실전 전 마지막 단계</h4>
+<p>백테스트를 통과한 규칙도 바로 큰 금액으로 실행하지 않습니다. 가능하다면 다음 단계를 거칩니다.</p>
+<ol>
+<li>과거 데이터에 없는 이후 기간에서 다시 검증합니다.</li>
+<li>실시간 가격을 받되 실제 주문은 내지 않는 모의 운용(paper trading)으로 주문 시점·데이터 지연·오류 처리를 확인합니다.</li>
+<li>감당 가능한 매우 작은 금액으로만 실행해 수수료·체결·세금 기록이 가정과 맞는지 확인합니다.</li>
+<li>정기적으로 전략 규칙이 아니라 데이터 품질·거래 비용·위험 한도가 여전히 유효한지만 점검합니다.</li>
+</ol>
+<p>이 과정에서 LEAN은 규칙을 실행하고 기록하는 도구입니다. 최종 투자 결정은 목표·생활 자금·기존 자산 구성·손실 감내 수준을 고려해 본인이 내려야 하며, 필요하면 공인된 투자·세무 전문가에게 개별 상황을 상담합니다.</p>
+</article></section><section class="lesson-supplement" aria-labelledby="supplement-title"><header class="lesson-supplement-head"><p class="lesson-kicker">금융 이론 보충 · 선물과 옵션 · 펀드 · ETF · 채권 · 코인</p><h2 id="supplement-title">이 단원과 관련된 금융 이론</h2><p>선물·옵션, 펀드·ETF, 채권·코인 이론 중 이 단원의 주제와 이어지는 절을 골라 실었습니다. 시뮬레이터와 대화형 요소는 제외하고 본문만 담았습니다.</p></header><nav class="lesson-toc" aria-label="보충 학습 목차"><b>보충 학습 목차 · 9개 절</b><ol><li><a href="#theory-08-1">현물과 선물: 지금 거래와 미래 계약</a> <small>선물과 옵션</small></li><li><a href="#theory-08-2">선물은 미래 거래를 미리 정하는 약속</a> <small>선물과 옵션</small></li><li><a href="#theory-08-3">프리미엄과 증거금, 미리 구분하기</a> <small>선물과 옵션</small></li><li><a href="#theory-08-4">만기와 청산: 계약을 끝내는 방법</a> <small>선물과 옵션</small></li><li><a href="#theory-08-5">옵션은 선택권입니다: 콜과 풋</a> <small>선물과 옵션</small></li><li><a href="#theory-08-6">옵션 만기일과 실제 파생상품 보기</a> <small>선물과 옵션</small></li><li><a href="#theory-08-7">선물 만기일은 왜 3개월 단위(분기월)로 정해질까요?</a> <small>선물과 옵션</small></li><li><a href="#theory-08-8">분산투자 10% 규칙과 단일종목 레버리지 ETF의 예외</a> <small>펀드 · ETF</small></li><li><a href="#theory-08-9">알파카·바이낸스 API 연동과 자동화의 기본</a> <small>채권 · 코인</small></li></ol></nav><article class="lesson-doc lesson-theory"><section class="lesson-block">
+            
+            
+              <p class="lesson-kicker">금융 이론 · 선물과 옵션</p><h2 id="theory-08-1">현물과 선물: 지금 거래와 미래 계약</h2>
+              
+                <p>
+                  현물(現物)은 주식·채권·금처럼 실제로 존재하는 자산을 지금
+                  사고파는 거래입니다. 예를 들어 주식을 사면 결제 뒤 그 회사의
+                  지분이 내 계좌에 들어오는데, 이것이 현물 거래입니다.
+                </p>
+                <p>
+                  영어권 금융시장에서는 현물가격·현물시장을 보통 스팟 가격(spot price)·스팟
+                  시장(spot market)이라고 부릅니다. 주식·채권처럼 파생상품이 아닌 자산을
+                  선물과 대비할 때는 현금시장(cash market)이라는 표현도 씁니다. 그래서
+                  주식 매수는 기업 지분 자체를 보유하는 현물 거래이고, 주식선물
+                  매수는 그 주가 변화에 연결된 계약을 보유하는 파생상품
+                  거래입니다.
+                </p>
+                <p>
+                  다만 원유·금·곡물처럼 실제 물건의 인도까지 강조할 때는
+                  실물자산(physical commodity·피지컬 커모디티) 또는 실물인도
+                  (physical delivery·피지컬 딜리버리)라고 합니다. spot은 “지금
+                  거래·결제하는 시장”이라는 뜻에 가깝고, physical은 “실물의
+                  보관·운송·인도”를 강조하는 말이라는 차이가 있습니다.
+                </p>
+                <p>
+                  선물은 미래 가격을 지금 약속하는 계약입니다. 실제 자산을 지금
+                  받는 대신 가격 차이를 정산하는 구조가 많습니다. 현물은 보통
+                  사려는 금액 전체가 필요하지만, 선물은 일부 증거금으로
+                  거래하므로 적은 돈으로 큰 금액에 노출될 수 있고 손익도 빠르게
+                  커질 수 있습니다.
+                </p>
+              
+            
+            
+          </section><section class="lesson-block">
+            
+              <p class="lesson-kicker">금융 이론 · 선물과 옵션</p><h2 id="theory-08-2">선물은 미래 거래를 미리 정하는 약속</h2>
+              
+                <p>
+                  선물은 미래의 특정 날짜에 어떤 물건이나 자산을 미리 정한
+                  가격으로 사고팔기로 하는 계약입니다. 이름에 “선(先)”이
+                  들어가는 이유는 미래의 거래 조건을 지금 먼저 정하기
+                  때문입니다.
+                </p>
+                <p>
+                  현물 주식처럼 기업 지분이라는 물건 자체를 사는 것이 아니라,
+                  지수·원유·환율 같은 기준 대상의 가격 변화에 따른 손익을
+                  주고받는 표준 계약을 거래합니다.
+                </p>
+                <p>
+                  예를 들어 A가 KOSPI 200 선물 1계약을 매도하고 B가 같은 계약
+                  1계약을 매수해 주문이 체결되면 선물 계약 1개가 생깁니다. A는
+                  지수가 내리면, B는 지수가 오르면 유리합니다. 거래소·청산기관이
+                  양쪽 증거금을 관리하고 매일 손익을 정산합니다.
+                </p>
+                <p>
+                  배추 농부와 김치공장이 “가을에 배추 1,000포기를 포기당
+                  3,000원에 사고팔자”고 약속하는 모습을 생각해 보세요. 나중의
+                  시장가격이 달라져도, 약속한 가격을 기준으로 거래하거나 차이를
+                  정산합니다.
+                </p>
+                <p>
+                  선물은 가격 변동 위험을 줄이는 헤지에 쓸 수 있지만, 가격
+                  방향만 보고 거래하면 손실이 빠르게 커질 수 있습니다. 거래
+                  단위·만기·증거금과 최악의 손실을 먼저 확인해야 합니다.
+                </p>
+                <h3>선물의 일일정산: 만기까지 손익을 미루지 않습니다</h3>
+                <p>
+                  선물은 보통 만기일에만 손익을 계산하는 것이 아니라, 매 거래일 장이 끝난 뒤
+                  그날의 정산가격을 기준으로 손익을 계좌에 반영합니다. 이를 <b>일일정산
+                  (일일 시가평가)</b>이라고 합니다. 다음 날의 손익은 최초 진입가격이 아니라
+                  전날 정산가격과 오늘 정산가격의 차이로 다시 계산합니다.
+                </p>
+                <p>
+                  예를 들어 코스피200 선물 1계약을 보유한 상태에서 전날 정산가격이
+                  340포인트, 오늘 정산가격이 342포인트이고 거래승수가 25만 원/포인트라면,
+                  매수자는 2포인트 × 25만 원 = 50만 원을 받고 매도자는 같은 금액을 냅니다.
+                  손실이 쌓여 계좌가 유지증거금 기준 아래로 내려가면 추가 증거금 납부를
+                  요구받을 수 있으며, 채우지 못하면 포지션이 청산될 수 있습니다.
+                </p>
+                <p>
+                  개인은 보통 증권사의 <strong>선물·옵션 거래계좌 예수금</strong>에서 정산 손익이 반영되고, 부족한 돈은 본인 명의의 연결 은행계좌에서 이체합니다. 기업은 임직원 개인 통장이 아니라 증권사에 개설한 <strong>법인 파생상품 거래계좌</strong>를 사용하며, 자금부서가 회사의 법인 운영·자금관리 계좌에서 필요한 증거금을 이체해 관리합니다. 정산 계산은 장 마감 뒤 이뤄지며 실제 반영·이체 가능 시각과 부족금 납부 마감은 증권사별 안내를 확인해야 합니다.
+                </p>
+                <p>선물 거래의 일일정산(Mark-to-Market)은 매 영업일 거래가 마감된 직후 '일일 장 종료 시점'에 진행됩니다.</p>
+                <p>시장이 열려 있는 동안에는 가격이 계속 변하므로 평가 손익만 바뀌다가, 장이 닫히면 거래소가 당일 정산가격(Settlement Price)을 확정짓고 그날의 최종 손익을 계좌에 반영합니다.</p>
+                <h3>시장별 일일정산 시점</h3>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <thead><tr><th scope="col">시장 구분</th><th scope="col">대상 상품</th><th scope="col">일일정산 수행 시점</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">국내 파생상품 시장 (KRX)</th><td>코스피200 선물, 국채선물 등</td><td><strong>매 영업일 장 마감 직후</strong> (오후 3:45 이후 정산)</td></tr>
+                      <tr><th scope="row">해외 파생상품 시장 (CME 등)</th><td>나스닥/S&amp;P500 선물, 원유, 금 등</td><td><strong>각 해외 거래소의 본장 마감 시점</strong> (한국시간 기준 주로 새벽~아침)</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3>일일정산이 이뤄지는 핵심 과정</h3>
+                <ol>
+                  <li><strong>당일 정산가격 확정:</strong> 장이 마감되면 거래소가 당일 마감 가격 등을 기준으로 정산가격을 산출합니다.</li>
+                  <li><strong>손익 정산 및 현금 이동:</strong>
+                    <ul>
+                      <li><strong>이익 발생:</strong> 이익금만큼 증거금(계좌 잔고)에 바로 현금으로 입금됩니다.</li>
+                      <li><strong>손실 발생:</strong> 손실금만큼 증거금에서 바로 차감됩니다.</li>
+                    </ul>
+                  </li>
+                  <li><strong>증거금 평가:</strong> 정산 후 남은 잔고가 <strong>유지증거금(Maintenance Margin)</strong> 미만으로 떨어졌는지 확인합니다.</li>
+                  <li><strong>마진콜(Margin Call) 발생:</strong> 유지증거금 밑으로 떨어지면 거래소/증권사가 <strong>다음 날 지정된 시간까지 증거금을 추가로 넣으라</strong>고 통보하며, 미입금 시 강제 청산(반대매매)됩니다.</li>
+                </ol>
+                <blockquote>
+                  <p><strong>요약</strong></p>
+                  <p>일일정산은 <strong>매일 장이 끝난 직후</strong>에 이루어집니다. 따라서 선물 포지션을 밤새 들고 넘어가는(오버나잇) 투자자는 매일 장 마감 후 자신의 계좌 잔고가 유지증거금 이상으로 유지되고 있는지 확인해야 합니다.</p>
+                </blockquote>
+                <h3>증거금은 계약금·중도금·잔금과 무엇이 다를까요?</h3>
+                <p>건설·부동산·주문제작 거래의 <b>계약금·중도금·잔금</b>과 선물의 <b>증거금·마진콜</b>은 모두 계약 이행을 뒷받침한다는 점에서 비교할 수 있습니다. 그러나 일대일로 대응하지는 않습니다. 일반 거래 대금은 물건·서비스의 대가를 단계별로 지급하는 구조인 반면, 선물 증거금은 가격 변동에 따른 결제불이행 위험을 관리하기 위한 담보이며 일일정산에 따라 계속 변합니다.</p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <caption>일반 거래 대금과 선물 증거금의 비교</caption>
+                    <thead><tr><th scope="col">상황</th><th scope="col">일반 거래</th><th scope="col">선물·옵션 거래</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">계약을 시작할 때</th><td>계약금·착수금은 계약 체결과 이행 의사를 표시하고, 계약 조건에 따라 해제·손해배상의 기준이 되기도 합니다.</td><td>위탁증거금 또는 개시증거금은 포지션을 열기 위해 계좌에 예치·확보해야 하는 담보입니다. 기본예탁금과는 다른 개념입니다.</td></tr>
+                      <tr><th scope="row">계약을 유지할 때</th><td>중도금은 공정·인도 등 정한 단계에 따라 지급하는 거래대금입니다.</td><td>유지증거금은 포지션을 계속 보유하기 위해 계좌에 남아 있어야 하는 최소 잔액 기준입니다. 상품·시장에 따라 수준이 달라집니다.</td></tr>
+                      <tr><th scope="row">부족하거나 이행하지 못할 때</th><td>계약금 몰수, 해제, 손해배상 등 계약과 법률관계에 따른 처리가 문제됩니다.</td><td>잔액이 유지증거금 아래로 내려가면 추가증거금 납부를 요구받을 수 있고, 기한 내 충족하지 못하면 반대매매로 강제청산될 수 있습니다.</td></tr>
+                      <tr><th scope="row">계약을 끝낼 때</th><td>잔금을 지급하고 물건·서비스를 인도받습니다.</td><td>반대매매, 실물인도 또는 현금결제로 손익과 의무를 확정합니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>즉 유지증거금은 ‘중도금을 더 내는 시점’이라기보다 <b>계좌 안전 잔액의 기준선</b>입니다. 일일정산 손실로 이 기준 아래로 내려가면 증권사가 정한 기한과 방식에 따라 추가 자금을 채워야 하며, 이를 흔히 마진콜이라고 부릅니다. 추가 납부액과 강제청산 기준은 거래소·상품·증권사별로 다를 수 있습니다.</p>
+                
+              
+            
+            
+          </section><section class="lesson-block">
+            
+              <p class="lesson-kicker">금융 이론 · 선물과 옵션</p><h2 id="theory-08-3">프리미엄과 증거금, 미리 구분하기</h2>
+              
+                <p>
+                  premium은 영어로 기본 가격에 더해 내는 돈, 또는 특별한
+                  권리·보상에 붙는 대가라는 뜻입니다. 더 거슬러 올라가면 라틴어
+                  praemium(상·보상)에서 온 말입니다. 보험료를 insurance
+                  premium이라 부르는 것도 같은 맥락입니다.
+                </p>
+                <p>
+                  옵션 프리미엄은 옵션을 사는 사람이 “정한 가격으로 사고팔 수
+                  있는 선택권”을 얻기 위해 내는 가격입니다. 예를 들어 1,000만
+                  원어치 주식/ETF 하락을 대비하는 풋옵션의 프리미엄이 3%라면,
+                  처음 내는 비용은 30만 원입니다. 시장이 안 떨어지면 이 돈은
+                  비용이 되지만 크게 떨어지면 옵션의 이익이 손실 일부를 메울 수
+                  있습니다. 상가 등의 권리금과는 다른 금융 용어입니다.
+                </p>
+                <p>
+                  증거금은 선물 거래나 옵션 매도자가 계약을 지키기 위해 맡기는
+                  보증금입니다. 손실로 유지 기준에 못 미치면 추가 증거금 요구나
+                  강제청산이 생길 수 있습니다. 즉 프리미엄은 권리를 사는
+                  가격이고, 증거금은 계약 이행을 위한 보증금이라는 점을
+                  구분하세요.
+                </p>
+              
+            
+            
+          </section><section class="lesson-block">
+            
+              <p class="lesson-kicker">금융 이론 · 선물과 옵션</p><h2 id="theory-08-4">만기와 청산: 계약을 끝내는 방법</h2>
+              
+                <p>
+                  선물·옵션은 영원히 이어지는 계약이 아니라, 거래소가 상품별로
+                  미리 정한 마지막 거래일과 만기일이 있습니다. “몇 월물”이라는
+                  말은 그 계약이 끝나는 달을 가리킵니다. 정확한 날짜와 결제
+                  방식은 상품마다 다르므로 거래소의 상품명세에서 확인해야
+                  합니다.
+                </p>
+                <p>
+                  청산은 만기 전에 반대 거래를 해서 내 포지션을 0으로 만드는
+                  것입니다. 선물을 샀다면 같은 계약을 팔아 청산하고, 선물을
+                  팔았다면 같은 계약을 사서 청산합니다. 옵션도 사 둔 계약을
+                  팔거나, 팔아둔 계약을 다시 사면 청산할 수 있습니다.
+                </p>
+                <p>
+                  만기까지 계약을 남겨 두면 상품 조건에 따라 현금으로 가격
+                  차이를 정산하거나, 옵션 권리가 행사되거나, 가치 없이 끝날 수
+                  있습니다. 따라서 “언제 끝나는 계약인지, 만기 전에 청산할지
+                  다음 만기로 옮길지”를 주문 전에 정리하는 습관이 중요합니다.
+                </p>
+                <h3>선물은 누구와 계약하고, 베팅일까요?</h3>
+                <p>
+                  거래소 선물은 특정 사람과 이름을 알고 직접 약속하는 계약이
+                  아닙니다. 매도 주문과 반대편의 매수 주문이 체결되면 거래소와
+                  청산기관이 중간에서 증거금·손익정산·만기결제를 관리합니다.
+                  쉽게 말해 “나 ↔ 거래소·청산기관 ↔ 반대편 투자자” 구조입니다.
+                </p>
+                <p>
+                  반대편이 모두 투기 거래자는 아닙니다. 항공사는 유가 급등,
+                  수출기업은 환율 하락, 주식 ETF 보유자는 시장 급락을 줄이려는
+                  헤지 목적으로 거래할 수 있고, 시장조성자·금융기관은 유동성을
+                  제공한 뒤 다른 거래로 자신의 위험을 조정할 수 있습니다.
+                  보유 자산 없이 가격 방향만 맞히려 하면 투기적 거래가 되지만,
+                  이미 가진 가격 위험을 반대 방향 계약으로 줄이면 헤지, 현물과
+                  선물의 가격 차이를 이용하면 차익거래라고 부릅니다.
+                </p>
+                <h3>왜 미래 가격을 맞히려는 거래가 생길까요?</h3>
+                <p>
+                  첫째는 위험을 옮기기 위해서입니다. 농부는 수확물 가격 하락이,
+                  식품회사는 원재료 가격 상승이 걱정될 수 있습니다. 선물 계약으로
+                  미래 가격을 미리 정하면 두 쪽 모두 불확실성을 줄일 수 있고,
+                  그 위험을 받아 주는 반대편 거래도 필요해집니다.
+                </p>
+                <p>
+                  둘째는 정보와 전망이 서로 다르기 때문이고, 셋째는 현물과
+                  선물의 가격 차이를 줄이고 거래를 원활하게 하기 위해서입니다.
+                  모든 방향 거래가 단순 도박은 아니지만, 이해 없이 큰 규모로
+                  거래하면 투기와 매우 가까워집니다. 헤지라도 계약 규모가 보유
+                  자산보다 크면 오히려 위험과 증거금 부담이 커질 수 있습니다.
+                </p>
+              
+            
+            
+          </section><section class="lesson-block">
+            
+              <p class="lesson-kicker">금융 이론 · 선물과 옵션</p><h2 id="theory-08-5">옵션은 선택권입니다: 콜과 풋</h2>
+              
+                <p>
+                  옵션은 미래에 정한 가격으로 사고팔 수 있는 권리입니다.
+                  콜옵션은 살 권리이고, 풋옵션은 팔 권리입니다.
+                </p>
+                <div>
+                  <p><b>콜(Call) = 살 권리</b><span>“사려고 상대를 콜(Call), 부른다!”</span></p>
+                  <p><b>풋(Put) = 팔 권리</b><span>“풋의 ‘ㅍ’은 팔다의 ‘ㅍ’과 같다!”</span></p>
+                </div>
+                <p>
+                  “콜(call)”과 “풋(put)”이라는 이름은 옵션 매수자가
+                  매도자에게 무엇을 요구할 수 있는지에서 왔습니다. 콜옵션은
+                  매수자가 정한 가격에 기초자산을 팔라고 매도자를 “불러낼(call)”
+                  수 있는 권리, 즉 살 권리입니다. 반대로 풋옵션은 매수자가
+                  정한 가격에 기초자산을 사라고 매도자에게 “가져다 놓을(put)”
+                  수 있는 권리, 즉 팔 권리입니다. 이 용어는 17~18세기
+                  유럽 증권시장의 “put and call” 계약에서 비롯된 것으로
+                  전해지며, 1973년 미국 시카고옵션거래소(CBOE)가 표준화된
+                  상장 옵션 시장을 열면서 지금과 같은 콜·풋 용어로 널리
+                  굳어졌습니다.
+                </p>
+                <p>
+                  주가가 오를 때를 대비해 살 권리를 사는 것이 콜옵션 매수이고,
+                  주가 하락에 대비해 팔 권리를 사는 것이 풋옵션 매수입니다. 옵션
+                  매수자는 현물 주식이 없어도 옵션 계약 자체를 사고팔 수
+                  있습니다.
+                </p>
+                <p>
+                  옵션도 선물처럼 반대편이 있어야 체결됩니다. 예를 들어 A가
+                  “2개월물·행사가 10만 원 콜옵션” 1계약을 매수하고 B가 같은
+                  계약을 매도하면, A는 살 권리를 받고 B는 팔아줄 의무를 집니다.
+                  A는 프리미엄을 내고, B는 프리미엄을 받습니다.
+                </p>
+                <p>
+                  실제 거래소에서는 B에게 직접 말하는 것이 아니라 증권사 주문
+                  화면에서 거래소가 미리 정한 기초자산·만기·행사가·콜/풋·수량을
+                  고른 뒤 매수 또는 매도 주문을 냅니다. 같은 조건의 익명 반대
+                  주문과 가격이 맞으면 거래소·청산기관을 통해 체결됩니다.
+                  거래소에 상장되지 않은 주식·만기·행사가를 임의로 만들어 주문할
+                  수는 없습니다.
+                </p>
+                <p>
+                  권리를 사는 사람은 보통 프리미엄을 내고 불리하면 권리를 포기할
+                  수 있습니다. 권리를 팔아주는 사람은 프리미엄을 받지만, 현물
+                  없이 콜옵션을 매도하면 필요할 때 비싼 가격에 주식을 사서
+                  넘겨야 할 수도 있어 큰 손실 위험이 있습니다. 기관·기업은
+                  금융회사와 조건을 직접 정하는 장외 맞춤계약을 맺기도 하지만,
+                  개인의 일반 거래소 주문과는 다릅니다.
+                </p>
+                
+                <h3>에스크로와 CCP: 제3자가 안전장치를 만드는 방식</h3>
+                <p>일반 상거래와 파생상품 거래 모두 상대방이 돈만 받고 물건을 주지 않거나 결제 의무를 이행하지 못할 위험이 있습니다. 다만 <b>에스크로(Escrow)</b>와 <b>중앙청산상대방(CCP)</b>은 작동 방식과 책임 범위가 다릅니다.</p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <caption>에스크로와 중앙청산상대방(CCP)의 차이</caption>
+                    <thead><tr><th scope="col">구분</th><th scope="col">에스크로</th><th scope="col">CCP</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">주요 거래</th><td>전자상거래·부동산 등에서 구매대금을 조건부로 보관하는 데 활용됩니다.</td><td>거래소 파생상품 등 청산 대상 거래의 결제 이행을 관리합니다.</td></tr>
+                      <tr><th scope="row">작동 방식</th><td>중립 제3자가 대금을 보관했다가 배송·구매확정 등 약정 조건이 충족되면 지급합니다.</td><td>체결 뒤 매수자와 매도자 사이에 들어가 계약 상대방이 되며, 증거금·일일정산·결제불이행 절차를 운영합니다.</td></tr>
+                      <tr><th scope="row">위험 관리</th><td>대금의 조기 유출을 막고 거래 조건 이행을 확인합니다.</td><td>참가자의 결제불이행 위험이 시장 전체로 번지는 것을 줄이기 위해 증거금, 청산기금 등 다층 안전장치를 사용합니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3>거래소가 보증하는 것은 계약 이행입니다</h3>
+                <p>
+                  거래소 파생상품은 매수자와 매도자가 서로의 신용을 직접 확인해
+                  계약을 끝까지 이행해야 하는 구조가 아닙니다. 체결 뒤에는
+                  <b>KRX 청산기관</b>이 <b>중앙청산상대방(CCP)</b> 역할로
+                  청산회원 사이에 들어가, 모든 매도자에게는 매수자 역할을 하고
+                  모든 매수자에게는 매도자 역할을 합니다. 즉 <b>CCP는 기관 이름이
+                  아니라 ‘거래 상대방 사이에 서서 청산·결제를 안정시키는 역할’</b>이고,
+                  한국에서는 KRX의 청산 부문이 그 역할을 수행합니다. 이를 통해 원래
+                  두 당사자 사이의 계약은 KRX와 각 청산회원 사이의 결제 의무로 바뀝니다.
+                </p>
+                <p>
+                  이행 안정성은 증거금, 매일의 손익정산, 위험 수준에 맞춘
+                  추가 증거금, 강제청산, 공동기금 등으로 관리합니다. 어느
+                  청산회원이 결제 의무를 제때 이행하기 어려운 상황이 생겨도,
+                  청산기관은 정해진 절차에 따라 결제를 완료하도록 조치합니다.
+                  개인 투자자는 보통 증권사를 통해 거래하므로, 실제 증거금
+                  납부·추가 납부 요구·강제청산 안내는 증권사 계좌에서 받습니다.
+                </p>
+                <p>
+                  KRX는 경찰이나 금융감독원이 아닙니다. 경찰·검찰은 범죄를 수사하고,
+                  금융감독원은 금융회사를 감독합니다. KRX는 자본시장법에 따라
+                  금융위원회가 지정한 거래소·청산기관으로서 시장을 운영하고 거래 뒤의
+                  청산·결제를 관리합니다. 따라서 CCP가 보증하는 것은 <b>회원사 사이의
+                  계약 이행과 결제 절차</b>이지, 개인의 투자 손실이나 수익이 아닙니다.
+                </p>
+                <p>
+                  다만 “거래소가 보증한다”는 말은
+                  <b>계약의 결제 이행과 상대방 결제불이행 위험을 관리한다</b>는
+                  뜻입니다. 내가 선물·옵션 가격을 잘못 예상해 발생한 평가손실, 추가
+                  증거금, 강제청산 손실을 거래소가 대신 보상하거나 수익을
+                  보장한다는 뜻은 아닙니다.
+                </p>
+                <figure class="concept-visual">
+                  <p class="visual-kicker">CENTRAL CLEARING</p>
+                  <div class="visual-row">
+                    <div class="visual-card">
+                      <strong>매수·매도 주문</strong><span>증권사를 통해 익명으로 체결됩니다.</span>
+                    </div>
+                    <div class="visual-card">
+                      <strong>KRX 청산기관 · CCP 역할</strong><span>증거금·일일정산·결제이행을 관리합니다.</span>
+                    </div>
+                    <div class="visual-card">
+                      <strong>결제 안정성</strong><span>상대방 결제불이행 위험을 줄이는 구조입니다.</span>
+                    </div>
+                  </div>
+                  <figcaption><b>계약 이행 보증 ≠ 투자 손실 보전</b> · 가격 변동으로 인한 손익은 투자자에게 귀속됩니다.</figcaption>
+                </figure>
+                <h3>KRX에서 실제로 확인할 수 있는 선물·옵션</h3>
+                <p>
+                  한국거래소(KRX)에는 주가지수·개별주식·통화·금리 등을 기초자산으로 하는
+                  파생상품이 상장되어 있습니다. 아래는 학습에서 자주 보는 주가지수·개별주식
+                  상품의 예시입니다. <b>계약금액은 ‘현재 가격 × 거래승수’</b>이므로 시세에 따라
+                  바뀌며, 아래 금액은 증거금이나 실제 필요한 예탁금이 아닙니다.
+                </p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <caption>KRX 공식 상품소개의 핵심 명세를 쉬운 말로 요약했습니다. 거래 전에는 링크의 최신 상품명세를 다시 확인하세요.</caption>
+                    <thead>
+                      <tr><th scope="col">상품</th><th scope="col">KRX 공식 핵심 명세</th><th scope="col">쉽게 읽기</th><th scope="col">KRX 소개 자료</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><th scope="row">코스피200 선물</th><td>코스피200 지수 · 가격 × 250,000원<br>분기월(3·6·9·12월) · 호가 0.05포인트<br>현금결제</td><td>340포인트면 1계약 규모는 약 8,500만 원입니다. 0.05포인트만 움직여도 손익은 12,500원 움직입니다. 주식을 사는 것이 아니라 지수 변화의 차액을 정산합니다.</td><td><a href="https://open.krx.co.kr/contents/OPN/01/01040201/OPN01040201.jsp" target="_blank" rel="noopener">공식 상품소개</a></td></tr>
+                      <tr><th scope="row">미니 코스피200 선물</th><td>코스피200 지수 · 가격 × 50,000원<br>매월 결제월 · 호가 0.02포인트<br>현금결제</td><td>표준 코스피200 선물의 거래승수가 5분의 1입니다. 같은 340포인트라도 1계약 규모가 약 1,700만 원이어서, 표준 계약과 금액 차이를 비교해 볼 수 있습니다.</td><td><a href="https://open.krx.co.kr/contents/OPN/01/01040204/OPN01040204.jsp" target="_blank" rel="noopener">공식 상품소개</a></td></tr>
+                      <tr><th scope="row">코스닥150 선물</th><td>코스닥150 지수 · 가격 × 10,000원<br>분기월(3·6·9·12월) · 호가 0.10포인트<br>현금결제</td><td>코스닥150이라는 지수의 움직임을 거래하는 계약입니다. 1포인트가 1만 원이고 최소 호가 0.10포인트는 1,000원 손익 단위가 됩니다.</td><td><a href="https://open.krx.co.kr/contents/OPN/01/01040208/OPN01040208.jsp" target="_blank" rel="noopener">공식 상품소개</a></td></tr>
+                      <tr><th scope="row">코스피200 옵션</th><td>코스피200 지수 · 가격 × 250,000원<br>콜·풋 중 권리를 사거나 의무를 지는 계약<br>지수 기준 현금결제</td><td>프리미엄이 5포인트라면 1계약에 내거나 받는 프리미엄은 125만 원입니다. 선물처럼 가격 변화를 그대로 받는 구조가 아니라, 콜·풋과 행사가격에 따라 권리 가치가 달라집니다.</td><td><a href="https://open.krx.co.kr/contents/OPN/01/01040202/OPN01040202.jsp" target="_blank" rel="noopener">공식 상품소개</a></td></tr>
+                      <tr><th scope="row">개별주식 선물·옵션</th><td>거래소가 정한 기초주권 · 주식가격 × 10주<br>원화로 가격 표시 · 가격대별 호가단위 적용</td><td>지수 포인트가 아니라 특정 회사 주가를 기준으로 합니다. 예를 들어 선물가격이 7만 원이면 1계약의 기준 금액은 약 70만 원입니다. 실제 거래 가능 종목과 호가단위는 상품별로 확인해야 합니다.</td><td><a href="https://open.krx.co.kr/contents/OPN/01/01040401/OPN01040401T1.jsp" target="_blank" rel="noopener">주식선물</a><br><a href="https://open.krx.co.kr/contents/OPN/01/01040402/OPN01040402T1.jsp" target="_blank" rel="noopener">주식옵션</a></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>
+                  코스피200 선물·옵션과 미니 코스피200 선물·옵션, 코스닥150 선물·옵션 등은
+                  야간거래 대상에도 포함될 수 있습니다. 다만 상장 종목·결제월·거래시간·호가단위·
+                  거래 가능 단계와 기본예탁금은 상품과 증권사에 따라 다를 수 있습니다. KRX의
+                  <a href="https://open.krx.co.kr/contents/OPN/01/0104/01040100/OPN01040100.jsp" target="_blank" rel="noopener">파생상품시장 안내</a>와 증권사 약관·주문 화면을 함께 확인하세요.
+                </p>
+                
+                <h3>주식선물의 대상 종목은 어떻게 정할까요?</h3>
+                <p>
+                  KRX의 주식선물은 모든 상장주식에 자동으로 붙는 상품이 아닙니다.
+                  선물의 기준이 되는 주식을 <b>기초주권</b>이라고 하며, 거래소가
+                  정한 대상만 주식선물로 거래할 수 있습니다. 계약 단위와 만기가
+                  표준화된 장내상품이므로 투자자가 임의의 종목·만기·행사가를 만들어
+                  주문하는 방식과는 다릅니다.
+                </p>
+                <p>
+                  KRX 시행세칙상 기초주권은 코스피200 구성종목, 코스닥글로벌
+                  구성종목 또는 거래수요 등을 고려해 거래소가 인정하는 주권 가운데
+                  선정됩니다. 실제 대상 종목은 유동성·거래수요와 함께 바뀔 수 있으니
+                  주문 전 최신 <a href="https://open.krx.co.kr/contents/OPN/01/01040401/OPN01040401T1.jsp" target="_blank" rel="noopener">KRX 주식선물 기초주권 목록</a>을 확인하세요.
+                </p>
+                <p>
+                  상장폐지·합병·분할·감자·주식교환처럼 기초주권에 큰 변동이 생기면
+                  거래소는 해당 주식선물의 최종거래일이나 계약 조건을 조정할 수
+                  있습니다. 이미 보유한 계약의 처리 방식은 거래소 공지와 증권사
+                  안내를 확인해야 합니다.
+                </p>
+                <h3>누가 상품을 만들고, 나는 무엇을 거래하나요?</h3>
+                <p>
+                  개인이 선물·옵션을 임의의 이름·만기·행사가격으로 새로 만들 수는 없습니다.
+                  장내 파생상품은 한국거래소(KRX)가 <b>기초자산, 만기, 행사가격, 거래승수,
+                  결제 방법</b>을 미리 정해 상장한 표준 계약입니다. 투자자는 증권사 화면에서
+                  이미 상장된 종목을 골라 주문합니다.
+                </p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <caption>선물·옵션 거래에서 ‘상품’, ‘주문’, ‘포지션’을 구분하는 법</caption>
+                    <thead><tr><th scope="col">단계</th><th scope="col">무엇을 뜻하나요?</th><th scope="col">코스피200 옵션 예시</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">상장 계약 종목</th><td>거래소가 미리 정한 표준 계약 조건</td><td>코스피200 콜옵션 · 특정 결제월 · 특정 행사가격</td></tr>
+                      <tr><th scope="row">주문</th><td>투자자가 증권사를 통해 내는 매수·매도 의사</td><td>해당 콜옵션 1계약을 프리미엄 5포인트에 매도</td></tr>
+                      <tr><th scope="row">체결</th><td>반대 주문과 가격·수량이 맞아 거래가 성립</td><td>매도 주문과 다른 투자자의 매수 주문이 만남</td></tr>
+                      <tr><th scope="row">포지션</th><td>체결 후 계좌에 남는 계약의 방향과 수량</td><td>매수자는 롱 포지션(권리), 매도자는 숏 포지션(의무)</td></tr>
+                      <tr><th scope="row">청산</th><td>같은 종목을 반대 방향으로 거래해 포지션을 0으로 만듦</td><td>매도한 옵션 1계약을 다시 매수</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3>롱(Long)과 숏(Short)은 무엇을 뜻할까요?</h3>
+                <p>시장에서는 보통 매수 쪽 포지션을 <b>롱(Long)</b>, 매도 쪽 포지션을 <b>숏(Short)</b>이라고 부릅니다. 이 말은 단순히 보유 기간이 길고 짧다는 뜻이 아니라, 가격이 움직일 때 어느 방향에서 이익·손실이 나는지를 나타내는 금융 용어입니다.</p>
+                <p class="lesson-note"><b>쉽게 외우기:</b> “사니까 가지고 있는 쪽이 롱(Long), 파니까 없어서 숏(Short)”이라고 기억하면 편해요.</p>
+                <p><b>롱</b>은 자산을 보유하는 상태와 연결된 표현입니다. 과거 영어권 상업에서 재고나 증권을 많이 보유한 상태를 long in stock이라고 부른 용례가 금융시장으로 이어졌습니다. 주식 현물에서는 보통 사서 보유하는 매수 포지션이 롱이고, 선물에서는 계약을 매수한 쪽이 롱입니다. 가격이 오르면 롱 포지션이 유리하고, 내리면 불리합니다.</p>
+                <p><b>숏</b>은 결제할 자산이 부족한 상태와 연결된 표현입니다. 공매도에서는 보유하지 않은 주식을 빌려 먼저 팔고 나중에 사서 갚아야 하므로, 해당 주식이 ‘short’한 상태라고 부릅니다. 주식 공매도나 선물 매도 포지션은 가격이 내리면 유리하고, 오르면 불리합니다. 다만 선물의 숏은 주식을 실제로 빌려 파는 공매도와 달리 계약을 매도해 만든 포지션입니다.</p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <caption>롱과 숏의 기본 비교</caption>
+                    <thead><tr><th scope="col">구분</th><th scope="col">용어가 가리키는 상태</th><th scope="col">현대적 의미</th><th scope="col">가격 하락 시</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">롱 (Long)</th><td>자산·계약을 보유한 쪽</td><td>매수 포지션</td><td>보통 손실 방향</td></tr>
+                      <tr><th scope="row">숏 (Short)</th><td>결제할 자산이 부족하거나 빌린 상태에서 판 쪽</td><td>매도 포지션</td><td>보통 이익 방향</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>롱과 숏의 어원은 여러 역사적 용례가 겹쳐 있어 하나의 이야기로 단정하기 어렵습니다. 중요한 것은 현재의 쓰임입니다. 롱은 항상 장기투자를, 숏은 항상 단기거래를 뜻하지 않으며, 둘 다 헤지 또는 가격 방향에 대한 거래에 쓰일 수 있습니다. 주식 공매도는 빌린 주식을 되갚아야 하므로 가격 상승 때 손실이 커질 수 있고, 선물도 증거금 때문에 손익 변동이 커질 수 있습니다.</p>
+                <p>
+                  따라서 “옵션을 만들어 판다”보다는 <b>상장된 옵션 종목의 매도 포지션을
+                  만든다</b>고 이해하는 편이 정확합니다. 선물은 매수·매도 모두 계약 이행 의무를
+                  지며, 옵션은 매수자가 권리를 갖고 매도자는 그 권리에 대응할 의무를 집니다.
+                  거래소와 청산기관은 익명으로 체결된 양쪽 거래의 증거금·손익정산·결제를
+                  관리합니다.
+                </p>
+                <p>
+                  일반 개인은 옵션 매도를 바로 할 수 있는 것이 아닙니다. 교육·모의거래와
+                  기본예탁금, 거래 경험 등 단계별 요건을 충족해야 하며 증권사는 자체 위험관리
+                  기준에 따라 추가 제한을 둘 수 있습니다. 특히 옵션 매도는 받은 프리미엄보다
+                  훨씬 큰 손실이 날 수 있으므로, 계약 규모·증거금·최대 손실·만기 전 청산 계획을
+                  먼저 확인해야 합니다. 최신 기준은
+                  <a href="https://trn.krx.co.kr/pages/0101?cmd=base" target="_blank" rel="noopener">KRX 모의거래·제도 안내</a>와
+                  <a href="https://regulation.krx.co.kr/contents/RGL/03/03050200/RGL03050200.jsp" target="_blank" rel="noopener">KRX 파생상품 매매절차</a>에서 확인할 수 있습니다.
+                </p>
+                <p>
+                  기업과 금융회사가 거래소 밖에서 개별 조건을 합의하는 <b>장외(OTC) 파생상품</b>은
+                  맞춤형 계약을 설계할 수 있습니다. 그러나 신용·담보·법무 관리가 필요한 별도
+                  거래이며, 개인이 증권사 앱에서 내는 일반 장내 주문과는 다릅니다.
+                </p>
+              
+            
+            
+          </section><section class="lesson-block">
+            
+            
+              <p class="lesson-kicker">금융 이론 · 선물과 옵션</p><h2 id="theory-08-6">옵션 만기일과 실제 파생상품 보기</h2>
+              
+                <p>
+                  옵션 만기일에는 계약이 끝나므로, 옵션을 가진 사람과 옵션을
+                  팔아준 금융기관이 포지션을 정리하거나 위험을 줄이기 위한
+                  헤지를 조정할 수 있습니다. 이 과정에서 관련 주식이나 선물의
+                  주문이 늘어나면 지수에 단기 영향이 생길 수 있지만, 만기만으로
+                  가격 방향을 단정할 수는 없습니다.
+                </p>
+                <p>
+                  한국거래소(KRX)에는 KOSPI 200·미니 KOSPI 200·KOSDAQ 150
+                  선물과 옵션, 미국달러선물, 국채선물, 금선물 등이 있습니다.
+                  상품마다 거래승수·만기·결제 방식·증거금이 다르므로, 실제
+                  주문 전에는 거래소 상품명세와 증권사 주문 화면을 함께
+                  확인해야 합니다.
+                </p>
+                
+              
+            
+            
+          </section><section class="lesson-block">
+            
+              <p class="lesson-kicker">금융 이론 · 선물과 옵션</p><h2 id="theory-08-7">선물 만기일은 왜 3개월 단위(분기월)로 정해질까요?</h2>
+              
+                <p>
+                  선물 거래의 모태는 19세기 미국 시카고 상품거래소(CBOT)의
+                  옥수수·밀 같은 농산물 거래였습니다. 파종부터 수확·저장·유통까지
+                  이어지는 흐름이 대략 한 계절, 즉 3개월 단위로 바뀌었기 때문에
+                  농부와 상인이 계절별 수급과 가격 변동 위험을 헤지하기에 3개월
+                  주기가 잘 맞았습니다. 이 관행이 이후 금융선물에도 이어졌습니다.
+                </p>
+                <p>
+                  주가지수·채권 같은 금융선물에서도 3개월 주기는 시장 참가자의
+                  생태계와 맞습니다. 기업은 분기마다 실적을 발표하고, 연기금·펀드
+                  같은 기관 투자자도 보통 분기 단위로 포트폴리오를 재조정하므로
+                  3개월 만기가 위험 관리와 이월(롤오버) 계획을 세우기에
+                  편리합니다.
+                </p>
+                <p>
+                  만기가 매달 있으면 거래량이 여러 만기로 흩어져 특정 만기의
+                  유동성이 얕아질 수 있습니다. 만기를 3·6·9·12월처럼 분기월로
+                  제한하면 거래가 가장 가까운 만기(근월물)에 집중되어 매수·매도
+                  호가가 촘촘해지고 체결이 원활해지는 효과가 있습니다.
+                </p>
+                <p>
+                  다만 모든 선물이 분기월 만기만 쓰는 것은 아닙니다. KOSPI 200
+                  선물 같은 지수선물은 대개 3·6·9·12월을 분기월로 두지만, 원유·금
+                  같은 원자재나 일부 통화 선물은 실물 인도와 수급 특성에 맞춰
+                  매월 만기를 두기도 합니다. 정확한 만기 월과 최종거래일은
+                  상품마다 다르므로 거래소 상품명세에서 확인해야 합니다.
+                </p>
+              
+            
+            
+          </section><section class="lesson-block">
+            <span>03.5</span>
+            
+              <p class="lesson-kicker">금융 이론 · 펀드 · ETF</p><h2 id="theory-08-8">분산투자 10% 규칙과 단일종목 레버리지 ETF의 예외</h2>
+              
+                <p>공모 집합투자기구에는 일반적으로 <strong>같은 법인 등이 발행한 증권에 집합투자재산의 10%를 넘겨 투자하지 못하게 하는</strong> 집중투자 제한이 적용됩니다. 이는 ‘모든 투자자산’에 똑같이 적용되는 단순 규칙이라기보다, 동일 발행인의 증권에 지나치게 쏠리는 위험을 줄이기 위한 법정 운용한도입니다.</p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <caption>10% 제한을 읽는 방법</caption>
+                    <thead><tr><th scope="col">흔한 표현</th><th scope="col">정확한 이해</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">“한 종목은 10%까지만”</th><td>일반 공모펀드의 동일 발행인 증권 투자에 적용되는 기본 한도입니다. 특정 종목 급락이 펀드 전체에 미치는 영향을 낮추려는 장치입니다.</td></tr>
+                      <tr><th scope="row">“최소 10종목이면 된다”</th><td>10% 한도만으로 포트폴리오의 질이 보장되지는 않습니다. 서로 비슷한 업종·국가·위험요인에 몰리면 여러 종목이어도 함께 손실이 날 수 있습니다.</td></tr>
+                      <tr><th scope="row">“10%를 넘으면 위법”</th><td>국채 등 법령상 예외, 지수 추종 등 예외·완화 규정, 시장가격 변동에 따른 일시적 초과의 조정 규칙이 있어 상품 구조와 규약을 함께 봐야 합니다.</td></tr>
+                      <tr><th scope="row">파생상품을 쓰면 한도가 사라진다</th><td>아닙니다. 파생상품에는 별도의 위험평가·거래상대방·노출 한도가 적용될 수 있습니다. 현물 비중만 보고 실제 특정 종목 노출을 단정하면 안 됩니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3>단일종목 레버리지 상품은 왜 가능한가요?</h3>
+                <p>국내에서는 분산투자 요건 때문에 단일종목 레버리지·인버스 상품이 오랫동안 허용되지 않았지만, 2026년 제도 개선 후 일정 요건을 충족한 국내 우량주를 기초로 한 단일종목 레버리지·인버스 <strong>ETF·ETN</strong>이 상장 심사를 거쳐 도입됐습니다. 금융위원회가 안내한 초기 대상에는 삼성전자와 SK하이닉스가 포함됐고, 일간 수익률의 ±2배 이내를 추종하는 구조입니다.</p>
+                <p>따라서 <strong>SK하이닉스 단일종목 레버리지 상품이 ‘10% 규정을 피해 현물은 10%만, 나머지는 스왑 90%’로 운용된다고 일반화할 수는 없습니다.</strong> 상품마다 현물·개별주식선물·스왑·현금성 자산의 조합이 다르고, 실제 편입 비중도 매일 바뀔 수 있습니다. 해당 ETF 또는 ETN의 투자설명서, 자산구성내역(PDF), 일일 기준가격 공시에서 실제 익스포저와 파생상품 사용 여부를 확인하세요.</p>
+                <p>금융에서 레버리지 ETF의 ‘200% 노출(Exposure)’이란, ‘내가 ETF에 넣은 투자 원금의 2배에 달하는 실제 주식 금액을 사들인 것과 동일한 효과를 내도록 파생상품 포지션을 구성했다’는 뜻입니다.</p>
+                <p>예를 들어, 삼성전자 2배 레버리지 ETF에 <strong>100만 원</strong>을 투자했을 때 ETF 운용사는 다음과 같이 포지션을 잡습니다.</p>
+                <h3>100만 원 투자 시 포지션 구성 예시</h3>
+                <ul>
+                  <li><strong>실제 내 원금:</strong> 100만 원</li>
+                  <li><strong>목표 노출 비율:</strong> 200% (2배)</li>
+                  <li><strong>실제 운용 규모:</strong> <strong>200만 원 상당의 삼성전자 주식 가치</strong></li>
+                </ul>
+                <p>이 200만 원을 채우기 위해 운용사는 현물 주식 80만 원(80%)과 주식선물 120만 원(120%)을 합쳐 총 200만 원(200%)치 손익에 노출되도록 맞춥니다.</p>
+                <h3>왜 200% 노출이라고 부를까?</h3>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <thead><tr><th scope="col">구분</th><th scope="col">일반 삼성전자 ETF (1배)</th><th scope="col">삼성전자 2배 레버리지 ETF</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">투자 원금</th><td>100만 원</td><td><strong>100만 원</strong></td></tr>
+                      <tr><th scope="row">실제 주식 노출액</th><td>100만 원 (100%)</td><td><strong>200만 원 (200%)</strong></td></tr>
+                      <tr><th scope="row">주가 5% 상승 시</th><td>+5만 원 이익 (<strong>+5%</strong>)</td><td><strong>+10만 원 이익 (+10%)</strong></td></tr>
+                      <tr><th scope="row">주가 5% 하락 시</th><td>-5만 원 손실 (<strong>-5%</strong>)</td><td><strong>-10만 원 손실 (-10%)</strong></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3>핵심 정리</h3>
+                <p>파생상품(주식선물, 스왑 등)은 <strong>원금의 일부만 증거금으로 내고도 더 큰 액수의 주식을 계약</strong>할 수 있는 성질이 있습니다.</p>
+                <p>따라서 200% 노출이란 "내 원금은 100만 원이지만, 금융공학(파생상품)을 써서 200만 원어치 주식을 들고 있는 것과 똑같은 손익 움직임을 만들어냈다"는 의미입니다.</p>
+                <p>2026년 국내 증시에 상장된 <strong>삼성전자 단일종목 2배 레버리지 ETF</strong>(KODEX, TIGER, ACE, PLUS 등)는 삼성전자 주식 현물 약 70~90% + 삼성전자 개별주식선물(파생상품) 약 80~110% + 원화예금(현금성 자산)으로 구성되어 있습니다.</p>
+                <h3>실제 자산 구성 방식 (포트폴리오 예시)</h3>
+                <p>대표적인 상품인 <strong>KODEX 삼성전자단일종목레버리지</strong>나 <strong>PLUS·ACE 단일종목레버리지</strong>의 자산 구성(PDF)을 살펴보면 아래와 같은 비중으로 운용됩니다.</p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <thead><tr><th scope="col">구성 자산</th><th scope="col">실제 보유 비중</th><th scope="col">역할 및 특징</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">삼성전자 현물 주식</th><td><strong>약 70% ~ 90%</strong></td><td>기초자산의 기본 1배수 노출(Exposure)을 담당</td></tr>
+                      <tr><th scope="row">삼성전자 주식선물 (파생)</th><td><strong>약 80% ~ 110%</strong></td><td>부족한 1배수 이상의 노출을 채워 <strong>총 200%(2배) 노출</strong> 달성</td></tr>
+                      <tr><th scope="row">원화 예금 및 현금성 자산</th><td><strong>약 5% ~ 10%</strong></td><td>주식선물 매매를 위한 위탁증거금 및 리밸런싱용 현금</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p><em>(※ 합계 노출액이 약 200%가 되도록 매일 장 마감 시점에 리밸런싱을 수행합니다.)</em></p>
+                <h3>국내 단일종목 레버리지 ETF의 2가지 운용 방식</h3>
+                <p>국내 상장 상품은 자산운용사에 따라 크게 두 가지 방식으로 나뉩니다. 둘 다 <b>‘하루 동안 삼성전자 주가 움직임의 2배’</b>를 목표로 하는 점은 같고, <b>그 2배를 무엇으로 채우는가</b>가 다릅니다. 100만 원을 넣었다고 가정해 비교해 보겠습니다.</p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <caption>삼성전자 2배 ETF의 두 운용 방식 비교 — 상품명은 상장 당시 명칭 기준 예시이며, 정확한 이름·종목코드·운용 방식은 각 운용사 투자설명서와 KRX 정보데이터시스템에서 확인하세요.</caption>
+                    <thead><tr><th scope="col">구분</th><th scope="col">① 현물 주식 + 주식선물 혼합 방식 (가장 대표적)</th><th scope="col">② 순수 선물 추종 방식</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">해당 상품 (예)</th><td>KODEX 삼성전자레버리지(삼성자산운용) · TIGER 삼성전자레버리지(미래에셋) · ACE 삼성전자레버리지(한국투자신탁운용) · RISE 삼성전자레버리지(KB자산운용) · PLUS 삼성전자레버리지(한화자산운용). SK하이닉스 2배 상품도 같은 브랜드로 함께 상장되었습니다.</td><td>KIWOOM 삼성전자선물레버리지(키움투자자산운용) · 1Q 삼성전자선물레버리지(하나자산운용). 상품 이름에 <b>‘선물’</b>이 들어가 있으면 이 방식일 가능성이 큽니다.</td></tr>
+                      <tr><th scope="row">100만 원을 넣으면</th><td>약 <b>80만 원</b>으로 삼성전자 <b>진짜 주식</b>을 삽니다(노출 80%). 나머지 <b>120% 노출</b>은 삼성전자 <b>개별주식선물</b>을 사서 채웁니다. 선물은 계약금액의 일부(증거금)만 내면 되므로 남은 20만 원 안팎으로 120만 원어치 노출을 만들 수 있습니다. 합계 200%.</td><td>주식은 사지 않고 삼성전자 <b>주식선물만으로 200만 원어치 노출</b>을 만듭니다. 증거금으로 20~30만 원 정도만 쓰이고, 남은 <b>70~80만 원은 단기 채권·예금</b>에 넣어 이자를 받습니다.</td></tr>
+                      <tr><th scope="row">쉽게 비유하면</th><td>“집(주식)을 한 채 사고, 한 채 더 사는 대신 계약금만 걸어 두는 방식.” 실제 주식이 있어서 배당도 직접 받습니다.</td><td>“집은 안 사고 계약금만 두 채 분량 걸어 두고, 남은 돈은 예금에 넣는 방식.” 배당은 직접 못 받지만 선물 가격에 미리 반영됩니다.</td></tr>
+                      <tr><th scope="row">장점</th><td>현물 비중이 높아 설정·환매 때 주식을 그대로 주고받을 수 있어 거래세·거래비용을 줄일 수 있습니다. 선물 만기마다 갈아타는 <b>롤오버 비용</b>이 120% 부분에만 생깁니다.</td><td>구조가 단순하고, 남은 현금에서 나오는 <b>이자 수익</b>이 비용 일부를 상쇄합니다. 현물을 사고팔 필요가 없어 리밸런싱이 빠릅니다.</td></tr>
+                      <tr><th scope="row">유의점</th><td>주식 80%와 선물 120%를 매일 장 마감에 다시 맞추므로, 삼성전자 주식선물의 거래가 얇은 날에는 목표 배수와 차이(추적오차)가 커질 수 있습니다.</td><td>롤오버 비용이 <b>200% 전체</b>에 생기고, 선물 가격이 현물보다 비싸거나 싼 정도(베이시스)에 따라 수익률이 주가 2배와 달라질 수 있습니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="lesson-note"><b>두 방식 모두 공통:</b> 약속하는 것은 <b>‘하루’</b> 수익률의 2배뿐입니다. 며칠 이상 들고 있으면 앞서 본 <b>음의 복리</b> 때문에 누적 수익률이 주가 상승률의 2배와 다르게 됩니다. 또 삼성전자 한 종목에 200% 노출되므로 분산 효과가 전혀 없고, 하루에 10% 이상 움직일 수도 있습니다. 상품명에 브랜드(KODEX·TIGER 등)만 다르게 보여도 <b>‘선물’이 붙는지, 투자설명서의 자산구성이 현물+선물인지 선물만인지</b>를 확인하면 방식을 구분할 수 있습니다.</p>
+                <blockquote>
+                  <p><strong>요약</strong></p>
+                  <p>한국의 삼성전자 단일종목 레버리지 ETF는 현물을 안 담거나 고정 비율로 제한하는 것이 아니라, <strong>삼성전자 진짜 주식을 약 80%가량 사고, 부족한 나머지 120%만큼을 삼성전자 주식선물로 채워서 매일 2배의 손익 움직임(총 200% 노출)</strong>을 구현하는 구조입니다.</p>
+                </blockquote>
+                <p>단일종목 레버리지 상품은 분산 효과가 거의 없고, 일일 목표수익률 구조 때문에 장기 누적성과가 단순 배수와 달라질 수 있습니다. 일반 ETF보다 높은 변동성, 음의 복리효과, 괴리율, 파생상품·거래상대방 위험을 함께 고려해야 합니다.</p>
+                <p><small>참고: <a href="https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1025079481" target="_blank" rel="noopener">자본시장법 시행령 제80조</a>, <a href="https://www.fsc.go.kr/no010101/86910" target="_blank" rel="noopener">금융위원회 단일종목 레버리지·인버스 상품 도입 안내</a>, <a href="https://www.fsc.go.kr/no010101/86973?curPage=16" target="_blank" rel="noopener">금융위원회 투자자 보호 보완 안내</a>.</small></p>
+              
+            
+            
+          </section><section class="lesson-block">
+            
+            
+              <p class="lesson-kicker">금융 이론 · 채권 · 코인</p><h2 id="theory-08-9">알파카·바이낸스 API 연동과 자동화의 기본</h2>
+              
+                <h3>알파카와 바이낸스: API로 시장데이터·주문 기능을 연결하는 서비스</h3>
+                <p><b>Alpaca(알파카)</b>는 미국 주식·ETF·옵션과 일부 가상자산의 시장데이터 및 주문 기능을 API로 제공하는 브로커리지 플랫폼입니다. 전략을 시험해 보는 <b>Paper Trading</b> 환경과 실제 주문을 내는 Live 환경의 주소·API 키가 분리되어 있어, 학습·개발은 반드시 Paper 환경부터 시작하는 것이 좋습니다. 거래 가능 상품과 계좌 개설 가능 지역은 이용자의 거주지·계좌 유형에 따라 다를 수 있습니다.</p>
+                <p><b>Binance(바이낸스)</b>는 현물·파생상품 등 가상자산 서비스를 제공하는 글로벌 거래소이며, 공개 시세·호가 데이터와 계좌·주문 기능을 API로 제공합니다. 공개 시장데이터는 일반적으로 API 키 없이 조회할 수 있지만, 잔고 조회·주문 같은 개인 기능은 API 키와 요청 서명이 필요합니다. 제공 법인과 가능한 상품은 국가·지역·시점에 따라 달라질 수 있으므로, 서비스 화면과 약관에서 자신의 거주지에 허용된 범위를 먼저 확인해야 합니다.</p>
+                <h3>안전한 연동 순서: 조회 → 모의환경 → 최소 권한</h3>
+                <ol>
+                  <li><b>목적을 나눕니다.</b> 가격 차트·호가를 가져오는 용도라면 공개 시장데이터 API부터 사용합니다. 자동 주문이 필요하지 않다면 거래 권한이 있는 키를 만들 이유가 없습니다.</li>
+                  <li><b>계정 보안을 먼저 설정합니다.</b> 공식 웹사이트에서 계정 본인확인과 2단계 인증을 마치고, 피싱 링크가 아닌 공식 개발자 문서의 API 관리 화면으로 이동합니다.</li>
+                  <li><b>별도 API 키를 만듭니다.</b> 알파카는 Paper Trading 전용 키를 발급해 Paper 엔드포인트에 연결합니다. 바이낸스는 우선 읽기 전용 권한만 켜고, 가능하면 IP 허용목록을 설정합니다. 출금 권한은 자동화 프로그램에 부여하지 않는 것이 원칙입니다.</li>
+                  <li><b>서버에서만 비밀값을 보관합니다.</b> API Key와 Secret은 비밀번호와 같습니다. 브라우저 JavaScript, Git 저장소, 화면 캡처, 채팅창에 넣지 말고 서버의 환경변수·비밀관리 도구에 저장합니다. 화면에는 서버가 필요한 데이터만 전달합니다.</li>
+                  <li><b>모의 주문과 오류 처리를 검증합니다.</b> 주문을 내기 전 잔고·거래 가능 종목·최소 주문단위·수수료·호가 단위를 확인하고, 네트워크 시간 초과 뒤에는 주문이 실제 체결되었는지 주문번호로 다시 조회합니다. 테스트가 끝난 뒤에도 Live 키 전환은 별도 검토 사항입니다.</li>
+                </ol>
+                <p>연동 정보는 다음처럼 <b>서버 환경변수의 이름만</b> 정해 두고 실제 값은 배포 환경에서 입력합니다: <code>ALPACA_API_KEY</code>, <code>ALPACA_API_SECRET</code>, <code>BINANCE_API_KEY</code>, <code>BINANCE_API_SECRET</code>. 키가 노출됐거나 의심스러운 주문이 보이면 즉시 해당 키를 폐기하고 새 키를 발급해야 합니다. 바이낸스의 서명 요청은 키 종류와 권한 설정을 따르며, 공식 문서는 거래 권한을 기본값으로 비활성화하고 키·비밀키를 공유하지 말라고 안내합니다.</p>
+                <p><a href="https://docs.alpaca.markets/us/v1.1/docs/authentication-1" target="_blank" rel="noopener">Alpaca 인증·Paper Trading 공식 문서</a> · <a href="https://developers.binance.com/en/docs/products/spot/rest-api" target="_blank" rel="noopener">Binance Spot API 공식 문서</a> · <a href="https://developers.binance.com/en/docs/products/spot/testnet" target="_blank" rel="noopener">Binance Spot Testnet 공식 문서</a></p>
+                <h3>퀀트 시스템과 코인 거래를 연결하는 방법</h3>
+                <p>퀀트 시스템은 가격 데이터를 규칙으로 해석해 주문 후보를 만들고, 위험 한도를 통과한 경우에만 거래소 API로 주문을 보내는 구조입니다. 핵심은 ‘매수 신호’보다 <b>데이터 품질·백테스트·위험 통제·주문 확인</b>을 분리하는 것입니다. 한 프로그램이 신호를 만들자마자 제한 없이 주문·출금을 모두 실행하게 만들면 오류 한 번이 큰 손실이나 보안 사고로 이어질 수 있습니다.</p>
+                <div>
+                  <article><b>1. 데이터 수집</b><span>공개 REST·WebSocket으로 체결·호가·캔들을 수집합니다.</span></article>
+                  <article><b>2. 신호 연구</b><span>정규화한 데이터로 지표·리밸런싱 규칙을 계산합니다.</span></article>
+                  <article><b>3. 백테스트</b><span>수수료·스프레드·슬리피지·상장폐지를 반영해 검증합니다.</span></article>
+                  <article><b>4. 리스크 엔진</b><span>종목별 한도·최대 손실·주문 크기·중단 조건을 검사합니다.</span></article>
+                  <article><b>5. 실행·감사</b><span>서버가 서명 주문을 보내고 체결·잔고·오류를 기록합니다.</span></article>
+                </div>
+                <ul>
+                  <li><b>데이터 계층:</b> 바이낸스의 공개 시세 API와 알파카의 시장데이터 API에서 받은 데이터를 공통 형식(시간, 거래쌍, 가격, 거래량, 통화)으로 저장합니다. BTC/USDT와 BTC/USD는 기준 통화가 다르므로 같은 가격열로 단순 합치면 안 됩니다. 결측 구간, 거래소별 시간대, 상장폐지 종목도 기록해야 미래 정보를 미리 사용한 백테스트 오류를 줄일 수 있습니다.</li>
+                  <li><b>전략·검증 계층:</b> 과거 성과에는 매매 수수료뿐 아니라 호가 스프레드, 시장가 주문 슬리피지, 파생상품이라면 펀딩비·청산 조건을 반영합니다. 학습용으로는 알파카 Paper Trading과 바이낸스 Testnet·공개 데이터에서 먼저 전략을 검증하고, 실제 계좌에서는 ‘신호만 기록하는’ 섀도 모드를 거친 뒤에 판단합니다.</li>
+                  <li><b>주문·위험 계층:</b> 주문 서비스는 전략과 분리해 최대 주문금액·하루 손실 한도·보유 비중·중복 주문·거래 중단 스위치(kill switch)를 검사합니다. API 응답이 시간 초과됐다고 주문이 실패한 것은 아니므로, 고유 주문 ID로 체결 상태를 다시 조회해야 합니다. 자동화 키에는 출금 권한을 주지 않고, 가능하면 읽기용 키와 거래용 키도 분리합니다.</li>
+                  <li><b>모니터링 계층:</b> 주문 요청·응답, 체결, 잔고 변화, 오류, 전략 버전과 설정값을 시간 순서로 남깁니다. 이 기록이 있어야 신호 문제인지 API 장애인지, 예상한 슬리피지인지 확인하고 시스템을 중지·복구할 수 있습니다.</li>
+                </ul>
+                <p><b>권장 도입 순서:</b> ① 공개 데이터 대시보드 → ② 과거 데이터 백테스트 → ③ Paper/Testnet 모의 주문 → ④ 실제 계좌의 신호 비교(섀도 모드) → ⑤ 작게 제한한 현물 주문입니다. 레버리지·파생상품 자동화는 별도의 청산 위험 검증 없이는 이 순서의 다음 단계로 보지 않는 편이 안전합니다.</p>
+                
+              
+            
+            
+          </section></article></section></div></main></div><script>document.querySelectorAll("img[data-port8000]").forEach(function(img){img.src=location.protocol+"//"+location.hostname+":8000"+img.dataset.port8000;});</script></body></html>

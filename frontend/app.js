@@ -1527,8 +1527,16 @@ KOSDAQ|웹젠|게임`,
       'learn-03': '05', 'learn-05': '06', 'learn-04': '07', 'learn-06': '08', 'learn-07': '09', 'learn-10': '10',
     }[lessonId];
     if (!lessonNumber) return;
-    // 학습 단원도 포털을 새 상태로 열어 GNB의 기존 화면 상태와 섞이지 않게 한다.
-    window.location.assign(`/static/lessons/${lessonNumber}.html`);
+    // 학습 단원은 80 포트의 하드코딩 페이지(/static/lessons)를 포털 본문 iframe으로 띄운다.
+    const lessonUrl = `/static/lessons/${lessonNumber}.html?embedded=1`;
+    stopTickDashboard();
+    stopDashboardAssets();
+    state.activeView = 'learning';
+    $viewButtons.forEach(btn => btn.classList.toggle('active', false));
+    $integratedLessonButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.integratedLesson === lessonId));
+    $chatInputArea.classList.add('hidden');
+    $messages.innerHTML = `<article class="content-page integrated-lesson-page"><div class="integrated-lesson-frame"><iframe src="${lessonUrl}" title="통합 학습 과정 ${lessonNumber}" loading="eager"></iframe></div></article>`;
+    setPanel('left', false);
   }
 
   function loadMarkedForLesson() {

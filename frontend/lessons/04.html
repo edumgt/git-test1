@@ -1,1 +1,1137 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>학습 04 | 투자 분석 포털</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"><link rel="stylesheet" href="lesson-page.css?v=4"></head><body><div class="lesson-layout"><aside class="lesson-lnb"><div class="lesson-lnb-head"><b>EDUMGT Finance</b><span>투자 분석 · 금융 학습 · RAG 실습</span></div><nav><p>통합 학습 과정 · 10개</p><a href="01.html"><b>01</b>법인과 회사 구조 1</a><a href="02.html"><b>02</b>법인과 회사 구조 2</a><a href="03.html"><b>03</b>법인과 회사 구조 3</a><a href="04.html" aria-current="page"><b>04</b>거시경제와 주식시장</a><a href="05.html"><b>05</b>주식 기초</a><a href="06.html"><b>06</b>주식 분석</a><a href="07.html"><b>07</b>가치와 재무</a><a href="08.html"><b>08</b>거래 전략 · LEAN</a><a href="09.html"><b>09</b>펀드 · ETF · 채권</a><a href="10.html"><b>10</b>자산배분 · 퀀트</a></nav></aside><main class="lesson-main"><header class="lesson-gnb"><a class="lesson-brand" href="/?view=home">투자 분석 포털</a><nav><a href="/?view=home">대시보드</a><a href="/?view=minute-chart">시장정보</a><a href="/?view=chart-drawing">드로잉 차트</a><a href="/?view=quiz">퀴즈</a><a href="/?view=data-visualization">데이터 시각화</a><a href="/?view=learn">RAG</a><a href="/?view=investment-practice">투자 실습</a></nav></header><div class="lesson-content"><header class="lesson-title"><b>학습 04 · 거시경제와 주식시장 읽기</b><span>경제 지표가 주식시장에 영향을 주는 경로를 이해합니다.</span></header><article class="lesson-doc"><p class="note">거시지표는 주가를 맞히는 답안지가 아니라 시장 환경을 확인하는 도구입니다. 발표 시점·기준·수정 여부를 확인하고, 지표 하나만으로 매매 결정을 내리지 마세요.</p><h2>거시경제는 무엇인가요?</h2><p>거시경제는 나라 전체의 생산, 물가, 고용, 금리와 돈의 흐름을 보는 경제입니다. 개별 회사의 실적만으로 설명되지 않는 할인율, 소비, 환율, 원자재 가격이 기업 이익과 주가에 함께 영향을 줍니다.</p><table><thead><tr><th>지표</th><th>무엇을 보여 주나요?</th><th>시장에서는 무엇을 함께 볼까요?</th></tr></thead><tbody><tr><td>GDP·산업생산</td><td>경제 활동의 크기와 성장 속도</td><td>기업 매출과 이익 전망이 개선되는지</td></tr><tr><td>CPI·물가</td><td>생활물가의 변화</td><td>금리 경로와 채권금리의 반응</td></tr><tr><td>고용</td><td>소득·소비와 경기의 온도</td><td>경기 둔화인지 과열인지</td></tr><tr><td>환율</td><td>원화와 외화의 교환 가격</td><td>수출기업, 외국인 수급, 수입물가</td></tr></tbody></table><h2>경기 사이클 읽기</h2><p>경제는 회복·확장·둔화·침체를 오가지만, 현실에서는 산업마다 속도가 다릅니다. 성장률이 좋아도 물가가 높으면 금리 부담이 커질 수 있고, 성장률이 낮아도 금리 인하 기대가 위험자산을 지지할 수 있습니다.</p><ul><li><b>회복:</b> 소비·생산이 바닥에서 살아나는지 확인합니다.</li><li><b>확장:</b> 고용·투자와 함께 물가·금리 압력도 봅니다.</li><li><b>둔화:</b> 주문·재고·실적 전망이 낮아지는지 점검합니다.</li><li><b>침체:</b> 현금흐름과 재무건전성의 중요성이 커질 수 있습니다.</li></ul><h2>금리와 주식의 관계</h2><p>금리는 미래 이익의 현재가치를 계산할 때 쓰이는 할인율과 연결됩니다. 금리가 오르면 특히 먼 미래의 성장 기대가 큰 자산의 가치가 압박받을 수 있습니다. 다만 실제 주가는 금리뿐 아니라 이익 전망, 수급, 환율과 위험선호가 동시에 결정합니다.</p><h2>매월 점검할 순서</h2><ol><li>정책의 발표가 아니라 실제 시행일과 세부 내용을 확인합니다.</li><li>국채금리, 유가, 환율이 같은 방향으로 움직이는지 봅니다.</li><li>기업 실적과 가이던스가 시장의 기대를 뒷받침하는지 확인합니다.</li><li>하나의 뉴스가 국가·업종·종목마다 다르게 반영될 수 있음을 기억합니다.</li></ol></article></div></main></div></body></html>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>학습 04 | 투자 분석 포털</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"><link rel="stylesheet" href="lesson-page.css?v=7"><script>if(new URLSearchParams(location.search).get("embedded")==="1")document.documentElement.classList.add("embedded");</script></head><body><div class="lesson-layout"><aside class="lesson-lnb"><div class="lesson-lnb-head"><b>EDUMGT Finance</b><span>투자 분석 · 금융 학습 · RAG 실습</span></div><nav><p>통합 학습 과정 · 10개</p><a href="01.html"><b>01</b>법인과 회사 구조 1</a><a href="02.html"><b>02</b>법인과 회사 구조 2</a><a href="03.html"><b>03</b>법인과 회사 구조 3</a><a href="04.html" aria-current="page"><b>04</b>거시경제와 주식시장</a><a href="05.html"><b>05</b>주식 기초</a><a href="06.html"><b>06</b>주식 분석</a><a href="07.html"><b>07</b>가치와 재무</a><a href="08.html"><b>08</b>거래 전략 · LEAN</a><a href="09.html"><b>09</b>펀드 · ETF · 채권</a><a href="10.html"><b>10</b>자산배분 · 퀀트</a></nav></aside><main class="lesson-main"><header class="lesson-gnb"><a class="lesson-brand" href="/?view=home">투자 분석 포털</a><nav><a href="/?view=home">대시보드</a><a href="/?view=minute-chart">시장정보</a><a href="/?view=chart-drawing">드로잉 차트</a><a href="/?view=quiz">퀴즈</a><a href="/?view=data-visualization">데이터 시각화</a><a href="/?view=learn">RAG</a><a href="/?view=investment-practice">투자 실습</a></nav></header><div class="lesson-content"><header class="lesson-title"><b>학습 04 · 거시경제와 주식시장 읽기</b><span>경제 지표가 주식시장에 영향을 주는 경로를 이해합니다.</span></header><article class="lesson-doc"><p class="note">거시지표는 주가를 맞히는 답안지가 아니라 시장 환경을 확인하는 도구입니다. 발표 시점·기준·수정 여부를 확인하고, 지표 하나만으로 매매 결정을 내리지 마세요.</p><h2>거시경제는 무엇인가요?</h2><p>거시경제는 나라 전체의 생산, 물가, 고용, 금리와 돈의 흐름을 보는 경제입니다. 개별 회사의 실적만으로 설명되지 않는 할인율, 소비, 환율, 원자재 가격이 기업 이익과 주가에 함께 영향을 줍니다.</p><table><thead><tr><th>지표</th><th>무엇을 보여 주나요?</th><th>시장에서는 무엇을 함께 볼까요?</th></tr></thead><tbody><tr><td>GDP·산업생산</td><td>경제 활동의 크기와 성장 속도</td><td>기업 매출과 이익 전망이 개선되는지</td></tr><tr><td>CPI·물가</td><td>생활물가의 변화</td><td>금리 경로와 채권금리의 반응</td></tr><tr><td>고용</td><td>소득·소비와 경기의 온도</td><td>경기 둔화인지 과열인지</td></tr><tr><td>환율</td><td>원화와 외화의 교환 가격</td><td>수출기업, 외국인 수급, 수입물가</td></tr></tbody></table><h2>경기 사이클 읽기</h2><p>경제는 회복·확장·둔화·침체를 오가지만, 현실에서는 산업마다 속도가 다릅니다. 성장률이 좋아도 물가가 높으면 금리 부담이 커질 수 있고, 성장률이 낮아도 금리 인하 기대가 위험자산을 지지할 수 있습니다.</p><ul><li><b>회복:</b> 소비·생산이 바닥에서 살아나는지 확인합니다.</li><li><b>확장:</b> 고용·투자와 함께 물가·금리 압력도 봅니다.</li><li><b>둔화:</b> 주문·재고·실적 전망이 낮아지는지 점검합니다.</li><li><b>침체:</b> 현금흐름과 재무건전성의 중요성이 커질 수 있습니다.</li></ul><h2>금리와 주식의 관계</h2><p>금리는 미래 이익의 현재가치를 계산할 때 쓰이는 할인율과 연결됩니다. 금리가 오르면 특히 먼 미래의 성장 기대가 큰 자산의 가치가 압박받을 수 있습니다. 다만 실제 주가는 금리뿐 아니라 이익 전망, 수급, 환율과 위험선호가 동시에 결정합니다.</p><h2>매월 점검할 순서</h2><ol><li>정책의 발표가 아니라 실제 시행일과 세부 내용을 확인합니다.</li><li>국채금리, 유가, 환율이 같은 방향으로 움직이는지 봅니다.</li><li>기업 실적과 가이던스가 시장의 기대를 뒷받침하는지 확인합니다.</li><li>하나의 뉴스가 국가·업종·종목마다 다르게 반영될 수 있음을 기억합니다.</li></ol></article><section class="lesson-core" aria-labelledby="core-title"><header class="lesson-supplement-head lesson-core-head"><p class="lesson-kicker">학습 본문</p><h2 id="core-title">거시경제와 주식시장 읽기</h2></header><nav class="lesson-toc" aria-label="학습 본문 목차"><b>학습 본문 목차</b><ol><li><a href="#2025년-8월2026년-8월-월별-시장-변동-키워드">2025년 8월~2026년 8월: 월별 시장 변동 키워드</a></li><li><a href="#최근-10년의-8월-코스피-계절성보다-변수를-봐야-합니다">최근 10년의 8월 코스피: 계절성보다 변수를 봐야 합니다</a></li><li><a href="#산타-랠리-연말에-오른다는-말은-무엇일까요">산타 랠리: 연말에 오른다는 말은 무엇일까요?</a></li><li><a href="#1-경제의-큰-순환-경기-사이클">1. 경제의 큰 순환: 경기 사이클</a></li><li><a href="#2-거시지표가-주가로-이어지는-네-단계">2. 거시지표가 주가로 이어지는 네 단계</a></li><li><a href="#3-가장-많이-보는-경제지표">3. 가장 많이 보는 경제지표</a></li><li><a href="#4-물가-왜-주식-투자자가-볼까요">4. 물가: 왜 주식 투자자가 볼까요?</a></li><li><a href="#5-기준금리와-시장금리">5. 기준금리와 시장금리</a></li><li><a href="#httpsnotebookgooglecomnotebook0107afa8-2828-4132-9bcf-98b16a910128">https://notebook.google.com/notebook/0107afa8-2828-4132-9bcf-98b16a910128</a></li><li><a href="#6-통화량과-유동성">6. 통화량과 유동성</a></li><li><a href="#7-환율-원화와-달러의-관계">7. 환율: 원화와 달러의 관계</a></li><li><a href="#8-유가와-원자재">8. 유가와 원자재</a></li><li><a href="#9-한국-투자자가-미국-경제를-보는-이유">9. 한국 투자자가 미국 경제를 보는 이유</a></li><li><a href="#10-주식시장은-이익가치수급을-함께-반영해요">10. 주식시장은 이익·가치·수급을 함께 반영해요</a></li><li><a href="#11-경제-뉴스와-지표를-보는-순서">11. 경제 뉴스와 지표를 보는 순서</a></li><li><a href="#12-한국-지표를-확인할-수-있는-사이트">12. 한국 지표를 확인할 수 있는 사이트</a></li><li><a href="#httpsecosbokorkrstatisticsbythemekoreanstat100">https://ecos.bok.or.kr/#/StatisticsByTheme/KoreanStat100</a></li><li><a href="#위의-url-이-대표-사이트-입니다">위의 url 이 대표 사이트 입니다.</a></li></ol></nav><article class="lesson-doc lesson-core-doc">
+<p>**거시경제(Macroeconomics, 나라 전체의 생산·물가·고용·돈의 흐름을 보는 경제)**는 개별 회사 밖에서 주가에 영향을 주는 큰 환경이에요. 거시지표는 주가를 맞히는 답안지가 아니라, ‘시장에 어떤 바람이 부는지’를 확인하는 도구예요.</p>
+<blockquote>
+<p>숫자의 발표 시점·기준·수정 여부를 확인하세요. 지표 하나가 올랐거나 내렸다는 사실만으로 매수·매도 결정을 내리면 안 돼요.</p>
+</blockquote>
+<h2 id="2025년-8월2026년-8월-월별-시장-변동-키워드">2025년 8월~2026년 8월: 월별 시장 변동 키워드</h2>
+<p>아래는 이 기간의 <strong>글로벌·미국 시장을 중심으로</strong>, 한국 시장에도 파급력이 컸던 월별 변동 요인을 세 가지씩 추린 복기표예요. 수익률 순위나 매수·매도 신호가 아니라, 그달 뉴스가 주가·업종·금리 기대를 어떤 경로로 흔들었는지 기억하기 위한 키워드입니다. 같은 사건도 국가·업종·종목에 따라 반응이 달랐고, 한 달의 움직임을 세 단어로 모두 설명할 수는 없어요. <strong>2026년 8월은 8월 13일 기준의 진행 중인 복기</strong>이므로, 월말 성과로 읽으면 안 됩니다.</p>
+<table>
+<thead>
+<tr>
+<th>월</th>
+<th>크게 부각된 키워드 3개</th>
+<th>주식시장에서는 어떻게 읽혔나요?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025년 8월</td>
+<td><strong>상호관세 발효·협상</strong> · <strong>고용 둔화</strong> · <strong>9월 금리인하 기대</strong></td>
+<td>관세의 실제 적용과 협상 가능성이 수출·제조업 전망을 흔들었고, 고용 둔화와 물가 지표는 연준의 인하 기대를 키워 성장주 밸류에이션에 영향을 줬어요.</td>
+</tr>
+<tr>
+<td>2025년 9월</td>
+<td><strong>연준 금리인하</strong> · <strong>노동시장 약화</strong> · <strong>AI 반도체 실적</strong></td>
+<td>완화 전환 기대가 위험자산 선호를 뒷받침했지만, 금리인하의 이유가 경기 둔화인지도 함께 점검해야 했어요. AI 관련 실적은 지수 대형주의 방향성을 키웠습니다.</td>
+</tr>
+<tr>
+<td>2025년 10월</td>
+<td><strong>미·중 관세 재격화</strong> · <strong>AI 고평가 논쟁</strong> · <strong>정부 셧다운</strong></td>
+<td>대중 관세·수출통제 위협이 위험회피를 만들었고, 대형 기술주의 높은 기대가 실적 발표 전후 변동성을 확대했어요. 미국 정부 셧다운은 경제지표 발표 지연이라는 불확실성도 남겼습니다.</td>
+</tr>
+<tr>
+<td>2025년 11월</td>
+<td><strong>AI 밸류에이션 조정</strong> · <strong>12월 인하 베팅</strong> · <strong>기술주 쏠림</strong></td>
+<td>AI 투자비의 회수 가능성과 높은 주가가 재평가되며 기술주가 흔들렸고, 금리인하 기대 회복이 월말 위험선호를 일부 지지했어요.</td>
+</tr>
+<tr>
+<td>2025년 12월</td>
+<td><strong>연준 추가 인하</strong> · <strong>2026년 인하 경로</strong> · <strong>AI에서 경기민감주로 순환</strong></td>
+<td>연준의 인하와 향후 경로가 채권금리·주가를 움직였고, AI 주가 부담 속에서 금융·소재 등으로 관심이 옮겨갈 수 있다는 순환매가 나타났어요.</td>
+</tr>
+<tr>
+<td>2026년 1월</td>
+<td><strong>그린란드 관련 관세 위협</strong> · <strong>금·안전자산 강세</strong> · <strong>AI 투자 지속성</strong></td>
+<td>지정학·관세 발언이 하루 단위 위험회피를 키웠고, 안전자산 선호가 강해졌습니다. 동시에 AI 투자와 실적 기대가 지수 하방을 제한하는 힘으로 작용했어요.</td>
+</tr>
+<tr>
+<td>2026년 2월</td>
+<td><strong>상호관세 위법 판결</strong> · <strong>일률관세 재도입</strong> · <strong>근원물가 재상승</strong></td>
+<td>법원 판단으로 관세 불확실성이 끝나는 듯했지만 새 관세 조치가 이어졌고, 물가 재상승은 금리인하 기대와 주식 밸류에이션에 부담을 줬어요.</td>
+</tr>
+<tr>
+<td>2026년 3월</td>
+<td><strong>이란 전쟁</strong> · <strong>호르무즈 해협</strong> · <strong>유가·인플레이션 충격</strong></td>
+<td>중동 충돌과 해상 물류 차질 우려로 유가가 급등하면서 세계 주식·채권이 크게 흔들렸어요. 에너지 업종은 상대적으로 강했고, 인플레이션 재점화는 금리인하 기대를 약화했습니다.</td>
+</tr>
+<tr>
+<td>2026년 4월</td>
+<td><strong>이란 휴전 기대</strong> · <strong>유가 급락</strong> · <strong>위험자산 반등</strong></td>
+<td>휴전·항로 정상화 기대가 에너지 위험 프리미엄을 낮추고 급락했던 위험자산의 반등을 도왔습니다. 다만 실제 이행 여부에 따라 장중 변동성이 매우 컸어요.</td>
+</tr>
+<tr>
+<td>2026년 5월</td>
+<td><strong>미·이란 평화 협상</strong> · <strong>AI 실적·투자 붐</strong> · <strong>지수 사상 최고치</strong></td>
+<td>평화 합의 기대에 유가가 내려가고 AI 관련 실적·설비투자 기대가 겹치며 주요 지수가 강세를 보였어요. 동시에 에너지·채권시장의 변동성은 성장 전망의 위험 요인으로 남았습니다.</td>
+</tr>
+<tr>
+<td>2026년 6월</td>
+<td><strong>취약한 휴전</strong> · <strong>호르무즈 재개방</strong> · <strong>AI 주도 랠리</strong></td>
+<td>해협 재개방 기대와 유가 하락이 거시 부담을 덜어 줬고, AI 수요·실적 기대가 세계 주식의 상승을 이끌었습니다. 평화 합의가 깨질 위험은 계속 할인율과 에너지 가격 변수였어요.</td>
+</tr>
+<tr>
+<td>2026년 7월</td>
+<td><strong>이란 충돌 재확대</strong> · <strong>반도체·AI 조정</strong> · <strong>고유가와 고금리 우려</strong></td>
+<td>중동 긴장 재점화로 유가가 오르고, AI 수익화·경쟁 우려로 반도체주가 조정받으며 지수 변동성이 확대됐어요. 물가와 연준의 금리 경로도 다시 핵심 변수로 떠올랐습니다.</td>
+</tr>
+<tr>
+<td>2026년 8월 <em>(13일 기준)</em></td>
+<td><strong>미국 7월 CPI 안도</strong> · <strong>AI·반도체 반등</strong> · <strong>코스피 6,800선 돌파</strong></td>
+<td>7월의 고유가·금리 경계와 반도체 조정이 컸던 것과 달리, 물가가 예상보다 나쁘지 않다는 해석이 금리 부담을 덜어 위험선호를 되살렸어요. 미국 AI·반도체 강세가 한국 대형 반도체주로 이어지며 코스피는 8월 13일 장 초반 6,835.55까지 올라 6,800선을 넘었습니다.</td>
+</tr>
+</tbody>
+</table>
+<p>표의 사실관계와 당시 시장 반응은 <a href="https://www.investing.com/news/economy-news/resilient-stocks-rally-faces-earnings-wave-after-ai-fed-wobbles-4322942" target="_blank" rel="noopener">2025년 8~11월 Reuters 시장 보도</a>, <a href="https://www.investing.com/news/economy-news/asia-shares-ease-as-fed-cut-priced-guidance-uncertain-4399883" target="_blank" rel="noopener">2025년 12월 연준 결정 관련 Reuters 보도</a>, <a href="https://www.investing.com/news/economy-news/markets-in-q1-everything-everywhere-all-at-once-4590285" target="_blank" rel="noopener">2026년 1분기 시장 복기 Reuters 보도</a>, <a href="https://www.investing.com/news/stock-market-news/asia-markets-hit-records-on-ai-euphoria-iran-peace-hopes-4661624" target="_blank" rel="noopener">2026년 5~6월 글로벌 시장 Reuters 보도</a>, <a href="https://www.investing.com/news/stock-market-news/stocks-stumble-oil-set-for-weekly-gain-on-renewed-gulf-hostilities-4797335" target="_blank" rel="noopener">2026년 7월 반도체·유가 관련 Reuters 보도</a>, <a href="https://apnews.com/article/3a23f22469cd0e0062f711096906525c" target="_blank" rel="noopener">8월 13일 AP 시장 보도</a>를 바탕으로 정리했습니다.</p>
+<h3 id="7월과-8월-뉴스는-어떻게-달랐나요">7월과 8월 뉴스는 어떻게 달랐나요?</h3>
+<table>
+<thead>
+<tr>
+<th>뉴스 흐름</th>
+<th>2026년 7월에 시장이 걱정한 점</th>
+<th>2026년 8월 13일에 시장이 안도한 점</th>
+<th>다음으로 확인할 사실</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>미국 물가·금리</td>
+<td>고유가와 물가가 연준의 긴축 경로를 더 오래 만들 수 있다는 우려가 컸습니다.</td>
+<td>미국의 7월 CPI가 시장에 큰 물가 충격을 주지 않았다는 해석이 나와 금리 부담이 다소 낮아졌습니다.</td>
+<td>CPI의 세부 항목, 미국 국채금리와 연준 인사 발언이 같은 방향인지 봅니다.</td>
+</tr>
+<tr>
+<td>반도체</td>
+<td>AI 투자 수익화, 중국 경쟁, 메모리 공급 확대 우려로 반도체주가 크게 흔들렸습니다.</td>
+<td>미국 AI 주식의 반등과 반도체 기대가 한국의 삼성전자·SK하이닉스 등 대형주로 전해졌습니다.</td>
+<td>실제 주문·메모리 가격·기업 실적 전망이 주가 기대를 뒷받침하는지 확인합니다.</td>
+</tr>
+<tr>
+<td>코스피</td>
+<td>반도체 비중이 큰 지수라 글로벌 기술주 조정과 유가·환율 부담에 민감했습니다.</td>
+<td>장 초반 6,800선을 넘은 것은 강한 위험선호를 보여 주지만, 장중 수치이지 월말 결론은 아닙니다.</td>
+<td>종가, 외국인 수급, 원/달러 환율과 업종별 상승 폭을 따로 봅니다.</td>
+</tr>
+</tbody>
+</table>
+<p>미국 CPI의 <strong>7월 수치 발표일은 8월 12일</strong>이었습니다. CPI는 한 달 전의 물가를 뒤늦게 알려 주는 지표이고, 코스피 6,800선 돌파는 장중 움직임일 수 있습니다. 따라서 “CPI 안도 → 반도체 상승 → 코스피 상승”을 자동 공식으로 외우기보다, 각 뉴스가 금리 기대·AI 수요·외국인 수급을 통해 같은 날 어떻게 연결됐는지 읽는 연습에 사용하세요. <a href="https://www.bls.gov/schedule/news_release/cpi.htm" target="_blank" rel="noopener">미국 노동통계국 CPI 발표 일정</a></p>
+<p>이 표를 활용할 때는 키워드만 보고 다음 달을 예측하기보다, 매달 <strong>정책의 실제 시행일</strong>, <strong>유가·국채금리·환율의 변화</strong>, <strong>기업 실적과 가이던스가 기대를 따라갔는지</strong>를 다시 확인하세요. 특히 ‘AI 강세’와 ‘전쟁·관세 위험’은 같은 달에도 업종별로 반대 방향의 주가 반응을 만들 수 있습니다.</p>
+<h2 id="최근-10년의-8월-코스피-계절성보다-변수를-봐야-합니다">최근 10년의 8월 코스피: 계절성보다 변수를 봐야 합니다</h2>
+<p>여기서는 ‘주가’를 한국 대표 지수인 **코스피(KOSPI)**로 정하고, 아직 끝나지 않은 2026년 8월은 빼고 <strong>2016~2025년의 완료된 10개 8월</strong>을 살펴봅니다. 아래 수익률은 전월 마지막 거래일 종가와 8월 마지막 거래일 종가를 비교한 <strong>가격 수익률</strong>이며, 배당은 포함하지 않았습니다. 월별 수익률 데이터는 <a href="https://returnsview.com/stock/KS11/" target="_blank" rel="noopener">KOSPI 월간 수익률 자료</a>를 사용해 소수점 첫째 자리로 정리했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>연도</th>
+<th>8월 코스피 수익률</th>
+<th>그달 시장에서 특히 살필 변수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td>+0.9%</td>
+<td>브렉시트 뒤의 세계 유동성, 미국 금리 인상 지연 기대, 외국인 순매수</td>
+</tr>
+<tr>
+<td>2017</td>
+<td>-1.6%</td>
+<td>북한 관련 지정학적 긴장, 위험자산 회피</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>+1.2%</td>
+<td>미·중 무역갈등과 신흥국 불안이 이어진 가운데 실적·환율·외국인 수급의 줄다리기</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>-2.8%</td>
+<td>일본 수출규제 갈등, 미·중 무역분쟁, 원화 약세와 위험회피</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>+3.4%</td>
+<td>코로나 대응의 저금리·유동성, 기술주·개인 수급, 경제 재개 기대</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>-0.1%</td>
+<td>델타 변이 확산, 중국 규제와 미국 통화정책 전환 우려</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>+0.8%</td>
+<td>7월 반등의 연장, 물가·미국 금리 경로에 대한 기대와 경계</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>-2.9%</td>
+<td>미국 고금리 장기화 우려와 글로벌 위험회피</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>-3.5%</td>
+<td>미국 경기·금리 우려와 글로벌 기술주 변동성 확대</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>-1.8%</td>
+<td>최근 상승 뒤 차익실현 압력과 자본시장 제도개선 기대 변화</td>
+</tr>
+</tbody>
+</table>
+<p>10개 중 <strong>상승은 4번, 하락은 6번</strong>이었고, 단순 평균 수익률은 약 **-0.6%**입니다. 이 작은 표본만 보면 8월이 약한 달처럼 보일 수 있지만, 하락하지 않은 해도 적지 않고 수익률 차이도 큽니다. 따라서 ‘8월이니 팔아야 한다’는 매매 규칙으로 쓰기에는 근거가 약합니다. 특히 코스피는 반도체·수출 비중과 외국인 자금 비중이 커서 미국 금리, 달러/원 환율, 중국 수요, 글로벌 위험 선호의 영향을 크게 받을 수 있습니다.</p>
+<h3 id="8월에-올랐던-해에는-어떤-변수가-있었나요">8월에 올랐던 해에는 어떤 변수가 있었나요?</h3>
+<p>상승한 네 해가 같은 이유로 오른 것은 아닙니다. 아래 내용은 인과관계를 하나로 단정한 것이 아니라, 당시 상승과 함께 봐야 했던 환경을 정리한 것입니다.</p>
+<table>
+<thead>
+<tr>
+<th>상승한 8월</th>
+<th>당시의 주요 변수</th>
+<th>무엇을 배울 수 있나요?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td>브렉시트 뒤 주요국 완화적 통화정책 기대와 외국인 순매수가 위험자산 선호를 뒷받침했습니다.</td>
+<td>금리 기대와 외국인 수급이 수출주·대형주의 단기 방향에 영향을 줄 수 있어요.</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>월간 수익률은 플러스였지만, 미·중 무역갈등과 신흥국 불안으로 거래대금이 위축됐습니다.</td>
+<td>플러스 수익률이라도 강한 상승장이라는 뜻은 아니며, 거래량·대외 위험을 함께 봐야 해요.</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>코로나 충격 뒤 저금리와 유동성이 풍부했고, 기술주·개인 투자자 수급 및 경기 회복 기대가 시장을 지지했습니다. 다만 월중 코로나 재확산으로 변동성도 컸습니다.</td>
+<td>유동성과 기대가 지수를 끌어올릴 수 있지만, 실물경제·감염병 같은 위험이 남으면 흔들림도 커질 수 있어요.</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>큰 폭의 상반기 하락 뒤 반등 흐름이 이어졌고, 미국 물가와 금리 인상 속도에 대한 기대가 매일 바뀌었습니다.</td>
+<td>전월의 강한 반등이 이어질 수는 있어도, 금리 전망이 바뀌면 작은 월간 상승도 쉽게 되돌릴 수 있어요.</td>
+</tr>
+</tbody>
+</table>
+<p>2016년의 유동성·외국인 매수 배경은 <a href="https://www.koreatimes.co.kr/economy/20160808/liquidity-pulling-up-kospi" target="_blank" rel="noopener">한국 시장 보도</a>와 <a href="https://www.koreatimes.co.kr/economy/20160919/foreign-traders-keep-buying-korean-stocks" target="_blank" rel="noopener">외국인 순매수 통계 보도</a>에서, 2018년의 무역갈등·거래 위축은 <a href="https://en.yna.co.kr/view/AEN20180910001300320" target="_blank" rel="noopener">연합뉴스 보도</a>에서 확인할 수 있습니다. 2020년은 <a href="https://view.asiae.co.kr/en/article/2020080812163891151" target="_blank" rel="noopener">유동성과 실적을 함께 본 당시 시장 분석</a>, 2022년은 <a href="https://www.koreatimes.co.kr/business/banking-finance/20220801/bear-market-rally-expected-in-august" target="_blank" rel="noopener">7월 반등과 금리 경계에 관한 당시 분석</a>을 참고했습니다. 하락한 해의 주요 위험은 2017년 <a href="https://www.business-standard.com/article/reuters/asia-stocks-dollar-extend-slide-as-u-s-north-korea-tensions-intensify-117081100092_1.html" target="_blank" rel="noopener">북한 관련 긴장</a>, 2019년 <a href="https://www.investing.com/news/world-news/south-korea-summons-japan-ambassador-as-export-trade-curbs-take-effect-1964991" target="_blank" rel="noopener">한·일 무역갈등</a>, 2021년 <a href="https://www.koreatimes.co.kr/amp/economy/20210801/kospi-on-course-toward-mild-corrections-in-august" target="_blank" rel="noopener">델타 변이</a>와 <a href="https://www.yna.co.kr/view/AKR20210826155100002" target="_blank" rel="noopener">중국 규제·잭슨홀 경계</a>, 2023년 <a href="https://apnews.com/article/df4a167de7bcde05696775f5dbdec123" target="_blank" rel="noopener">고금리 장기화 우려</a>, 2024년 <a href="https://m.investing.com/news/economy-news/skorean-shares-trigger-trading-curb-for-first-time-since-2020-amid-tech-rout-3553824?ampMode=1" target="_blank" rel="noopener">미국 경기침체 우려와 기술주 급락</a>, 2025년 <a href="https://www.bok.or.kr/eng/bbs/E0000634/view.do?depth=400423&amp;menuNo=400423&amp;nttId=10093493&amp;programType=newsDataEng&amp;relate=Y" target="_blank" rel="noopener">한국은행의 월간 금융시장 동향</a>에서 확인할 수 있습니다.</p>
+<p>8월에는 기업의 2분기 실적 발표가 이어지고, 미국의 물가·고용 지표와 잭슨홀 회의 같은 통화정책 신호도 나옵니다. 휴가철로 거래가 줄어들면 뉴스 하나에 변동성이 커질 수 있어요. 매년 8월에는 과거 평균보다 <strong>실적 컨센서스와 가이던스</strong>, <strong>미국 금리·달러/원 환율</strong>, <strong>외국인 수급</strong>, <strong>반도체 가격·중국 수요</strong>가 지금 어떻게 움직이는지를 먼저 확인하세요.</p>
+<h2 id="산타-랠리-연말에-오른다는-말은-무엇일까요">산타 랠리: 연말에 오른다는 말은 무엇일까요?</h2>
+<p>**산타 랠리(Santa Claus Rally)**는 연말연시에 주가가 오르는 경향이 있다는 시장의 계절성 표현이에요. 좁게는 <strong>12월의 마지막 5거래일과 다음 해 1월의 첫 2거래일</strong>의 상승 흐름을 가리키며, 미국 S&amp;P 500을 관찰하며 널리 쓰인 말입니다. <a href="https://www.stocktradersalmanac.com/Alerts.aspx/Alert/20260105.aspx" target="_blank" rel="noopener">산타 랠리의 정의와 기간</a></p>
+<p>연말에는 기관의 포트폴리오 조정, 세금·배당 관련 거래, 새해 기대, 거래량 감소 같은 일이 동시에 나타날 수 있습니다. 하지만 이것들이 매년 같은 방향으로 작용하는 것은 아니며, 한국 시장은 해외 시장 흐름·환율·반도체 업황·연말 수급에 따라 미국과 다르게 움직일 수 있어요.</p>
+<p>따라서 산타 랠리는 ‘연말에는 반드시 사야 한다’는 신호가 아니라, 연말 시장을 읽을 때 참고할 수 있는 <strong>과거의 관찰</strong>입니다. 실제로는 다음을 함께 확인하세요.</p>
+<ol>
+<li>연말 실적 전망과 다음 해 가이던스가 좋아지고 있나요?</li>
+<li>미국 금리와 달러/원 환율이 외국인 자금에 어떤 영향을 주고 있나요?</li>
+<li>연기금·지수 펀드의 리밸런싱이나 배당 기준일 같은 일회성 수급이 있나요?</li>
+<li>거래량이 적어 작은 주문에도 가격이 과하게 움직이고 있지는 않나요?</li>
+</ol>
+<h2 id="1-경제의-큰-순환-경기-사이클">1. 경제의 큰 순환: 경기 사이클</h2>
+<p>경제는 늘 같은 속도로 움직이지 않아요. 대체로 회복·확장·둔화·침체를 오가요.</p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>보이는 모습</th>
+<th>주식시장에 생각해 볼 점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>회복</td>
+<td>소비와 생산이 바닥에서 조금씩 살아남</td>
+<td>앞으로의 이익 기대가 중요해질 수 있어요.</td>
+</tr>
+<tr>
+<td>확장</td>
+<td>고용·소비·투자가 늘고 기업 이익이 좋아질 수 있음</td>
+<td>물가와 금리 부담도 함께 커질 수 있어요.</td>
+</tr>
+<tr>
+<td>둔화</td>
+<td>성장 속도가 느려지고 기업의 주문이 약해질 수 있음</td>
+<td>실적 전망이 낮아지는지 살펴봐요.</td>
+</tr>
+<tr>
+<td>침체</td>
+<td>생산·소비·고용이 약해질 수 있음</td>
+<td>방어적인 업종과 현금흐름의 중요성이 커질 수 있어요.</td>
+</tr>
+</tbody>
+</table>
+<p>현실의 경제는 교과서처럼 딱 네 칸으로 나뉘지 않아요. 산업마다 다른 시기에 좋아지거나 나빠질 수 있어요.</p>
+<h2 id="2-거시지표가-주가로-이어지는-네-단계">2. 거시지표가 주가로 이어지는 네 단계</h2>
+<p>경제 뉴스는 주가에 바로 닿기보다 여러 단계를 거쳐 해석돼요. 시장이 보는 것은 숫자의 좋고 나쁨 자체보다 <strong>예상과의 차이</strong>, 그리고 그 차이가 기업의 미래 현금흐름과 할인율을 어떻게 바꾸는지입니다.</p>
+<pre><code>지표·정책·사건 변화
+        ↓
+금리·환율·소비·원가·자금 흐름 변화
+        ↓
+기업 매출·마진·투자·이익 전망 변화
+        ↓
+주가의 밸류에이션과 수급 변화
+</code></pre>
+<p>예를 들어 물가가 예상보다 높게 나오면 장기금리가 오를 수 있고, 이는 미래 이익의 현재 가치를 낮춰 고평가된 성장주에 더 큰 부담이 될 수 있어요. 하지만 같은 물가 상승이 수요 증가와 함께 나타나 가격 전가력이 큰 기업의 매출·마진 개선으로 이어진다면 결과는 달라집니다. 따라서 한 줄짜리 뉴스와 특정 업종의 주가를 1대1로 연결하면 안 돼요.</p>
+<table>
+<thead>
+<tr>
+<th>변화</th>
+<th>먼저 확인할 연결고리</th>
+<th>업종별로 달라지는 이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>금리 상승</td>
+<td>차입비용, 할인율, 예금·채권의 대체 매력</td>
+<td>부채가 많거나 먼 미래 이익 비중이 큰 기업이 더 민감할 수 있어요.</td>
+</tr>
+<tr>
+<td>원화 약세</td>
+<td>수출 가격·외화 매출 환산, 수입 원가, 외화부채</td>
+<td>수출 비중과 원재료 수입 비중이 회사마다 달라요.</td>
+</tr>
+<tr>
+<td>유가 상승</td>
+<td>운송·전력·원재료 비용, 소비자 물가</td>
+<td>에너지 생산자는 수혜 가능성이 있지만 항공·운송은 비용 부담이 커질 수 있어요.</td>
+</tr>
+<tr>
+<td>경기 둔화</td>
+<td>판매량, 재고, 가격 결정력, 대손 위험</td>
+<td>필수소비·통신처럼 수요가 비교적 안정적인 업종과 경기민감 업종의 반응이 다를 수 있어요.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-가장-많이-보는-경제지표">3. 가장 많이 보는 경제지표</h2>
+<table>
+<thead>
+<tr>
+<th>지표</th>
+<th>영어 전체 이름</th>
+<th>쉬운 뜻</th>
+<th>주식과의 연결 고리</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GDP</td>
+<td>Gross Domestic Product</td>
+<td>한 나라 안에서 만든 물건·서비스의 값어치</td>
+<td>경제가 얼마나 성장하는지 보여 주지만, 개별 회사 실적과 같지는 않아요.</td>
+</tr>
+<tr>
+<td>CPI</td>
+<td>Consumer Price Index</td>
+<td>소비자가 사는 물건·서비스 가격의 변화</td>
+<td>물가가 예상보다 높으면 금리 부담이 커질 수 있어요.</td>
+</tr>
+<tr>
+<td>PPI</td>
+<td>Producer Price Index</td>
+<td>기업이 생산 단계에서 받거나 내는 가격의 변화</td>
+<td>원재료·중간재 비용 변화가 나중에 소비자물가와 기업 이익에 영향을 줄 수 있어요.</td>
+</tr>
+<tr>
+<td>실업률</td>
+<td>Unemployment Rate</td>
+<td>일할 의사가 있는데 일하지 못하는 사람의 비율</td>
+<td>고용이 약하면 소비와 기업 매출에 부담이 될 수 있어요.</td>
+</tr>
+<tr>
+<td>고용률</td>
+<td>Employment-to-Population Ratio</td>
+<td>일정 나이 이상 인구 중 일하는 사람의 비율</td>
+<td>노동시장 참여와 경제 활동을 함께 볼 때 도움이 돼요.</td>
+</tr>
+<tr>
+<td>경상수지</td>
+<td>Current Account Balance</td>
+<td>수출입, 서비스, 투자소득 등의 대외 거래 결과</td>
+<td>환율과 해외 자금 흐름을 볼 때 참고할 수 있어요.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-물가-왜-주식-투자자가-볼까요">4. 물가: 왜 주식 투자자가 볼까요?</h2>
+<p>물가가 너무 빠르게 오르면 가계의 생활비 부담이 늘고, 중앙은행이 금리를 올릴 가능성이 커질 수 있어요. 금리가 오르면 기업이 돈을 빌리는 비용이 늘고, 미래 이익의 현재 가치가 낮아져 성장주에 부담이 될 수 있어요.</p>
+<ul>
+<li><strong>소비자물가(CPI)</strong>: 우리가 마트·교통·주거 등에서 체감하는 가격 흐름이에요.</li>
+<li><strong>생산자물가(PPI)</strong>: 공장과 기업 사이의 거래 가격 흐름이에요. 원가 변화의 단서가 될 수 있어요.</li>
+<li><strong>근원물가(Core Inflation)</strong>: 식품·에너지처럼 가격 변동이 큰 항목을 일부 빼고, 물가의 기본 흐름을 보려는 지표예요.</li>
+</ul>
+<p>‘물가가 올랐다’만 보지 말고, 시장 예상보다 높았는지, 일시적인 에너지 가격 영향인지, 몇 달째 이어지는지 함께 봐야 해요.</p>
+<h2 id="5-기준금리와-시장금리">5. 기준금리와 시장금리</h2>
+<p>**기준금리(Policy Rate)**는 중앙은행이 정하는 대표 정책금리예요. 한국에서는 한국은행 금융통화위원회가, 미국에서는 연방준비제도(Federal Reserve, Fed)의 FOMC(Federal Open Market Committee, 연방공개시장위원회)가 중요한 결정을 해요.</p>
+<table>
+<thead>
+<tr>
+<th>종류</th>
+<th>예시</th>
+<th>뜻</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>정책금리</td>
+<td>한국은행 기준금리, 미국 연방기금금리 목표 범위</td>
+<td>중앙은행의 정책 방향을 보여 줘요.</td>
+</tr>
+<tr>
+<td>단기 시장금리</td>
+<td>콜금리, CD금리</td>
+<td>금융기관 사이의 짧은 기간 자금 사정을 보여 줘요.</td>
+</tr>
+<tr>
+<td>장기 시장금리</td>
+<td>국고채·미국 국채 10년물 수익률</td>
+<td>장기 성장·물가 기대와 채권 수요를 반영할 수 있어요.</td>
+</tr>
+</tbody>
+</table>
+<p>일반적으로 금리가 오르면 기존 채권 가격은 내려가는 경향이 있어요. 하지만 주식시장에서는 금리 변화의 이유가 더 중요해요. 경기가 좋아서 금리가 오르는 경우와 물가가 너무 높아 긴축하는 경우는 기업 이익에 주는 의미가 다를 수 있어요.</p>
+<h3 id="수익률곡선과-할인율">수익률곡선과 할인율</h3>
+<h2 id="httpsnotebookgooglecomnotebook0107afa8-2828-4132-9bcf-98b16a910128">https://notebook.google.com/notebook/0107afa8-2828-4132-9bcf-98b16a910128</h2>
+<p>**수익률곡선(Yield Curve)**은 만기가 다른 국채의 금리를 이어 놓은 선이에요. 단기 금리는 중앙은행 정책 기대의 영향을 많이 받고, 장기 금리는 장기 성장·물가 기대와 채권 수요를 더 많이 반영할 수 있어요. 장기금리가 급격히 움직일 때는 기준금리를 그대로 두더라도 주식의 할인율과 주택·기업의 자금조달 비용이 달라질 수 있습니다.</p>
+<p>주식의 가치는 아주 단순하게 말하면 ‘앞으로 벌 현금’을 현재 가치로 바꾼 결과예요. 할인율이 오르면 같은 미래 이익에도 현재 가치는 낮아지는 방향으로 작용합니다. 다만 실제 주가는 이익 전망, 위험 프리미엄, 수급을 함께 반영하므로 금리와 항상 같은 비율로 움직이지는 않아요.</p>
+<h2 id="6-통화량과-유동성">6. 통화량과 유동성</h2>
+<p>**M1(Narrow Money, 협의통화)**은 현금과 바로 쓸 수 있는 예금처럼 즉시 결제에 쓰기 쉬운 돈의 범위예요. **M2(Broad Money, 광의통화)**는 M1보다 넓게, 비교적 쉽게 현금화할 수 있는 금융상품까지 포함해 보는 통화량이에요.</p>
+<p>통화량이 늘었다고 주식이 반드시 오르는 것은 아니에요. 돈이 어디로 움직이는지, 대출이 늘었는지, 물가 압력이 커졌는지, 금리와 함께 어떻게 변하는지를 봐야 해요.</p>
+<h2 id="7-환율-원화와-달러의-관계">7. 환율: 원화와 달러의 관계</h2>
+<p>원/달러 환율이 오른다는 것은 보통 1달러를 사는 데 더 많은 원화가 필요하다는 뜻, 즉 원화 가치가 약해졌다는 뜻이에요.</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>영향을 받을 수 있는 곳</th>
+<th>꼭 기억할 점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>원화 약세(환율 상승)</td>
+<td>수출 비중이 큰 회사에는 유리하게 작용할 수 있음</td>
+<td>수입 원재료 비용과 외화부채 부담은 커질 수 있어요.</td>
+</tr>
+<tr>
+<td>원화 강세(환율 하락)</td>
+<td>수입 비용과 해외 여행·유학 비용에는 부담이 줄 수 있음</td>
+<td>수출 기업의 원화 환산 매출에는 부담이 될 수 있어요.</td>
+</tr>
+<tr>
+<td>미국 주식 투자</td>
+<td>달러 자산의 원화 가치에도 영향</td>
+<td>주가 수익률과 환율 수익률은 따로 계산해야 해요.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="숫자로-보는-쉬운-예시">숫자로 보는 쉬운 예시</h3>
+<p>환율이 움직이면 같은 달러 금액도 원화로 바꿔 볼 때 달라집니다. 아래는 이해를 위한 단순 예시이며, 세금·수수료·환헤지·계약 조건은 넣지 않았습니다.</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>환율 변화</th>
+<th>원화 금액의 변화</th>
+<th>주식에서 생각할 점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>수출 회사가 해외 고객에게 <strong>100만 달러</strong>를 받음</td>
+<td>1달러당 1,300원 → 1,400원</td>
+<td>원화 매출이 13억 원 → 14억 원</td>
+<td>달러 매출의 원화 환산액은 1억 원 늘 수 있어요. 다만 달러로 사는 원재료·부품 비용도 있다면 이익 증가 폭은 작아질 수 있습니다.</td>
+</tr>
+<tr>
+<td>수입 회사가 해외에서 <strong>100만 달러</strong>어치 원재료를 삼</td>
+<td>1달러당 1,300원 → 1,400원</td>
+<td>원화 매입 비용이 13억 원 → 14억 원</td>
+<td>판매가격을 올리지 못하면 이익률이 낮아질 수 있어요. 미리 환율을 고정했거나 재고를 확보했다면 영향 시점도 달라집니다.</td>
+</tr>
+<tr>
+<td>외국인 투자자가 한국 주식을 보유</td>
+<td>원화 약세</td>
+<td>원화 기준 주가가 같아도 달러로 바꾼 투자금 가치는 줄 수 있음</td>
+<td>외국인 매도가 늘 수 있는 한 요인이지만, 실적·금리·세계 시장 등 다른 이유도 함께 봐야 합니다.</td>
+</tr>
+</tbody>
+</table>
+<p>따라서 <strong>원화 약세 = 수출주 상승</strong>, <strong>원화 강세 = 수입주 상승</strong>처럼 바로 결론 내리면 안 됩니다. 회사별로 달러 매출과 달러 비용의 비중, 환율을 미리 고정한 계약(환헤지) 여부, 가격을 고객에게 전가할 힘, 해외 경쟁사의 통화까지 다르기 때문입니다. 실적 발표에서는 <code>환율 효과</code>, <code>외화환산</code>, <code>원재료 가격</code>, <code>해외 매출</code>이라는 표현을 함께 찾아보세요.</p>
+<p>환율은 수출만으로 움직이지 않아요. 미국 금리, 세계 위험 회피 분위기, 무역수지, 해외 투자자 자금 흐름도 함께 영향을 줘요.</p>
+<h2 id="8-유가와-원자재">8. 유가와 원자재</h2>
+<p>유가가 오르면 운송·항공·화학·제조업의 비용에 영향을 줄 수 있고, 생활물가에도 이어질 수 있어요. 반대로 에너지 생산 기업은 유가 상승의 혜택을 받을 수 있어요. 하지만 개별 기업의 계약 조건과 환율에 따라 결과가 달라져요.</p>
+<p>반도체·배터리·자동차 같은 산업은 금속·에너지·환율·세계 수요의 영향을 함께 받을 수 있어요. 원자재 가격이 움직였다는 사실 하나만으로 특정 종목의 결과를 단정하지 마세요.</p>
+<h2 id="9-한국-투자자가-미국-경제를-보는-이유">9. 한국 투자자가 미국 경제를 보는 이유</h2>
+<p>미국의 금리와 달러는 세계 자금 흐름에 큰 영향을 주기 때문에 한국 주식에도 영향을 줄 수 있어요. 특히 미국의 물가 발표, 고용 발표, FOMC 회의, 미국 대형 기술주의 실적은 한국의 반도체·수출 기업 기대와 연결돼 해석되기도 해요.</p>
+<p>다만 ‘미국 시장이 올랐으니 한국도 반드시 오른다’는 공식은 없어요. 한국 시장은 원화 환율, 외국인 수급, 반도체 업황, 국내 정책과 기업 실적 같은 자체 요인도 커요.</p>
+<h2 id="10-주식시장은-이익가치수급을-함께-반영해요">10. 주식시장은 이익·가치·수급을 함께 반영해요</h2>
+<p>주가지수는 단순한 경제성장률이 아니라 상장기업의 이익 전망과 투자자가 기꺼이 지불하는 가격, 그리고 매수·매도 자금의 균형을 함께 담습니다. 같은 이익이라도 금리와 불확실성이 높으면 더 낮은 가격이 매겨질 수 있고, 이익 전망이 좋아지면 금리가 높아도 주가가 버틸 수 있어요.</p>
+<table>
+<thead>
+<tr>
+<th>관찰 축</th>
+<th>확인할 질문</th>
+<th>대표 자료</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이익</td>
+<td>매출·마진·EPS 전망이 높아지거나 낮아지나요?</td>
+<td>실적 발표, 컨센서스, 가이던스</td>
+</tr>
+<tr>
+<td>가치</td>
+<td>같은 이익에 시장이 PER·PBR을 얼마나 허용하나요?</td>
+<td>밸류에이션 지표, 국채금리</td>
+</tr>
+<tr>
+<td>수급</td>
+<td>외국인·기관·개인, ETF·연기금의 자금 흐름은 어떤가요?</td>
+<td>거래대금, 투자자별 매매 동향</td>
+</tr>
+<tr>
+<td>위험</td>
+<td>환율·신용스프레드·변동성이 갑자기 커졌나요?</td>
+<td>국채금리, 회사채 금리, VIX 등</td>
+</tr>
+</tbody>
+</table>
+<p>**EPS(주당순이익)**가 늘어도 주식 수가 크게 증가하면 한 주당 몫의 개선은 작을 수 있고, 반대로 이익이 정체되어도 자사주 소각으로 주당 지표가 개선될 수 있어요. 지수와 종목을 볼 때는 총이익뿐 아니라 주당 이익, 발행주식 수, 현금흐름을 함께 확인하세요.</p>
+<h3 id="지표-발표일의-기본-점검표">지표 발표일의 기본 점검표</h3>
+<ol>
+<li>실제 수치가 시장 예상과 얼마나 달랐나요?</li>
+<li>이전 수치가 수정됐고, 추세는 몇 달째 이어지고 있나요?</li>
+<li>발표 뒤 국채금리·달러/원 환율·주가지수 선물이 같은 방향을 가리키나요?</li>
+<li>이 변화가 관심 기업의 매출, 원가, 차입비용, 환산손익 중 어디에 먼저 닿나요?</li>
+<li>이미 주가에 반영된 기대는 무엇이고, 기업의 다음 실적 발표에서 확인할 숫자는 무엇인가요?</li>
+</ol>
+<h2 id="11-경제-뉴스와-지표를-보는-순서">11. 경제 뉴스와 지표를 보는 순서</h2>
+<ol>
+<li><strong>무슨 지표인지</strong>: CPI인지 GDP인지, 어떤 숫자인지 확인해요.</li>
+<li><strong>언제의 수치인지</strong>: 발표 날짜와 실제 조사 기간은 다를 수 있어요.</li>
+<li><strong>예상과 비교</strong>: 시장 예상보다 높거나 낮았는지 확인해요.</li>
+<li><strong>이전 수치와 수정</strong>: 지난달 수치가 나중에 수정됐는지도 봐요.</li>
+<li><strong>연결되는 경로</strong>: 물가 → 금리 → 기업 비용·소비 → 이익처럼 영향을 나누어 생각해요.</li>
+<li><strong>회사별 차이</strong>: 같은 금리·환율 변화도 회사의 빚, 수출 비중, 원가 구조에 따라 다르게 작용해요.</li>
+</ol>
+<h2 id="12-한국-지표를-확인할-수-있는-사이트">12. 한국 지표를 확인할 수 있는 사이트</h2>
+<h2 id="httpsecosbokorkrstatisticsbythemekoreanstat100">https://ecos.bok.or.kr/#/StatisticsByTheme/KoreanStat100</h2>
+<h2 id="위의-url-이-대표-사이트-입니다">위의 url 이 대표 사이트 입니다.</h2>
+<p>뉴스의 숫자는 원문으로 한 번 더 확인하는 습관이 중요해요. 아래는 한국 투자자가 거시지표와 시장 흐름을 확인할 때 쓸 수 있는 <strong>공식·공공 사이트와 보조 시세 서비스</strong>입니다. 사이트마다 발표 시점과 단위가 다르므로, 그래프를 볼 때는 <code>전년동월비인지</code>, <code>전월비인지</code>, <code>잠정치인지</code>도 함께 확인하세요.</p>
+<table>
+<thead>
+<tr>
+<th>기관·서비스</th>
+<th>먼저 볼 지표·메뉴</th>
+<th>언제 유용한가요?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://ecos.bok.or.kr/" target="_blank" rel="noopener">한국은행 ECOS</a></td>
+<td>기준금리, 통화량(M1·M2), 시장금리, 원/달러 환율, 국제수지, 소비자심리지수</td>
+<td>금리·유동성·환율의 긴 흐름을 그래프로 비교할 때</td>
+</tr>
+<tr>
+<td><a href="https://snapshot.bok.or.kr/" target="_blank" rel="noopener">한국은행 금융·경제 스냅샷</a></td>
+<td>주요 거시·금융 지표의 최근 수치와 변화</td>
+<td>ECOS가 처음이라면 핵심 숫자를 빠르게 훑을 때</td>
+</tr>
+<tr>
+<td><a href="https://www.bok.or.kr/portal/main/main.do" target="_blank" rel="noopener">한국은행 통화정책방향·보도자료</a></td>
+<td>금융통화위원회 결정, 경제전망, 금융시장 동향</td>
+<td>기준금리 결정의 <strong>이유</strong>와 향후 위험을 읽을 때</td>
+</tr>
+<tr>
+<td><a href="https://kosis.kr/" target="_blank" rel="noopener">국가통계포털 KOSIS</a></td>
+<td>소비자물가, 고용률·실업률, 산업생산, 소매판매, 설비투자, 국내총생산</td>
+<td>물가·고용·경기 지표를 통계표와 긴 시계열로 확인할 때</td>
+</tr>
+<tr>
+<td><a href="https://kosis.kr/easyViewStatis/visualizationIndex.do" target="_blank" rel="noopener">KOSIS 경제상황판·100대 지표</a></td>
+<td>고용·물가·산업·인구 등 핵심 지표 시각화</td>
+<td>통계표가 낯설 때 전체 흐름을 먼저 볼 때</td>
+</tr>
+<tr>
+<td><a href="https://www.tradedata.go.kr/cts/index.do" target="_blank" rel="noopener">수출입무역통계</a></td>
+<td>일·월별 수출입, 품목·국가별 교역, 무역수지</td>
+<td>반도체·자동차·화학처럼 수출 비중이 큰 업종의 수요를 점검할 때</td>
+</tr>
+<tr>
+<td><a href="https://data.krx.co.kr/contents/MDC/MAIN/main/index.cmd?locale=ko_KR" target="_blank" rel="noopener">한국거래소 KRX 데이터 마켓</a></td>
+<td>코스피·코스닥 지수, 거래대금, 투자자별 거래실적, 공매도·상장 통계</td>
+<td>외국인·기관·개인 수급과 국내 시장의 실제 거래 흐름을 볼 때</td>
+</tr>
+<tr>
+<td><a href="https://www.investing.com/indices/kospi" target="_blank" rel="noopener">Investing.com KOSPI</a></td>
+<td>KOSPI(KS11) 현재 시세, 차트, 일중 범위, 과거 데이터, 구성 종목과 관련 뉴스</td>
+<td>장중 지수 흐름과 해외 시장 뉴스를 빠르게 함께 볼 때. <strong>공식 지수 산출·확정 수치는 KRX 자료로 다시 확인합니다.</strong></td>
+</tr>
+<tr>
+<td><a href="https://freesis.kofia.or.kr/" target="_blank" rel="noopener">금융투자협회 종합통계 포털</a></td>
+<td>채권·펀드·증권 관련 통계</td>
+<td>채권시장과 자금 흐름을 보조적으로 확인할 때</td>
+</tr>
+<tr>
+<td><a href="https://dart.fss.or.kr/" target="_blank" rel="noopener">DART 전자공시시스템</a></td>
+<td>사업·분기보고서, 실적, 자금조달, 지분·주요사항 공시</td>
+<td>거시 변화가 관심 기업의 매출·원가·부채에 실제로 어떻게 나타나는지 확인할 때</td>
+</tr>
+<tr>
+<td><a href="https://eiec.kdi.re.kr/" target="_blank" rel="noopener">KDI 경제교육·정보센터</a></td>
+<td>경제동향, 정책·통계 해설, 용어 설명</td>
+<td>지표의 뜻과 국내 경기 흐름을 쉬운 해설로 이해할 때</td>
+</tr>
+<tr>
+<td><a href="https://mofe.go.kr/" target="_blank" rel="noopener">재정경제부</a></td>
+<td>경제정책, 최근 경제동향, 재정·세제 자료</td>
+<td>정부 정책과 경기 판단 자료를 원문으로 확인할 때</td>
+</tr>
+</tbody>
+</table>
+<h3 id="초보자를-위한-한국-지표-10분-점검-순서">초보자를 위한 한국 지표 10분 점검 순서</h3>
+<ol>
+<li><strong>KOSIS 경제상황판</strong>에서 물가·고용·산업생산의 최근 흐름을 봅니다.</li>
+<li><strong>한국은행 스냅샷과 ECOS</strong>에서 기준금리, 원/달러 환율, 시장금리의 방향을 확인합니다.</li>
+<li><strong>수출입무역통계</strong>에서 전체 수출과 관심 품목·국가의 변화를 봅니다.</li>
+<li><strong>KRX 데이터 마켓</strong>에서 코스피·코스닥 등락과 외국인·기관 수급을 확인합니다. 장중 차트·관련 뉴스를 빠르게 같이 보려면 <strong>Investing.com KOSPI</strong>도 보조 화면으로 활용할 수 있습니다.</li>
+<li>마지막으로 <strong>DART</strong>에서 관심 기업의 실적·수주·자금조달 공시를 읽어, 거시 변화가 기업 실적에 연결되는지 확인합니다.</li>
+</ol>
+<p>예를 들어 ‘원화 약세인데 반도체주가 왜 약하지?’라는 의문이 들면 환율만 보지 마세요. 수출입 통계의 반도체 수출, KRX의 외국인 수급, DART의 회사 가이던스와 재고·가격 관련 설명까지 이어서 보면 더 균형 있게 판단할 수 있습니다.</p>
+<h3 id="미국-지표도-함께-볼-때">미국 지표도 함께 볼 때</h3>
+<table>
+<thead>
+<tr>
+<th>기관·서비스</th>
+<th>주로 보는 정보</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>미국 연방준비제도(Fed)</td>
+<td>미국 통화정책과 FOMC 발표</td>
+</tr>
+<tr>
+<td>미국 노동통계국(BLS)</td>
+<td>미국 CPI, 고용 등 주요 노동 통계</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>거시경제는 ‘내일 주가가 오를지’를 단정하는 도구가 아니에요. 내 투자 대상이 금리·물가·환율·경기 변화에 어떤 영향을 받을 수 있는지 차분히 확인하는 지도예요.</p>
+</blockquote>
+</article></section><section class="lesson-supplement" aria-labelledby="supplement-title"><header class="lesson-supplement-head"><p class="lesson-kicker">금융 이론 보충 · 선물과 옵션 · 펀드 · ETF · 채권 · 코인</p><h2 id="supplement-title">이 단원과 관련된 금융 이론</h2><p>선물·옵션, 펀드·ETF, 채권·코인 이론 중 이 단원의 주제와 이어지는 절을 골라 실었습니다. 시뮬레이터와 대화형 요소는 제외하고 본문만 담았습니다.</p></header><nav class="lesson-toc" aria-label="보충 학습 목차"><b>보충 학습 목차 · 10개 절</b><ol><li><a href="#theory-04-1">국가의 재정과 위험으로 보는 파생상품의 발달</a> <small>선물과 옵션</small></li><li><a href="#theory-04-2">선물·옵션은 언제, 왜 만들어졌을까요?</a> <small>선물과 옵션</small></li><li><a href="#theory-04-3">선물·옵션은 시장의 “기상청”일까요?</a> <small>선물과 옵션</small></li><li><a href="#theory-04-4">중앙은행: 통화와 금융시스템의 기반</a> <small>펀드 · ETF</small></li><li><a href="#theory-04-5">이머징마켓: 성장 가능성과 함께 보는 시장</a> <small>펀드 · ETF</small></li><li><a href="#theory-04-6">채권은 언제, 왜 만들어졌을까요?</a> <small>채권 · 코인</small></li><li><a href="#theory-04-7">채권은 돈을 빌려준 약속장</a> <small>채권 · 코인</small></li><li><a href="#theory-04-8">무위험수익률·은행 금리·채권: 금리의 기준과 위험</a> <small>채권 · 코인</small></li><li><a href="#theory-04-9">금리가 오르면 채권 가격은 왜 내려갈까요?</a> <small>채권 · 코인</small></li><li><a href="#theory-04-10">가상자산의 시장 규모</a> <small>채권 · 코인</small></li></ol></nav><article class="lesson-doc lesson-theory"><section class="lesson-block"><span>00.05</span>
+            
+              <p class="lesson-kicker">금융 이론 · 선물과 옵션</p><h2 id="theory-04-1">국가의 재정과 위험으로 보는 파생상품의 발달</h2>
+              
+                <p>파생상품의 역사는 단순히 금융기법이 복잡해진 과정만은 아닙니다. 수확·무역·전쟁·환율·금리처럼 국가와 민간이 통제하기 어려운 위험을 어떻게 나누고 재정을 안정시킬지 고민하는 과정과도 연결됩니다. 다만 파생상품이 오직 국가 존립을 위해 발전했다기보다, <b>국가 재정, 상업 확대, 민간의 위험관리와 거래소 경쟁이 함께 작용했다</b>고 보는 것이 정확합니다.</p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <caption>시대별 경제 환경과 위험관리 계약의 발전</caption>
+                    <thead><tr><th scope="col">시대·환경</th><th scope="col">재정·경제적 과제</th><th scope="col">위험관리와 계약의 변화</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">봉건제·농업 중심 경제</th><td>세금과 주요 자산이 곡물에 의존해 기후·수확량·가격 변동이 영지 재정과 생계에 큰 영향을 주었습니다.</td><td>상인과 생산자는 곡물 등을 미래에 정한 가격으로 인도하기로 약속하는 선도 형태의 거래를 활용했습니다.</td></tr>
+                      <tr><th scope="row">근세 상업·전쟁 재정</th><td>해상무역의 운송 위험과 전쟁 비용, 국채·회사채무의 관리가 중요해졌습니다.</td><td>보험, 주식·옵션 거래, 채무의 전환과 유통이 발전했습니다. 이들은 모두 파생상품은 아니지만 위험을 나누고 자금을 조달하는 금융시장의 기반을 넓혔습니다.</td></tr>
+                      <tr><th scope="row">현대 글로벌 경제</th><td>변동환율·금리·원자재 가격의 변화가 기업과 금융기관, 나아가 국가경제에 큰 영향을 미치게 됐습니다.</td><td>통화·금리·주가지수 선물과 스왑이 표준화·확대되며 환율, 금리, 시장가격 위험을 관리하는 수단이 됐습니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3>농업 경제: 수확과 세입의 불확실성</h3>
+                <p>농업 중심 사회에서 곡물은 식량인 동시에 세금·재산·교환수단이었습니다. 흉작과 풍작은 가격과 세입을 크게 흔들었고, 생산자·상인·영주는 미래 인도와 가격을 미리 약정해 불확실성을 줄이려 했습니다. 에도 시대에는 각 번이 세금으로 거둔 쌀을 오사카로 보내 쌀 증서로 거래했고, 도쿠가와 막부는 1730년 도지마의 현물·장부상 선물 거래를 공식 인가했습니다. 도지마 시장은 회원제와 청산 기능을 갖춘 조직적 선물거래소의 선구자로 평가됩니다.</p>
+                <h3>상업과 국가부채: 위험의 이전과 자금 조달</h3>
+                <p>16~18세기 해상무역은 침몰·해적·가격 변동 위험을 동반했고, 유럽 국가들은 전쟁과 식민지 경쟁에 필요한 자금을 국채와 특허회사를 통해 조달했습니다. 네덜란드·영국의 보험, 주식, 옵션 거래는 이러한 위험을 여러 투자자에게 나누는 방법을 넓혔습니다. 영국 남해회사는 정부채무를 회사 주식으로 전환하는 구조를 활용했지만, 이는 파생상품 자체라기보다 <b>국가채무 관리와 주식시장 발전이 결합한 사례</b>로 이해하는 편이 적절합니다.</p>
+                <h3>변동환율 시대: 금융 파생상품의 확대</h3>
+                <p>1970년대 브레튼우즈 체제가 무너지면서 고정환율의 틀이 약해지고 통화 가치의 변동성이 커졌습니다. CME는 1972년 주요 통화의 선물을 상장했고, 이후 금리·국채 선물과 주가지수선물이 발전했습니다. 오일 쇼크와 금리 변동도 기업과 금융기관에 큰 부담을 주면서, 현물 거래만으로는 관리하기 어려운 가격 위험을 선물·옵션·스왑으로 나누려는 수요가 커졌습니다.</p>
+                <p><b>핵심 흐름:</b> 농업 경제의 수확 위험 → 상업·전쟁 경제의 무역 위험과 국가채무 → 글로벌 경제의 환율·금리·원자재 위험. 파생상품은 이 위험을 없애는 장치가 아니라, 계약 상대방과 시장 참여자 사이에 <b>배분하고 가격을 미리 정하는 장치</b>로 발전했습니다. 따라서 헤지는 위험을 줄일 수 있지만, 잘못된 규모·만기·상대방 선택은 새로운 손실과 신용위험을 만들 수 있습니다.</p>
+                <figure class="lesson-figure">
+                  <img src="https://www.jpx.co.jp/dojima/common/img/mainvisual.jpg" alt="JPX 도지마 쌀거래소 전경" loading="lazy">
+                  <figcaption>JPX 도지마 쌀거래소</figcaption>
+                </figure>
+              
+            
+            
+          </section><section class="lesson-block"><span>00.1</span>
+            
+              <p class="lesson-kicker">금융 이론 · 선물과 옵션</p><h2 id="theory-04-2">선물·옵션은 언제, 왜 만들어졌을까요?</h2>
+              
+                <p>미래에 물건을 주고받기로 하는 약속(선도계약)은 오래전 상업에도 있었기 때문에 최초의 한 건을 단정하기 어렵습니다. 아래에서는 기록과 제도가 비교적 분명한 이정표를 구분합니다.</p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <thead><tr><th>구분</th><th>시기·장소</th><th>무엇이 처음이었나</th><th>필요했던 이유</th></tr></thead>
+                    <tbody>
+                      <tr><td>조직화된 선물시장</td><td>일본 오사카 도지마, 1730년</td><td>막부가 쌀 증서 현물시장과 장부상 쌀 선물시장을 공식 인가했습니다. 회원제와 청산 기능을 갖춘 <strong>세계 최초의 제도권 선물거래소</strong>로 널리 알려져 있습니다.</td><td>쌀은 세금·주요 자산이었고, 수확·운송·보관 사이 가격이 크게 달라졌습니다. 생산자·번·상인이 미리 가격을 정하고 거래하기 위해서였습니다.</td></tr>
+                      <tr><td>독립형 옵션계약</td><td>벨기에 앤트워프 거래소, 16세기</td><td>연구 문헌은 이곳의 독립적으로 거래되는 옵션계약을 초기 사례로 봅니다. 다만 현존 기록이 제한적이어서 ‘한 날짜의 최초 옵션’으로 단정하지 않습니다.</td><td>먼저 소액의 프리미엄을 내고, 이후 가격이 유리할 때만 거래할 수 있게 해 가격변동 위험을 제한하려는 목적이었습니다.</td></tr>
+                      <tr><td>금융옵션 시장의 정착</td><td>네덜란드 암스테르담, 17세기</td><td>VOC 등 회사 주식에 대한 콜·풋과 정기 만기가 거래됐습니다. 17세기 초 주식시장 형성 뒤 옵션 거래가 나타났다는 도시 기록도 남아 있습니다.</td><td>먼 항해·무역과 주식 가격의 불확실성을 관리하거나, 제한된 비용으로 가격 방향에 참여하려는 수요가 있었습니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3>약속이 오늘의 거래 방식으로 바뀐 과정</h3>
+                <p><strong>1. 맞춤 선도계약</strong> — 두 사람이 품질·수량·가격·인도일을 직접 정했습니다. 유연하지만 상대방이 약속을 지키지 못할 위험과, 계약을 다른 사람에게 넘기기 어려운 문제가 있었습니다.</p>
+                <p><strong>2. 거래소 선물</strong> — 도지마에서 발전한 장부 거래·회원·청산이라는 발상이 이후 시장의 토대가 됐습니다. 미국 CBOT는 1848년에 만들어져 초기 선도거래를 거친 뒤 1865년 곡물 <strong>표준 선물계약</strong>을 도입했습니다. 오늘날 선물은 거래소가 수량·만기·결제 규칙을 정하고, 증거금·일일정산·청산기관으로 이행 위험을 관리하며 반대매매로 포지션을 끝낼 수 있습니다.</p>
+                <p><strong>3. 옵션</strong> — 매수자는 프리미엄을 내고 정해진 가격(행사가)에 사고팔 <strong>권리</strong>를 얻지만, 행사할 의무는 없습니다. 반대로 매도자는 매수자가 행사하면 이행할 의무를 집니다. 1973년 4월 26일 CBOE가 표준화된 상장 주식옵션을 처음 거래시키면서, 표준 계약·청산·행사·배정 절차를 갖춘 현대 상장 옵션시장이 본격화됐습니다.</p>
+                <h3>주가지수선물의 등장: 포트폴리오 전체를 헤지하다</h3>
+                <p>세계 최초의 주가지수선물은 1982년 2월 24일 미국 캔자스시티상품거래소(KCBT)가 상장한 <strong>밸류라인 종합지수(Value Line Composite Index) 선물</strong>로 알려져 있습니다. 개별 주식이 아니라 주식시장 전체의 움직임을 선물계약의 대상으로 삼은 첫 사례였습니다.</p>
+                <p>1970년대에는 경기·금리·환율의 불확실성이 커지면서 기관투자자와 자산운용사가 포트폴리오 전체의 하락 위험을 관리할 필요가 커졌습니다. 주식을 모두 팔지 않아도 주가지수선물을 매도하면 시장 전반이 하락할 때 현물 주식의 손실 일부를 선물 이익으로 상쇄하는 <strong>헤지</strong>가 가능해졌습니다.</p>
+                <p>당시 곡물 선물이 중심이던 KCBT에는 차별화된 금융상품이 필요했고, 이미 통화·금리 선물을 성공시킨 시카고 거래소들과의 경쟁도 신상품 개발을 뒷받침했습니다. 주가지수선물은 수십·수백 종목을 직접 사고파는 대신 하나의 계약으로 시장 전체에 노출되거나 포트폴리오 비중을 조정할 수 있어 거래비용과 시간을 줄이는 장점도 있었습니다.</p>
+                <p>KCBT의 시도 뒤 CME는 1982년 4월 21일 S&amp;P 500 지수선물을 상장했습니다. 이후 주가지수선물은 대표적인 시장 위험 관리 수단이자, 적은 증거금으로 큰 시장 노출을 만들 수 있는 레버리지 상품으로 발전했습니다.</p>
+                <p>핵심은 처음부터 ‘수익을 크게 내는 상품’을 만들려던 것이 아니라 <strong>미래 가격과 공급의 불확실성을 미리 나누고 고정</strong>하려는 데 있었습니다. 표준화와 청산이 더해지면서 계약을 쉽게 사고팔 수 있게 됐고, 그만큼 투기와 레버리지 위험도 함께 커졌습니다.</p>
+              
+            
+            
+          </section><section class="lesson-block">
+            
+            
+              <p class="lesson-kicker">금융 이론 · 선물과 옵션</p><h2 id="theory-04-3">선물·옵션은 시장의 “기상청”일까요?</h2>
+              
+                <p>선물·옵션 시장은 투자자들의 가격 변동 기대가 빠르게 모이는 곳이라 주식시장의 ‘기상청’에 비유되기도 합니다. 날씨 예보가 비를 확정하지 않듯, 선물·옵션 가격도 시장의 기대와 긴장도를 보여 주는 신호이지 미래 주가를 확정하는 답은 아닙니다.</p>
+                <p>옵션 가격이 높아졌다면 시장이 앞으로 큰 움직임 가능성을 더 크게 보고 있을 수 있습니다. 지수 선물 거래량, 옵션 거래량, 선물과 현물의 가격 차이는 매수·매도 관심을 살피는 단서가 되지만 하나만으로 방향을 단정할 수는 없습니다.</p>
+                <p>퀀트 시스템도 이런 값을 예언이 아니라 관측값으로 사용합니다. 변동성 기대가 높아지면 포지션 크기를 줄이고, 가격 차이와 거래량이 평소와 크게 달라지면 수급 불균형·거래비용을 점검하는 식입니다. 데이터 기준 시점, 거래비용, 최악의 손실 시나리오를 함께 확인하세요.</p>
+                <h3>평소와 너무 다른 값 찾기</h3>
+                <p>이상치 탐지는 가격·거래량·수익률·변동성이 <b>평소 평균에서 너무 멀리 떨어졌는지</b> 찾는 방법입니다. 예를 들어 최근 20일 거래량의 평균과 표준편차를 구한 뒤, 오늘 거래량이 평균보다 표준편차의 2~3배 이상 크면 “평소와 다른 날”로 표시할 수 있습니다. 이는 매수·매도 신호가 아니라 뉴스, 오류 주문, 수급 변화가 있었는지 다시 확인하라는 알림에 가깝습니다.</p>
+                
+              
+            
+            
+          </section><section class="lesson-block">
+            
+            
+              <p class="lesson-kicker">금융 이론 · 펀드 · ETF</p><h2 id="theory-04-4">중앙은행: 통화와 금융시스템의 기반</h2>
+              
+                <p><b>중앙은행</b>은 한 국가 또는 통화권의 물가와 금융시스템 안정을 위한 통화정책을 수행하는 핵심 기관입니다. 시중은행처럼 일반 개인에게 예금·대출 상품을 직접 판매하지는 않으며, 정부·은행·금융시장과의 거래를 중심으로 지급결제와 금융안정을 뒷받침합니다. 다만 국가별 법률과 제도에 따라 구체적인 권한과 업무 범위는 다릅니다.</p>
+                <h3>중앙은행의 4대 핵심 역할</h3>
+                <ul>
+                  <li><b>통화 발행:</b> 보통 법정 지폐를 발행하고, 국가 제도에 따라 주화 발행·유통에도 관여합니다.</li>
+                  <li><b>통화정책과 기준금리:</b> 정책금리와 유동성 공급 수단 등을 통해 물가 안정과 경제·금융 여건에 대응합니다.</li>
+                  <li><b>최후의 대출자:</b> 금융위기 때 건전하지만 유동성이 부족한 금융기관에 정해진 조건과 담보 아래 긴급 유동성을 공급해 시스템 불안을 줄일 수 있습니다.</li>
+                  <li><b>정부의 은행:</b> 정부 예금을 관리하고 국고금 지급결제와 국채 관련 업무를 지원합니다. 세부 업무는 국가마다 다릅니다.</li>
+                </ul>
+                <h3>중앙은행의 역사적 발전 단계</h3>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <thead><tr><th scope="col">시기</th><th scope="col">중심 과제</th><th scope="col">역할의 변화</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">17~18세기</th><td>정부 자금 조달</td><td>전쟁과 재정 수요에 대응해 정부의 은행 역할이 형성됐습니다.</td></tr>
+                      <tr><th scope="row">19세기~20세기 초</th><td>금본위제와 금융공황 대응</td><td>은행권 발행과 유동성 위기 대응이 중요해지며 최후의 대출자 기능이 발전했습니다.</td></tr>
+                      <tr><th scope="row">20세기 후반~현재</th><td>물가와 금융 안정</td><td>정책금리·공개시장운영 등으로 물가 안정과 금융안정을 함께 추구합니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <ol>
+                  <li><b>초기:</b> 스웨덴 릭스방크는 1668년에 설립되어 현존하는 가장 오래된 중앙은행으로 알려져 있습니다. 영국은행은 1694년 프랑스와의 전쟁 자금을 마련하기 위해 설립됐으며, 초기에는 정부에 자금을 빌려주는 민간 주주 소유의 은행 형태였습니다.</li>
+                  <li><b>발전기:</b> 은행권과 예금에 대한 신뢰가 흔들리는 금융공황이 반복되면서, 중앙은행이 위기 때 유동성을 공급하는 역할이 중요해졌습니다. 월터 배젓은 위기 때 건전한 담보를 바탕으로 높은 금리로 대출해야 한다는 원칙을 제시해 최후의 대출자 논의에 큰 영향을 주었습니다.</li>
+                  <li><b>현대:</b> 1971년 닉슨 쇼크로 달러의 금 태환이 중단되고 주요국이 변동환율제로 옮겨가면서, 금과의 연결 대신 중앙은행의 통화정책과 제도에 대한 신뢰가 더 중요해졌습니다. 많은 중앙은행은 정치적 압력에서 일정한 독립성을 보장받으며 중장기 물가 안정과 금융 안정을 목표로 정책을 운용합니다.</li>
+                </ol>
+                <h3>주요 국가·지역의 중앙은행</h3>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <thead><tr><th scope="col">국가·지역</th><th scope="col">중앙은행</th><th scope="col">설립</th><th scope="col">주요 특징</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">미국</th><td>연방준비제도(Fed)</td><td>1913년</td><td>연방준비이사회와 12개 지역 연방준비은행으로 구성됩니다. 법률상 최대 고용·물가 안정·적정한 장기금리를 통화정책 목표로 둡니다.</td></tr>
+                      <tr><th scope="row">유럽연합</th><td>유럽중앙은행(ECB)</td><td>1998년</td><td>유로 지역의 단일 통화정책을 수행하며, 물가 안정이 일차 목표입니다.</td></tr>
+                      <tr><th scope="row">일본</th><td>일본은행(BOJ)</td><td>1882년</td><td>장기 저성장·저물가 환경에서 제로금리·마이너스금리와 양적완화 등을 운용한 경험이 있습니다.</td></tr>
+                      <tr><th scope="row">한국</th><td>한국은행(BOK)</td><td>1950년</td><td>통화신용정책을 통해 물가 안정을 도모하고, 금융 안정에도 유의합니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <section>
+                  <header>
+                    <div>
+                      <p> 금리회의 이벤트 스터디</p>
+                      <h3 id="cbvTitle">회의 전후 주식 변동성 시뮬레이터</h3>
+                      <p>2024년 정책금리 결정일을 고르고, 각 지역 대표 주가지수가 회의 전후에 어떻게 움직였는지 비교해 보세요.</p>
+                    </div>
+                    <span id="cbvStatus">데이터 준비 중</span>
+                  </header>
+                  <div id="cbvBankTabs">
+                    <span>미국</span>Fed
+                    <span>유럽</span>ECB
+                    <span>일본</span>BOJ
+                    <span>한국</span>BOK
+                  </div>
+                  
+                  <div>
+                    <article><span>회의 전 변동성</span><strong id="cbvBeforeVol">—</strong><small>연율 환산</small></article>
+                    <article><span>회의 후 변동성</span><strong id="cbvAfterVol">—</strong><small id="cbvVolChange">연율 환산</small></article>
+                    <article><span>회의 후 수익률</span><strong id="cbvAfterReturn">—</strong><small id="cbvDecision">—</small></article>
+                    <article><span>가상 투자 결과</span><strong id="cbvFinalValue">—</strong><small id="cbvProfit">—</small></article>
+                  </div>
+                  <div>
+                    <div><div><strong id="cbvBenchmark">대표 주가지수</strong><small>회의 기준일 = 100</small></div></div>
+                    
+                  </div>
+                  <p> 회의일과 가장 가까운 거래일을 0일로 두고, 그 전·후 종가 수익률의 표준편차를 연율화(√252)했습니다. 휴장일, 발표 시각과 장 마감 시차에 따라 당일 반응이 다음 거래일에 반영될 수 있으며 인과관계를 뜻하지 않습니다. 시세: Yahoo Finance.</p>
+                </section>
+                <h3>역사적 의미</h3>
+                <p>중앙은행은 금융 불안이 경제 전체로 번지는 것을 줄이는 <b>안전망</b> 역할을 합니다. 또한 오늘날의 법정화폐는 금과의 교환 약속보다 국가의 법·재정과 통화정책에 대한 신뢰를 바탕으로 작동하므로, 중앙은행의 정책 운영과 신뢰성은 물가·금리·환율과 금융시장에 큰 영향을 줍니다. 그렇다고 중앙은행이 모든 금융위기나 물가 변동을 막거나 어떤 자산의 가치를 보장하는 것은 아닙니다.</p>
+              
+            
+            
+          </section><section class="lesson-block">
+            
+            
+              <p class="lesson-kicker">금융 이론 · 펀드 · ETF</p><h2 id="theory-04-5">이머징마켓: 성장 가능성과 함께 보는 시장</h2>
+              
+                <p>
+                  해외 주식·채권 ETF의 투자 지역을 구분할 때 자주 만나는
+                  이머징마켓(emerging market, 신흥시장)은 경제 규모와
+                  자본시장이 성장하는 과정에 있는 국가·지역의 주식·채권
+                  시장을 가리키는 말입니다. 선진시장과의 경계가 하나의 공식
+                  기준으로 고정되어 있는 것은 아니며, 지수 제공기관마다 시장
+                  접근성·거래 결제·외국인 투자 제도·유동성 등을 기준으로
+                  분류가 달라질 수 있습니다.
+                </p>
+                <p>
+                  이머징마켓은 장기 성장, 인구·소비 확대, 산업화 같은 기회를
+                  반영할 수 있지만 더 높은 기대수익을 뜻하지는 않습니다.
+                  현지 주가 변동에 더해 환율, 정치·규제 변화, 거래 유동성,
+                  특정 국가·산업 집중, 시장 접근 제한이 수익률과 손실 폭에
+                  함께 영향을 줄 수 있습니다.
+                </p>
+                <p>
+                  자산배분에서는 개별 국가를 맞히는 선택이라기보다
+                  국내·선진국 주식과 구분되는 하나의 위험 요인으로 살펴볼 수
+                  있습니다. 광범위한 이머징마켓 ETF나 펀드를 비교할 때는
+                  편입 국가와 상위 종목, 국가·산업 집중도, 기준 통화와
+                  환노출, 총보수, 추적 방식, 거래량을 먼저 확인하세요. 여러
+                  국가를 담아도 세계 경기 침체나 달러 강세처럼 함께 영향을
+                  받는 위험은 남습니다.
+                </p>
+                
+              
+            
+            
+          </section><section class="lesson-block">
+            <span>00.07</span>
+            
+              <p class="lesson-kicker">금융 이론 · 채권 · 코인</p><h2 id="theory-04-6">채권은 언제, 왜 만들어졌을까요?</h2>
+              
+                <p><strong>채권의 ‘최초’는 채무 기록과 거래 가능한 증권을 나누어 보아야 합니다.</strong> 돈을 빌리고 갚겠다는 기록은 고대부터 있었지만, 오늘날의 채권은 많은 사람에게서 자금을 모으고 그 권리를 양도할 수 있게 만든 유가증권(有價證券)입니다.</p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <thead><tr><th scope="col">구분</th><th scope="col">시기·장소</th><th scope="col">역사적 이정표</th><th scope="col">필요했던 이유</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">채무기록의 원형</th><td>기원전 3천년기 무렵, 메소포타미아</td><td>점토판에 대출·이자·상환 의무를 기록한 사례가 남아 있습니다. 이는 채권 그 자체라기보다 채권 계약의 먼 원형입니다.</td><td>곡물·은 등의 대여와 상환을 증명하고, 거래 당사자의 권리와 의무를 분명히 하기 위해서였습니다.</td></tr>
+                      <tr><th scope="row">공공채의 초기 형태</th><td>1171년 무렵, 이탈리아 베네치아</td><td>전쟁 재원을 위해 시민에게서 모은 공공부채가 양도 가능한 권리로 발전했습니다. 현대 국채·지방채로 이어지는 초기 공공채 시장의 대표 사례입니다.</td><td>세금만으로는 부족한 대규모 전쟁·공공 지출을 한 번에 조달하기 위해서였습니다.</td></tr>
+                      <tr><th scope="row">현존 최고(最古) 이자지급 채권</th><td>1624년, 네덜란드 레크다이크 보벤담 수리위원회</td><td>제방 보수 자금을 위해 발행한 영구채는 지금도 이자를 지급하는 가장 오래된 활성 채권으로 기록됩니다. ‘최초의 채권’이라는 뜻은 아닙니다.</td><td>홍수 방어 시설처럼 여러 세대가 쓰는 공공 인프라의 비용을 장기에 걸쳐 조달하기 위해서였습니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3>차용증에서 오늘의 채권시장으로</h3>
+                <p><strong>1. 개별 대여</strong> — 채권자와 채무자가 금액·이자·상환일을 직접 약정했습니다. 조건은 유연하지만 돈을 빌려준 사람이 만기 전 현금이 필요할 때 권리를 넘기기 쉽지 않았습니다.</p>
+                <p><strong>2. 양도 가능한 공공채·회사채</strong> — 발행자가 많은 투자자에게 자금을 빌리고, 투자자는 이자(쿠폰)와 원금 상환을 받을 권리를 보유하거나 다른 사람에게 팔 수 있게 됐습니다. 1694년 영란은행 설립 때도 영국 정부는 대프랑스 전쟁 자금을 위해 대중으로부터 120만 파운드를 조달했습니다.</p>
+                <p><strong>3. 현대 채권</strong> — 발행시장에서 정부·기업이 만기·표면금리·상환 조건을 정해 발행하고, 유통시장에서 투자자가 가격과 수익률(YTM)을 기준으로 거래합니다. 현재는 대부분 계좌의 전자등록으로 관리되지만, 발행자의 상환 능력과 금리 변화에 따른 가격 위험은 여전히 남습니다.</p>
+              
+            
+            
+          </section><section class="lesson-block">
+            <span>00.01</span>
+            
+              <p class="lesson-kicker">금융 이론 · 채권 · 코인</p><h2 id="theory-04-7">채권은 돈을 빌려준 약속장</h2>
+              
+                <h3>‘채권’과 ‘채무’의 한자부터 구분하기</h3>
+                <p>
+                  채권(債權)과 채무(債務)는 모두 ‘빚 채(債)’를 씁니다.
+                  같은 빚의 관계를 서로 다른 입장에서 부르는 말입니다.
+                </p>
+                <ul>
+                  <li><b>채권(債權)</b>: 빚 채(債) + 권리 권(權) — 돈이나 물건을 받을 권리</li>
+                  <li><b>채무(債務)</b>: 빚 채(債) + 의무 무(務) — 빚을 갚아야 하는 의무</li>
+                </ul>
+                <p>
+                  따라서 돈을 받을 권리가 있는 사람은 <b>채권자</b>, 갚아야 할 의무가
+                  있는 사람은 <b>채무자</b>입니다.
+                </p>
+                <p>
+                  다만 ‘채권’은 한자에 따라 뜻이 둘로 나뉩니다.
+                  <b>채권(債權)</b>은 남에게 돈을 받을 권리이고,
+                  <b>채권(債券)</b>은 정부나 기업이 돈을 빌리기 위해 발행하는
+                  유가증권(有價證券)입니다. 이 단원에서 주로 다루는 것은 국채·회사채처럼
+                  두 번째 뜻의 <b>채권(債券)</b>이며, 더 큰 분류에서는 채무증권에 속합니다.
+                </p>
+                <h3>약속을 지키지 못하면: 채무불이행</h3>
+                <p>
+                  <b>채무불이행</b>은 채무자가 약속한 내용대로 빚을 갚거나
+                  의무를 이행하지 않는 것을 말합니다. 예를 들어 약정한 날에
+                  원금이나 이자를 지급하지 못하는 경우가 대표적입니다. 채권자는
+                  계약 내용과 법적 절차에 따라 이행을 요구하거나 손해배상을
+                  청구할 수 있고, 채권 투자에서는 이러한 가능성이
+                  <b>신용위험</b>으로 나타납니다.
+                </p>
+                <p>
+                  채무불이행이 발생했다고 해서 모든 돈을 즉시 잃는 것은 아닙니다.
+                  발행자의 재산·담보·보증과 법적 절차에 따라 회수할 수 있는 금액과
+                  시점이 달라질 수 있습니다. 그래서 채권을 고를 때는 이자율뿐 아니라
+                  발행자의 재무 상태와 신용등급도 함께 확인해야 합니다.
+                </p>
+                <h3>어음과 수표: 돈을 지급하라는 증서</h3>
+                <p>
+                  <b>어음</b>은 일정한 금액을 정해진 시점에 지급하겠다는 약속 또는
+                  지급 지시를 적은 증서입니다. 대표적으로 <b>약속어음</b>은 발행인이
+                  받을 사람에게 지급을 약속하는 방식이고, <b>환어음</b>은 발행인이
+                  제3자에게 지급을 지시하는 방식입니다. 어음은 만기 전에 다른 사람에게
+                  넘기거나 금융기관을 통해 현금화하는 거래에도 쓰일 수 있습니다.
+                </p>
+                <p>
+                  <b>수표</b>는 발행인이 은행에 예금에서 일정 금액을 지급하라고
+                  지시하는 증서로, 일반적으로 제시되면 바로 지급하는 것을 전제로 합니다.
+                  어음과 수표 모두 약속한 지급이 이뤄지지 않을 위험이 있으므로,
+                  발행인·지급인과 만기·금액 같은 조건을 확인하는 것이 중요합니다.
+                </p>
+                <p>
+                  채권을 산다는 것은 정부나 기업에 돈을 빌려주고 정해진 이자와
+                  만기 원금을 받기로 하는 것입니다.
+                </p>
+                <h3>부동산·자동차 등록 때 만나는 의무매입채권(공채)</h3>
+                <p>
+                  법령에 따라 부동산 등기나 자동차 등록 등을 할 때 의무적으로
+                  매입해야 하는 <b>의무매입채권(공채)</b>도 있습니다. 세금처럼
+                  납부 절차에 포함되지만, 매입자는 채권을 보유하므로 약정 조건에
+                  따라 만기에 원금과 이자를 받을 권리가 있다는 점이 세금과 다릅니다.
+                </p>
+                <ul>
+                  <li>
+                    <b>국민주택채권:</b> 주택·상가·토지 등의 소유권 이전 등기나
+                    일정한 인허가 때 매입 대상이 될 수 있습니다. 국민주택사업 등에
+                    필요한 재원을 마련하기 위해 발행합니다.
+                  </li>
+                  <li>
+                    <b>지역개발채권·도시철도채권:</b> 지방자치단체에 자동차를
+                    등록하거나 각종 인허가를 받을 때 매입 대상이 될 수 있습니다.
+                    지역 도로·도시철도 등 공공 인프라 재원에 활용됩니다.
+                  </li>
+                </ul>
+                <p>
+                  실제로는 만기까지 보유하는 대신, 매입과 동시에 금융기관 등에
+                  되파는 <b>즉시매도</b>를 선택하는 경우가 많습니다. 이때 채권의
+                  매입금액과 즉시매도 가격의 차이인 <b>채권 할인액</b>을 부담하며,
+                  등기 비용이나 자동차 등록 비용의 ‘채권 할인료’로 표시되기도 합니다.
+                  이는 별도의 단순 수수료라기보다 채권을 즉시 매도하면서 생기는
+                  가격 차이입니다.
+                </p>
+                <p>
+                  의무매입 여부·매입률·만기·할인액은 부동산의 종류와 금액,
+                  차량과 배기량, 등록 지역, 감면 대상 등에 따라 달라집니다. 실제
+                  거래에서는 법무사·등록 대행기관 또는 관할 행정기관의 안내를
+                  확인하세요.
+                </p>
+                <h3>채권은 현물일까요?</h3>
+                <p>
+                  ‘현물’은 쓰는 맥락에 따라 뜻이 달라집니다. 금·원유·부동산처럼
+                  물리적 형태가 있는 <b>실물자산</b>과 비교한다면, 채권은 실물이
+                  아니라 돈을 받을 권리를 나타내는 <b>금융자산(유가증권(有價證券))</b>입니다.
+                </p>
+                <p>
+                  반면 선물 같은 파생상품과 비교할 때의 <b>현물(spot)</b>은
+                  파생계약이 아닌 실제 기초자산을 뜻합니다. 이 맥락에서는 실제
+                  채권을 사고파는 거래가 현물거래이고, 3년 국채선물·10년 국채선물처럼
+                  미래 시점의 거래 조건을 먼저 정하는 계약은 선물거래입니다. 현물거래도
+                  계약 즉시 또는 시장별로 정해진 결제일에 채권의 인도와 대금 결제가
+                  이뤄질 수 있습니다.
+                </p>
+                <p>
+                  즉 “금이나 원유처럼 실물인가?”라는 질문에는 <b>아니오</b>이고,
+                  “채권선물과 대비되는 실제 채권인가?”라는 질문에는 <b>현물이다</b>라고
+                  답할 수 있습니다.
+                </p>
+                <p>
+                  국채는 정부가 발행하고, 회사채는 기업이 발행합니다. 발행자가
+                  약속한 돈을 갚지 못할 가능성은 신용위험이라고 합니다.
+                </p>
+                <p>
+                  만기가 길수록 금리 변화에 가격이 더 민감해지는 경향이
+                  있습니다. 시장금리가 오르면 이미 발행된 채권의 고정 이자가 새로 발행되는 채권보다 상대적으로 매력이 낮아지므로, 투자자가 시장금리에 맞는 수익률을 얻을 수 있도록 기존 채권의 가격이 내려가는 방향으로 조정됩니다. 반대로 시장금리가 내리면 기존의 높은 이자가 상대적으로 매력적이어서 가격이 오를 수 있습니다. 이를 설명할 때 듀레이션이라는 지표를 사용합니다.
+                </p>
+              
+            
+            
+          </section><section class="lesson-block">
+            <span>01.05</span>
+            
+              <p class="lesson-kicker">금융 이론 · 채권 · 코인</p><h2 id="theory-04-8">무위험수익률·은행 금리·채권: 금리의 기준과 위험</h2>
+              
+                <p>
+                  세 개념은 모두 ‘돈의 가격’인 이자와 관련 있지만, 같은 뜻은 아닙니다.
+                  <b>무위험수익률</b>은 다른 투자 기회를 평가하는 기준이고, <b>은행 금리</b>는
+                  예금·대출 계약에 적용되는 이자율이며, <b>채권</b>은 정부나 기업이 자금을
+                  빌리기 위해 발행하는 증권입니다. 채권의 가격과 수익률은 시장에서 계속 변할 수 있습니다.
+                </p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <thead>
+                      <tr><th scope="col">개념</th><th scope="col">뜻</th><th scope="col">대표적인 예</th><th scope="col">투자에서의 역할</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><th scope="row">무위험수익률<br><small>(Risk-free rate)</small></th><td>원금 상환 불이행 가능성이 매우 낮은 자산의 수익률을 기준으로 삼는 이론적 기준점입니다.</td><td>같은 통화·만기에 맞춘 단기 국채나 정부채 금리 등을 실무상 대용치로 사용합니다.</td><td>위험자산에 기대하는 추가 보상과 샤프지수의 기준이 됩니다.</td></tr>
+                      <tr><th scope="row">은행 금리<br><small>(Bank interest rate)</small></th><td>은행 예금에 지급되거나 대출에 부과되는 계약상 이자율입니다.</td><td>정기예금 금리, 주택담보대출 금리, 신용대출 금리</td><td>정책금리·시장 조달비용·만기·은행의 신용도·예금자보호·경쟁·비용 등이 함께 반영됩니다.</td></tr>
+                      <tr><th scope="row">채권<br><small>(Bond)</small></th><td>발행자가 이자와 원금을 지급하겠다고 약속한 금융자산입니다. ‘채권’ 자체와 ‘채권수익률’은 구분해야 합니다.</td><td>국채, 지방채, 금융채, 회사채</td><td>발행자·만기·담보·선순위에 따라 신용위험과 수익률이 달라집니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3>기준금리에 위험과 조건이 더해지는 방식</h3>
+                <div class="concept-visual flow-visual">
+                  <div class="flow-node"><b>무위험수익률</b><small>통화·만기에 맞춘 기준</small></div>
+                  <div class="flow-arrow">→</div>
+                  <div class="flow-node"><b>은행 금리</b><small>조달비용·보호제도·경쟁 등</small></div>
+                  <div class="flow-arrow">→</div>
+                  <div class="flow-node"><b>회사채 수익률</b><small>신용·유동성·만기·옵션 등</small></div>
+                </div>
+                <p>
+                  이 그림은 이해를 위한 구조입니다. 국채·예금·회사채의 금리가 언제나 왼쪽에서 오른쪽 순으로
+                  높아지는 것은 아닙니다. 만기, 세금, 유동성, 중도해지 조건, 예금자보호 한도와 시장 상황이
+                  달라지므로 <b>같은 통화와 비슷한 만기</b>를 맞춰 비교해야 합니다.
+                </p>
+                <p>한국의 단기 무위험지표금리인 KOFR와 CD금리, KOFR 산출의 기초가 되는 RP도 함께 알아두면 단기금리형 상품과 금리 기준을 구분하는 데 도움이 됩니다.</p>
+                <ul>
+                  <li><b>국채:</b> 국가가 발행한 채권입니다. 신용위험이 매우 낮아 무위험수익률의 대용치로 자주 쓰이지만, 시장금리 변화에 따른 가격 변동·인플레이션·환율 위험까지 사라지는 것은 아닙니다.</li>
+                  <li><b>은행 예금:</b> 예금자보호 범위 안에서는 안정성이 높지만, 적용 금리와 중도해지 이율, 보호 한도를 확인해야 합니다.</li>
+                  <li><b>회사채:</b> 기준금리에 기업의 부도 가능성에 대한 <b>신용스프레드</b> 등이 더해집니다. 같은 회사채라도 만기와 신용등급이 다르면 수익률이 달라집니다.</li>
+                </ul>
+                <h3>실전에서 보는 두 가지 기준</h3>
+                <p>
+                  <b>위험 프리미엄</b>은 위험자산의 기대수익률에서 적절한 무위험수익률을 뺀 추가 보상입니다.
+                  예를 들어 무위험수익률이 연 3.5%이고 어떤 자산의 기대수익률이 연 8%라면 기대 위험 프리미엄은
+                  4.5%p입니다. 이는 미래에 반드시 얻는 수익이 아니라 위험을 감수하는 대가로 시장이 요구하는
+                  <b>기대 보상</b>입니다.
+                </p>
+                <p>
+                  <b>샤프지수</b>는 보통 <code>(수익률 − 무위험수익률) ÷ 수익률 변동성</code>으로 계산합니다.
+                  비교할 때는 수익률의 기간·통화와 무위험수익률의 기간·통화를 맞춰야 합니다. 은행 예금 금리보다
+                  낮은 수익률의 채권이나 주식도 만기, 유동성, 세금, 가격 상승 가능성, 위험 수준이 다르므로
+                  숫자 하나만으로 투자 가치를 단정할 수는 없습니다.
+                </p>
+              
+            
+            
+          </section><section class="lesson-block">
+            <span>00.02</span>
+            
+              <p class="lesson-kicker">금융 이론 · 채권 · 코인</p><h2 id="theory-04-9">금리가 오르면 채권 가격은 왜 내려갈까요?</h2>
+              
+                <p>
+                  채권 가격과 시장금리(수익률)는 일반적으로 <b>반대 방향</b>으로
+                  움직입니다. 시장금리가 오르면 기존 채권 가격은 내려가고,
+                  시장금리가 내리면 기존 채권 가격은 오르는 경향이 있습니다.
+                </p>
+                <h3>기존 채권과 새 채권의 “금리 경쟁”</h3>
+                <p>채권은 처음 발행될 때 <b>“내가 만기까지 매년 이자 X%를 줄게”</b> 하고 찍히는 <b>고정 금리 상품</b>입니다. 한번 정해진 이자율(표면금리)은 절대로 변하지 않습니다.</p>
+                <p><small>아래 예시는 표면금리가 고정된 채권을 기준으로 합니다. 변동금리채는 발행 조건에 따라 이자율이 바뀔 수 있습니다.</small></p>
+                <p>이 상태에서 시장 금리가 오르면 무슨 일이 벌어질까요?</p>
+                <ol>
+                  <li><b>상황:</b> 내가 1년 전에 이자 3%짜리 채권을 100만 원 주고 샀습니다.</li>
+                  <li><b>변화:</b> 갑자기 시장 금리가 올라서, 은행에 가거나 <b>새로 발행되는 채권</b>을 사면 이자 5%를 줍니다.</li>
+                  <li><b>경쟁 발생:</b> 내가 가진 3%짜리 채권은 시장에 나온 5%짜리 새 채권과의 <b>경쟁에서 완전히 밀리게 됩니다.</b></li>
+                </ol>
+                <h3>그렇다면 3%짜리 채권을 누구에게 팔 수 있을까요?</h3>
+                <p>아무도 5% 이자를 주는 시대에 3% 이자만 주는 채권을 100만 원 제값 주고 사지 않습니다. 이 채권을 시장에 팔려면 <b>“이자 손해 보는 만큼 가격을 깎아주는 수밖에”</b> 없습니다.</p>
+                <ul>
+                  <li>5%짜리 새 채권을 산 사람만큼 수익을 맞춰주려면, 내 3%짜리 채권을 95만 원(할인된 가격)에 팔아야 겨우 거래가 성사됩니다.</li>
+                  <li>반대로, 시장 금리가 1%로 떨어진다면? 내 3%짜리 채권은 인기 폭발이므로 105만 원(프리미엄 가격)을 받고 웃으며 팔 수 있습니다.</li>
+                </ul>
+                <h3>한 줄 요약</h3>
+                <blockquote><b>“시장의 이자가 올라가면, 이미 발행된 고정 이자 채권의 매력이 떨어지기 때문에 헐값에 거래된다(가격 하락).”</b></blockquote>
+                <p>결국 기존 채권은 <b>지금 시장에 새로 나오는 금리(대안들)와 계속해서 매력도를 경쟁</b>하기 때문에 금리와 가격이 반대로 움직이는 것입니다.</p>
+                <h3>새 채권과 기존 채권을 비교해 보세요</h3>
+                <ul>
+                  <li>
+                    <b>시장금리가 3%에서 5%로 올랐을 때:</b> 새 채권은 더 높은
+                    이자를 주지만 기존 채권은 3% 쿠폰을 유지합니다. 기존 채권을
+                    팔려면 새 채권과 경쟁할 수 있도록 가격이 낮아져야 할 수 있습니다.
+                  </li>
+                  <li>
+                    <b>시장금리가 3%에서 1%로 내렸을 때:</b> 기존의 3% 쿠폰은
+                    새 채권보다 상대적으로 매력적입니다. 이 채권을 사려는 수요가
+                    늘면 가격에 프리미엄이 붙을 수 있습니다.
+                  </li>
+                </ul>
+                <p>
+                  여기서 ‘금리’는 보통 시장에서 요구하는 수익률을 뜻합니다. 이미
+                  발행된 채권의 <b>표면금리(쿠폰금리)</b> 자체가 시장금리에 맞춰
+                  매일 바뀌는 것은 아닙니다. 대신 그 고정된 이자 흐름의 현재가치가
+                  달라지면서 거래 가격과 만기수익률이 조정됩니다.
+                </p>
+                <h3>만기가 길수록 가격 변화가 커지는 이유</h3>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <caption>금리 변화에 대한 단기채와 장기채의 일반적 차이</caption>
+                    <thead><tr><th scope="col">구분</th><th scope="col">단기채 (예: 1~3년)</th><th scope="col">장기채 (예: 10~30년)</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">금리 변동 시 가격 변화</th><td>상대적으로 작음</td><td>상대적으로 큼</td></tr>
+                      <tr><th scope="row">이유</th><td>유리하거나 불리한 이자를 받는 기간이 짧음</td><td>고정된 이자와 시장금리의 차이가 더 오랫동안 영향을 줌</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>
+                  이 가격 민감도를 가늠하는 지표가 <b>듀레이션</b>입니다. 같은
+                  금리 변화라면 듀레이션이 큰 채권일수록 가격 변동 폭도 커지는
+                  경향이 있습니다. 따라서 금리 방향에 대한 전망이 빗나갈 때 장기채는
+                  단기채보다 큰 가격 손실을 겪을 수 있습니다.
+                </p>
+                <h3>채찍 비유로 보는 듀레이션의 민감도</h3>
+                <p>금리가 오르면 새로 발행되는 채권의 수익률이 높아집니다. 그러면 낮은 쿠폰을 주는 기존 채권은 새 채권과 경쟁하려고 가격이 내려가며, 그 결과 기존 채권을 사는 사람의 만기수익률이 시장 수준에 가까워집니다. 반대로 시장금리가 내려가면 기존의 높은 이자 흐름이 상대적으로 매력적이어서 가격이 오르는 방향으로 움직입니다.</p>
+                <div class="concept-visual">
+                  <p class="visual-kicker">WHIP ANALOGY · 채찍 비유</p>
+                  <div class="flow-visual">
+                    <div class="step highlight">금리 변동<small>손잡이를 1%p 움직이는 힘</small></div><div class="step">단기채·짧은 듀레이션<small>손잡이 가까이: 가격 변화가 상대적으로 작음</small></div><div class="step">장기채·긴 듀레이션<small>채찍 끝처럼: 가격 변화가 더 크게 증폭</small></div>
+                  </div>
+                  <figcaption><b>핵심:</b> 금리 변화 폭이 같아도 듀레이션이 길수록 채권 가격의 반대 방향 움직임이 커집니다.</figcaption>
+                </div>
+                <p>숫자로 빠르게 가늠할 때는 <b>가격 변화율 ≈ −수정듀레이션 × 수익률 변화</b>를 씁니다. 예를 들어 수정듀레이션이 2년인 채권은 수익률이 1%p 오를 때 가격이 약 2% 내려가고, 수정듀레이션이 20년이면 약 20% 내려가는 것으로 먼저 계산합니다. 이는 쿠폰·수익률곡선·신용위험·볼록성을 단순화한 근사치이므로 실제 가격 변동은 달라질 수 있습니다.</p>
+                <p>
+                  금리 하락을 예상하면 장기채의 가격 상승 가능성을, 금리 상승을
+                  예상하면 장기채의 가격 하락 위험을 검토하는 식으로 이해할 수
+                  있습니다. 다만 금리 전망만으로 매수·매도를 결정하기보다 만기,
+                  듀레이션, 신용위험, 유동성, 투자 기간을 함께 확인해야 합니다.
+                </p>
+                <h3>말킬(Burton G. Malkiel)의 채권가격 5대 정리</h3>
+                <p><a href="https://faculty.princeton.edu/people/burton-gordon-malkiel" target="_blank" rel="noopener">버턴 G. 말킬(Burton G. Malkiel)</a>은 1962년 논문 <a href="https://www.jstor.org/stable/1880816" target="_blank" rel="noopener">「Expectations, Bond Prices, and the Term Structure of Interest Rates」</a>에서 수익률 변화와 채권가격의 관계를 정리했습니다. 아래 원칙은 현금흐름·신용위험 등이 같은 일반적인 고정금리 채권을 비교하는 학습용 틀입니다. 실제 가격은 신용등급 변화, 옵션부 조항, 유동성, 수익률곡선의 모양에도 영향을 받습니다.</p>
+                <div class="lesson-table-wrap">
+                  <table class="lesson-table">
+                    <caption>금리·만기·쿠폰과 채권가격의 관계</caption>
+                    <thead><tr><th scope="col">정리</th><th scope="col">핵심 관계</th><th scope="col">왜 그런가요?</th></tr></thead>
+                    <tbody>
+                      <tr><th scope="row">1. 금리와 가격</th><td>수익률이 오르면 가격은 내려가고, 수익률이 내리면 가격은 오르는 방향으로 움직입니다.</td><td>기존의 고정 이자 현금흐름을 새 시장수익률로 할인해 현재가치를 계산하기 때문입니다.</td></tr>
+                      <tr><th scope="row">2. 만기와 민감도</th><td>다른 조건이 같다면 만기가 길수록 같은 수익률 변화에 가격 변동 폭이 커집니다.</td><td>먼 미래의 현금흐름일수록 할인율 변화의 영향이 더 크게 누적됩니다.</td></tr>
+                      <tr><th scope="row">3. 체감하는 증가</th><td>만기가 길어질수록 민감도는 커지지만, 만기를 더 늘릴 때마다 증가하는 속도는 대체로 둔화됩니다.</td><td>할인 효과는 멀어질수록 계속 커지지만 그 추가 효과는 점차 작아지는 형태를 보입니다.</td></tr>
+                      <tr><th scope="row">4. 볼록성</th><td>같은 폭의 수익률 하락과 상승을 비교하면, 가격 상승 폭이 가격 하락 폭보다 큰 경향이 있습니다.</td><td>가격-수익률 관계가 직선이 아니라 볼록한 곡선이기 때문입니다.</td></tr>
+                      <tr><th scope="row">5. 쿠폰과 민감도</th><td>같은 만기·수익률 조건에서는 표면이율이 낮을수록 가격 민감도가 커지는 경향이 있습니다.</td><td>중간 이자 현금흐름이 적어 원금 회수 시점의 비중이 커지고, 듀레이션이 길어지기 때문입니다.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p><b>왜 ‘쿠폰’이라고 부를까요?</b> 과거에는 종이 채권 증서에 이자 지급일마다 떼어 내 제출할 수 있는 작은 표(쿠폰)가 붙어 있었습니다. 투자자가 이 표를 떼어 내면 약정 이자를 받을 수 있었기 때문에, 오늘날 전자등록 채권에서도 정기 이자 지급액 또는 그 이자율을 관행적으로 ‘쿠폰’ 또는 ‘쿠폰금리’라고 부릅니다.</p>
+                <p>이 정리는 <b>듀레이션</b>과 <b>볼록성</b>을 이해하는 출발점입니다. 금리 하락 가능성을 염두에 둘 때는 장기·저쿠폰 채권이 더 크게 오를 수 있는 반면, 금리 상승 때는 더 큰 가격 하락을 겪을 수 있습니다. 이는 방향 예측을 위한 권유가 아니라, 보유 기간과 감당 가능한 가격 변동을 계약 조건과 함께 점검해야 한다는 뜻입니다.</p>
+                <section>
+                  <h3 id="bondPriceKeywordsHeading">채권 가격을 읽는 네 가지 키워드: 선형 · 비선형 · 듀레이션 · 컨벡시티</h3>
+                  <p><b>선형</b>은 원인이 1만큼 변할 때 결과도 일정한 비율로 변하는 관계입니다. 그래프가 곧은 직선이라 변화 폭을 빠르게 가늠하기 좋습니다. 반대로 <b>비선형</b>은 상황에 따라 반응 속도가 달라지는 관계로, 그래프가 휘어집니다. 옵션의 손익 구조나 채권 가격과 금리의 관계가 대표적인 예입니다.</p>
+                  <figure class="lesson-figure">
+                    <img src="../days/assets/linear-nonlinear-duration-convexity.svg" alt="컨벡시티가 0인 직선과 아래로 볼록한 양의 컨벡시티·위로 볼록한 음의 컨벡시티 구간이 있는 비선형 곡선, 듀레이션과 채권 컨벡시티를 비교한 네 개의 개념 그래프" loading="lazy">
+                    <figcaption>직선의 컨벡시티는 0입니다. 곡선은 변곡점을 기준으로 양(+)의 컨벡시티 구간과 음(−)의 컨벡시티 구간으로 나뉠 수 있으며, 채권에서는 듀레이션 직선과 실제 가격 곡선의 차이를 컨벡시티로 보정합니다.</figcaption>
+                  </figure>
+                  <p><b>듀레이션</b>은 금리가 조금 변할 때 채권 가격이 얼마나 민감하게 움직이는지 알려 주는 숫자입니다. 예를 들어 수정듀레이션이 5라면, 다른 조건이 같을 때 시장금리가 <b>1%p 오르면</b> 채권 가격은 대략 <b>5% 내려가는</b> 방향으로 생각할 수 있습니다. 듀레이션이 길수록 금리 변화에 더 크게 흔들립니다.</p>
+                  <p><b>컨벡시티</b>는 이 관계가 직선이 아니라 실제로는 휘어 있다는 점을 나타냅니다. 일반적인 양(+)의 컨벡시티 채권은 금리가 내려갈 때 가격 상승폭이 듀레이션 직선 근사보다 커지고, 금리가 오를 때 가격 하락폭은 그 근사보다 작아질 수 있습니다. 따라서 듀레이션은 ‘빠른 1차 추정’, 컨벡시티는 ‘그 추정을 더 실제에 가깝게 만드는 보정’으로 기억하면 쉽습니다.</p>
+                  <div class="lesson-table-wrap">
+                    <table class="lesson-table">
+                      <caption>한 줄로 기억하기</caption>
+                      <thead><tr><th scope="col">개념</th><th scope="col">쉽게 말하면</th><th scope="col">채권에서 보는 점</th></tr></thead>
+                      <tbody>
+                        <tr><th scope="row">선형</th><td>같은 입력 변화에 같은 속도로 반응하는 직선</td><td>작은 금리 변화에서의 단순 추정</td></tr>
+                        <tr><th scope="row">비선형</th><td>입력 위치에 따라 반응 속도가 달라지는 곡선</td><td>금리와 가격의 실제 관계</td></tr>
+                        <tr><th scope="row">듀레이션</th><td>금리 변화에 대한 가격의 ‘기울기’</td><td>금리 위험의 크기를 빠르게 비교</td></tr>
+                        <tr><th scope="row">컨벡시티</th><td>그 기울기 자체가 바뀌는 ‘휘어짐’</td><td>큰 금리 변화에서 듀레이션 추정을 보정</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+                
+              
+            
+            
+          </section><section class="lesson-block">
+            <span>16.1</span>
+            
+              <p class="lesson-kicker">금융 이론 · 채권 · 코인</p><h2 id="theory-04-10">가상자산의 시장 규모</h2>
+              
+                <h3>‘코인 규모’는 가격 하나가 아니라 세 숫자로 봅니다</h3>
+                <p>자산의 가격이 높다고 반드시 큰 프로젝트는 아닙니다. <b>시가총액</b>은 대략 현재 가격 × 유통량이며, 시장에서 실제 거래 가능한 규모를 비교하는 출발점입니다. <b>완전희석가치(FDV)</b>는 현재 가격 × 최대(또는 예정) 공급량으로, 아직 풀리지 않은 물량까지 반영한 가정치입니다. <b>거래대금·유동성</b>은 일정 기간 실제로 얼마나 거래되는지를 보여 주므로 시가총액과 별개입니다.</p>
+                <p>예를 들어 가격이 10만원인 A와 1만원인 B라도, A의 유통량이 100만 개이고 B가 1억 개라면 단순 시가총액은 둘 다 1,000억원입니다. 토큰은 향후 물량이 풀리는 <b>언락</b>, 재단·초기 투자자·팀의 보유 비중, 소각·발행 규칙에 따라 공급과 매도 압력이 달라질 수 있습니다. 시가총액 순위, 하루 거래량, 거래소별 호가 깊이를 한 숫자로 혼동하지 않는 것이 중요합니다.</p>
+              
+            
+            
+          </section></article></section></div></main></div><script>document.querySelectorAll("img[data-port8000]").forEach(function(img){img.src=location.protocol+"//"+location.hostname+":8000"+img.dataset.port8000;});</script></body></html>
