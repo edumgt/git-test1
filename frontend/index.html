@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>금융상품·생활거래 RAG 학습랩</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css?v=20260919-small-text110" />
+  <link rel="stylesheet" href="/static/assets/simulation-workbench.css?v=20260919-small-text110" />
+  <link rel="stylesheet" href="/static/hangul-scale.css?v=20260919-1" />
+</head>
+<body>
+  <div class="offcanvas-backdrop" id="offcanvasBackdrop" aria-hidden="true"></div>
+  <div class="app-layout">
+    <aside class="sidebar" id="learningPanel" aria-label="학습과 문서 등록">
+      <div class="sidebar-header">
+        <div class="panel-title-row">
+          <h1 class="logo"><i class="fa-solid fa-chart-pie"></i> Finance RAG Lab</h1>
+          <button class="panel-close" id="closeLeftPanel" aria-label="학습 패널 닫기"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <p class="logo-sub">금융상품 · 실물자산 · 생활거래 이해 · 실습</p>
+      </div>
+
+      <nav class="topic-nav">
+        <p class="nav-label">4일 이론 학습</p>
+        <button class="topic-btn theory-menu-btn" data-theory-day="1">
+          <span class="day-menu-number">1일차</span> 선물과 옵션
+        </button>
+        <button class="topic-btn theory-menu-btn" data-theory-day="2">
+          <span class="day-menu-number">2일차</span> 펀드 · ETF
+        </button>
+        <button class="topic-btn theory-menu-btn" data-theory-day="3">
+          <span class="day-menu-number">3일차</span> 채권 · 코인
+        </button>
+        <button class="topic-btn theory-menu-btn" data-theory-day="4">
+          <span class="day-menu-number">4일차</span> 자산배분, 퀀트
+        </button>
+
+      </nav>
+
+      <div class="sidebar-section rag-panel" id="ragPanel">
+        <p class="nav-label">RAG 자료 등록</p>
+        <p class="section-copy">예금·펀드·금·부동산·수집품·중고거래·보험·연금 등 생활 속 거래 교재를 TXT 또는 PDF로 등록하세요.</p>
+        <div class="upload-area" id="uploadArea">
+          <input type="file" id="fileInput" accept=".txt,.pdf" hidden />
+          <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+          <p>TXT / PDF 파일을 끌어다 놓거나<br /><span class="upload-link" id="uploadTrigger">클릭하여 선택</span></p>
+        </div>
+        <div id="uploadStatus" class="upload-status hidden"></div>
+
+        <div class="text-ingest">
+          <p class="nav-label" style="margin-top:20px">텍스트 직접 등록</p>
+          <input type="text" id="textTitle" placeholder="예: 블랙-리터만 모델 요약" class="input-field" />
+          <textarea id="textContent" placeholder="핵심 개념, 운용 전략, 사례 분석 메모를 입력하세요..." class="textarea-field" rows="5"></textarea>
+          <button class="btn-primary" id="ingestTextBtn">
+            <i class="fa-solid fa-plus"></i> 등록
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="/docs" target="_blank" class="docs-link">
+          <i class="fa-solid fa-book-open"></i> API 문서 (Swagger)
+        </a>
+        <a href="/health" target="_blank" class="docs-link">
+          <i class="fa-solid fa-heart-pulse"></i> 상태 확인
+        </a>
+      </div>
+    </aside>
+
+    <main class="chat-area">
+      <header class="chat-header">
+        <button class="panel-toggle" id="openLeftPanel" aria-controls="learningPanel" aria-label="학습 패널 열기">
+          <i class="fa-solid fa-bars"></i><span>학습</span>
+        </button>
+        <a class="main-kms-title" href="/?view=learn">금융과 행동</a>
+        <div class="brand-nav" aria-label="학습 서비스 메뉴">
+          <button class="brand-nav-btn active" data-view="home"><i class="fa-solid fa-house"></i> 홈</button>
+          <button class="brand-nav-btn" data-view="stocks"><i class="fa-solid fa-building-columns"></i> 종목보기</button>
+          <button class="brand-nav-btn" data-view="learn"><i class="fa-solid fa-comments"></i> RAG 질문</button>
+          <button class="brand-nav-btn" data-view="simulation"><i class="fa-solid fa-chart-pie"></i> 시뮬레이션</button>
+          <button class="brand-nav-btn" data-view="basis"><i class="fa-solid fa-scale-balanced"></i> 베이시스</button>
+          <button class="brand-nav-btn" data-view="backtest"><i class="fa-solid fa-flask"></i> LEAN 백테스트</button>
+          <button class="brand-nav-btn" data-view="calendar"><i class="fa-solid fa-calendar-days"></i> 캘린더</button>
+        </div>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="welcome-msg">
+          <div class="welcome-icon"><i class="fa-solid fa-robot"></i></div>
+          <h2>금융상품·자산배분 RAG 학습랩</h2>
+          <p>4일 이론, 설명형 RAG 질문과 실습 시뮬레이션을 함께 활용해 보세요.</p>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <div class="input-row">
+          <textarea
+            id="questionInput"
+            class="question-input"
+            placeholder="예: 평균분산과 Risk-Parity의 차이를 설명하고 어떤 시장에서 유리한지 알려줘"
+            rows="1"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" title="전송">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+        <p class="input-hint">
+          도메인: <span>금융·투자</span> &nbsp;·&nbsp; 근거 문서 기반 답변 &nbsp;·&nbsp; Top-K: <span id="topKLabel">4</span>
+        </p>
+      </div>
+      <footer class="app-footer">
+        <span>© (주)에듀엠지티</span>
+        <span>금융상품·자산배분 학습 플랫폼</span>
+      </footer>
+    </main>
+
+    <aside class="ref-panel" id="referencePanel" aria-label="RAG 자료 등록과 참고 문서">
+      <div class="ref-header">
+        <h3><i class="fa-solid fa-database"></i> RAG 도구</h3>
+        <button class="btn-ghost" id="closeRefBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="refList" class="ref-list">
+        <p class="ref-empty">질문 후 참고 문서가 여기에 표시됩니다.</p>
+      </div>
+    </aside>
+
+    <div id="simulationStaging" hidden>
+      <div class="simulation-panel" id="simulationPanel">
+        <section class="sim-scenario-lab" aria-labelledby="scenarioLabTitle">
+          <h3 id="scenarioLabTitle" class="sr-only">시장 충격 시나리오 선택</h3>
+          <div class="sim-scenario-layout">
+            <aside class="sim-scenario-controls">
+              <strong>시장 충격 선택</strong>
+              <p>먼저 시나리오를 선택해 보세요.</p>
+              <div class="scenario-actions" role="group" aria-label="스트레스 시나리오 선택">
+                <button class="sim-scenario active" data-scenario="equity"><i class="fa-solid fa-arrow-trend-down"></i> 주식 급락</button>
+                <button class="sim-scenario" data-scenario="rates"><i class="fa-solid fa-percent"></i> 금리 급등</button>
+                <button class="sim-scenario" data-scenario="inflation"><i class="fa-solid fa-fire"></i> 인플레이션 재확산</button>
+                <button class="sim-scenario" data-scenario="stagflation"><i class="fa-solid fa-industry"></i> 스태그플레이션</button>
+                <button class="sim-scenario" data-scenario="credit_crunch"><i class="fa-solid fa-money-bill-trend-down"></i> 신용경색</button>
+                <button class="sim-scenario" data-scenario="geopolitical"><i class="fa-solid fa-globe"></i> 지정학적 충격</button>
+                <button class="sim-scenario" data-scenario="pandemic"><i class="fa-solid fa-virus"></i> 팬데믹형 셧다운</button>
+              </div>
+            </aside>
+            <div class="sim-scenario-output">
+              <p class="section-copy">선택한 시나리오에서 주식/ETF·채권·대체자산이 각각 어떻게 움직이는지 비교해 보세요. 모든 값은 교육용 가정입니다.</p>
+              <div class="scenario-result" id="simScenarioResult"></div>
+            </div>
+          </div>
+        </section>
+
+        <div class="sim-footer">
+          <p><i class="fa-solid fa-circle-info"></i> 교육용 가정에 따른 계산입니다. 실시간 지수·옵션가격, 변동성, 만기, 증거금, 세금·수수료 및 개별 상품 제약은 반영하지 않습니다.</p>
+          <button class="btn-primary sim-ask-btn" id="simPromptBtn">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> 이 시나리오로 RAG 질문 만들기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glossary-modal" id="glossaryModal" role="dialog" aria-modal="true" aria-labelledby="glossaryTitle" aria-hidden="true">
+    <div class="glossary-modal-backdrop" data-glossary-close></div>
+    <section class="glossary-dialog">
+      <button class="glossary-close" type="button" data-glossary-close aria-label="용어 설명 닫기"><i class="fa-solid fa-xmark"></i></button>
+      <p class="glossary-label">금융 용어 사전</p>
+      <h2 id="glossaryTitle"></h2>
+      <div class="glossary-names" id="glossaryNames"></div>
+      <p class="glossary-summary" id="glossarySummary"></p>
+      <div class="glossary-detail" id="glossaryDetail"></div>
+      <p class="glossary-note">학습용 설명입니다. 실제 투자 판단에는 상품설명서와 공시 자료를 함께 확인하세요.</p>
+    </section>
+  </div>
+
+  <div class="glossary-modal calendar-modal" id="calendarModal" role="dialog" aria-modal="true" aria-labelledby="calendarModalTitle" aria-hidden="true">
+    <div class="glossary-modal-backdrop" data-calendar-close></div>
+    <section class="glossary-dialog calendar-dialog">
+      <button class="glossary-close" type="button" data-calendar-close aria-label="일정 상세 닫기"><i class="fa-solid fa-xmark"></i></button>
+      <p class="glossary-label" id="calendarModalCategory">증시 일정</p>
+      <h2 id="calendarModalTitle"></h2>
+      <div class="glossary-names calendar-modal-meta" id="calendarModalMeta"></div>
+      <p class="glossary-summary" id="calendarModalSummary"></p>
+      <div class="glossary-detail" id="calendarModalDetail"></div>
+      <p class="glossary-note">학습용 예시 일정입니다. 실제 발표 일정·시간은 변경될 수 있으니 거래소·기관의 공식 캘린더에서 다시 확인하세요.</p>
+    </section>
+  </div>
+
+  <div class="tick-guide-modal" id="tickGuideModal" role="dialog" aria-modal="true" aria-labelledby="tickGuideTitle" aria-hidden="true">
+    <div class="tick-guide-backdrop" data-tick-guide-close></div>
+    <aside class="tick-guide-panel">
+      <header class="tick-guide-header">
+        <div><span class="tick-guide-kicker">GUIDE</span><h2 id="tickGuideTitle">틱(Tick)과 호가 단위 이해하기</h2></div>
+        <button class="tick-guide-close" type="button" data-tick-guide-close aria-label="틱 설명 닫기"><i class="fa-solid fa-xmark"></i></button>
+      </header>
+      <div class="tick-guide-body" id="tickGuideBody"></div>
+    </aside>
+  </div>
+
+  <template id="day1ButlerContent">
+    <section class="butler-intro" aria-labelledby="butlerIntroTitle">
+      <div class="butler-intro-head"><span>COMPANY ANALYSIS TOOL</span><a href="https://www.butler.works/ko/home" target="_blank" rel="noopener noreferrer">버틀러 방문 <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+      <h2 id="butlerIntroTitle">버틀러로 기업의 펀더멘털을 읽어 보세요</h2>
+      <p>버틀러는 기업의 재무제표·실적·공시를 보기 쉽게 정리해, 개인 투자자가 기업 분석과 포트폴리오 점검에 활용할 수 있도록 돕는 플랫폼입니다.</p>
+      <div class="butler-feature-grid"><article><i class="fa-solid fa-chart-column"></i><b>기업 데이터 시각화</b><span>매출·영업이익·수주잔고·지역별 실적 등을 그래프로 확인합니다.</span></article><article><i class="fa-solid fa-file-lines"></i><b>기업공시 분석</b><span>많은 공시 가운데 중요한 정보를 빠르게 찾아볼 수 있습니다.</span></article><article><i class="fa-solid fa-briefcase"></i><b>포트폴리오·관심기업</b><span>여러 계좌의 종목과 관심 기업을 한눈에 관리합니다.</span></article><article><i class="fa-solid fa-filter"></i><b>기업 스크리너</b><span>다양한 조건을 조합해 투자 기준에 맞는 기업 후보를 살펴봅니다.</span></article></div>
+      <small><i class="fa-solid fa-circle-info"></i> 데이터와 시각화는 투자 판단을 돕는 정보입니다. 매매 추천이나 수익 보장을 뜻하지 않으며, 투자 결정 전 공시 원문과 최신 정보를 직접 확인하세요.</small>
+    </section>
+  </template>
+
+  <div class="auth-modal" id="authModal" hidden>
+    <div class="auth-modal-backdrop" data-auth-close></div>
+    <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="glossary-close" type="button" data-auth-close aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
+      <p class="glossary-label">MY ACCOUNT</p><h2 id="authTitle">로그인</h2>
+      <form id="authForm"><label id="authNameField" hidden>이름<input id="authName" maxlength="80"></label><label>이메일<input id="authEmail" type="email" required></label><label>비밀번호<input id="authPassword" type="password" minlength="8" required></label><button class="btn-primary" type="submit">로그인</button></form>
+      <button class="auth-switch" id="authSwitch" type="button">회원가입</button><p id="authStatus" class="auth-status"></p>
+    </section>
+  </div>
+
+  <script>window.API_BASE = '';</script> <!-- 빈 값 = 페이지를 서빙하는 이 서버(로컬 API)로 호출 -->
+  <script src="/static/assets/theory-data.js?v=20260919-discount-example"></script>
+  <script src="/static/assets/day4-project-schedule.js?v=20260919-100-120-hours"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts@7.1.0"></script>
+  <script src="/static/app.js?v=20260919-small-text110"></script>
+  <script src="/static/auth.js?v=20260905-gnb-unified"></script>
+  <script src="/static/assets/modal-fit.js?v=20260905-simulator-specific-hints"></script>
+  <script src="/static/assets/click-logger.js?v=20260905"></script>
+</body>
+</html>

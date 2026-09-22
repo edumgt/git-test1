@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">선형, 비선형, 듀레이션, 컨벡시티 개념 그래프</title>
+  <desc id="desc">선형은 컨벡시티가 0인 직선, 비선형은 변곡점을 기준으로 아래로 볼록한 양의 컨벡시티 구간과 위로 볼록한 음의 컨벡시티 구간이 이어지는 곡선, 듀레이션은 금리 변화에 대한 채권 가격의 직선 근사, 컨벡시티는 그 근사가 실제 가격 곡선에서 벗어나는 모습을 네 개의 패널로 보여 준다.</desc>
+  <style>
+    .bg { fill:#fff; } .panel { fill:#fbfcff; stroke:#d9e3f3; stroke-width:2; }
+    .title { fill:#16213a; font:700 25px 'Noto Sans KR',Arial,sans-serif; } .sub { fill:#62708a; font:400 16px 'Noto Sans KR',Arial,sans-serif; }
+    .label { fill:#4a5872; font:500 15px 'Noto Sans KR',Arial,sans-serif; } .note { fill:#2654c5; font:700 15px 'Noto Sans KR',Arial,sans-serif; }
+    .axis { stroke:#9aabc6; stroke-width:2; } .grid { stroke:#dfe7f3; stroke-width:1.5; stroke-dasharray:5 6; }
+    .blue { fill:none; stroke:#315ff4; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; } .mint { fill:none; stroke:#0b9b72; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
+    .positive { fill:none; stroke:#315ff4; stroke-width:6; stroke-linecap:round; } .negative { fill:none; stroke:#d05a8c; stroke-width:6; stroke-linecap:round; }
+    .positive-note { fill:#2654c5; font:700 14px 'Noto Sans KR',Arial,sans-serif; } .negative-note { fill:#b33c70; font:700 14px 'Noto Sans KR',Arial,sans-serif; }
+    .orange { fill:none; stroke:#ef7b45; stroke-width:4; stroke-linecap:round; stroke-dasharray:9 7; } .dot { fill:#315ff4; }
+  </style>
+  <rect class="bg" width="1200" height="700" rx="24"/>
+  <rect class="panel" x="25" y="25" width="565" height="310" rx="18"/>
+  <text class="title" x="60" y="72">1. 선형 · Linear</text><text class="sub" x="60" y="101">입력이 1만큼 바뀔 때 결과도 같은 속도로 변합니다.</text>
+  <line class="axis" x1="100" y1="285" x2="530" y2="285"/><line class="axis" x1="100" y1="285" x2="100" y2="135"/>
+  <line class="grid" x1="100" y1="220" x2="530" y2="220"/><line class="grid" x1="245" y1="135" x2="245" y2="285"/><line class="grid" x1="390" y1="135" x2="390" y2="285"/>
+  <path class="blue" d="M135 260 L485 155"/><circle class="dot" cx="310" cy="207" r="7"/>
+  <text class="label" x="418" y="310">입력값</text><text class="label" x="48" y="145">결과</text><text class="note" x="260" y="183">직선: 컨벡시티 0</text>
+  <rect class="panel" x="610" y="25" width="565" height="310" rx="18"/>
+  <text class="title" x="645" y="72">2. 비선형 · Non-linear</text><text class="sub" x="645" y="101">입력이 바뀌는 정도에 따라 반응 속도도 달라집니다.</text>
+  <line class="axis" x1="685" y1="285" x2="1115" y2="285"/><line class="axis" x1="685" y1="285" x2="685" y2="135"/>
+  <line class="grid" x1="685" y1="220" x2="1115" y2="220"/><line class="grid" x1="830" y1="135" x2="830" y2="285"/><line class="grid" x1="975" y1="135" x2="975" y2="285"/>
+  <path class="positive" d="M720 265 C800 265 845 245 900 205"/>
+  <path class="negative" d="M900 205 C955 165 1010 145 1070 145"/>
+  <circle class="dot" cx="900" cy="205" r="6"/>
+  <text class="positive-note" x="716" y="235">아래로 볼록(∪) = 양(+)의 컨벡시티</text>
+  <text class="negative-note" x="905" y="250">위로 볼록(∩) = 음(−)의 컨벡시티</text>
+  <text class="label" x="872" y="225">변곡점</text>
+  <text class="label" x="1004" y="310">입력값</text><text class="label" x="633" y="145">결과</text>
+  <rect class="panel" x="25" y="365" width="565" height="310" rx="18"/>
+  <text class="title" x="60" y="412">3. 듀레이션 · Duration</text><text class="sub" x="60" y="441">금리가 조금 움직일 때 채권 가격이 얼마나 민감한지 보는 ‘기울기’입니다.</text>
+  <line class="axis" x1="100" y1="625" x2="530" y2="625"/><line class="axis" x1="100" y1="625" x2="100" y2="470"/>
+  <line class="grid" x1="100" y1="550" x2="530" y2="550"/><line class="grid" x1="245" y1="470" x2="245" y2="625"/><line class="grid" x1="390" y1="470" x2="390" y2="625"/>
+  <path class="blue" d="M135 490 L490 598"/><circle class="dot" cx="310" cy="543" r="7"/>
+  <text class="label" x="420" y="650">시장금리 ↑</text><text class="label" x="45" y="482">채권 가격</text><text class="note" x="282" y="519">기울기 = 듀레이션</text>
+  <text class="label" x="126" y="605">금리 ↑ → 가격 ↓</text>
+  <rect class="panel" x="610" y="365" width="565" height="310" rx="18"/>
+  <text class="title" x="645" y="412">4. 컨벡시티 · Convexity</text><text class="sub" x="645" y="441">실제 가격 곡선의 ‘휘어짐’입니다. 듀레이션 근사의 오차를 보완합니다.</text>
+  <line class="axis" x1="685" y1="625" x2="1115" y2="625"/><line class="axis" x1="685" y1="625" x2="685" y2="470"/>
+  <line class="grid" x1="685" y1="550" x2="1115" y2="550"/><line class="grid" x1="830" y1="470" x2="830" y2="625"/><line class="grid" x1="975" y1="470" x2="975" y2="625"/>
+  <path class="mint" d="M720 480 C800 505 845 530 900 557 S1000 598 1080 605"/>
+  <path class="orange" d="M720 492 L1080 601"/><circle class="dot" cx="900" cy="557" r="7"/>
+  <text class="label" x="1006" y="650">시장금리 ↑</text><text class="label" x="633" y="482">채권 가격</text>
+  <text class="note" x="721" y="522">실제 가격 곡선</text><text class="label" x="965" y="565">듀레이션</text><text class="label" x="965" y="585">직선 근사</text>
+  <text class="label" x="746" y="647">곡선과 직선의 차이 = 컨벡시티 효과</text>
+</svg>

@@ -1,0 +1,66 @@
+name: CD — Deploy to EC2
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: domain-rag-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Sync and deploy production stack
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure SSH key
+        env:
+          EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$EC2_SSH_PRIVATE_KEY" > ~/.ssh/domain-rag-deploy.pem
+          chmod 600 ~/.ssh/domain-rag-deploy.pem
+          ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts
+
+      - name: Synchronize application files
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_APP_DIR: ${{ secrets.EC2_APP_DIR }}
+        run: |
+          rsync -az --delete \
+            --exclude '.env' \
+            --exclude '.env.*' \
+            --exclude '.git' \
+            --exclude '.claude' \
+            --exclude '__pycache__' \
+            --exclude '*.pyc' \
+            --exclude '*.pem' \
+            -e 'ssh -i ~/.ssh/domain-rag-deploy.pem' \
+            ./ "$EC2_USER@$EC2_HOST:$EC2_APP_DIR/"
+
+      - name: Build and restart services
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          EC2_APP_DIR: ${{ secrets.EC2_APP_DIR }}
+        run: |
+          ssh -i ~/.ssh/domain-rag-deploy.pem "$EC2_USER@$EC2_HOST" <<EOF
+          set -euo pipefail
+          cd "$EC2_APP_DIR"
+          if [ ! -f .env.prod ]; then
+            echo "ERROR: $EC2_APP_DIR/.env.prod is missing. Restore the production environment file on EC2 before deploying." >&2
+            exit 1
+          fi
+          sudo docker compose -p domain-rag-lab --env-file .env.prod -f docker-compose.prod.yml up --build -d
+          sudo docker compose -p domain-rag-lab --env-file .env.prod -f docker-compose.prod.yml ps
+          curl --fail --retry 12 --retry-delay 5 http://localhost/health
+          EOF

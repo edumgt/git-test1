@@ -1,0 +1,36 @@
+.etf-role-ap-detail {
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid #d8e3fb;
+  border-radius: 12px;
+  background: #f8fbff;
+}
+
+.etf-role-ap-detail p {
+  margin: 0 0 12px;
+  color: #3e4c67;
+  font-size: 15.95px;
+  line-height: 1.65;
+}
+
+.etf-role-ap-detail h3 {
+  margin: 17px 0 8px;
+  color: #2455c7;
+  font-size: 17.6px;
+  line-height: 1.45;
+}
+
+.etf-role-ap-detail h3:first-of-type { margin-top: 14px; }
+
+.etf-role-ap-detail ol,
+.etf-role-ap-detail ul {
+  margin: 8px 0;
+  padding-left: 21px;
+  color: #3e4c67;
+  font-size: 15.4px;
+  line-height: 1.65;
+}
+
+.etf-role-ap-detail li + li { margin-top: 7px; }
+.etf-role-ap-detail li ul { margin: 6px 0 2px; }
+.etf-role-ap-detail strong { color: #1e3f95; }
