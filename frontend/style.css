@@ -1434,6 +1434,27 @@ body.modal-open { overflow: hidden; }
 .msg.user .msg-bubble { color: var(--text); }
 .msg.user > div:nth-child(2) { min-width: 0; max-width: calc(100% - 50px); }
 .msg.user .msg-bubble { max-width: 100%; white-space: nowrap; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
+.typing-label { display: inline-block; margin-left: 10px; color: var(--text-muted); font-size: 14px; vertical-align: middle; }
+
+/* Native dashboard: former 8000 landing content absorbed into the 80-port shell. */
+.native-dashboard-page { width: min(1480px, 100%); max-width: none; }
+.native-dashboard-intro { display:flex; justify-content:space-between; gap:28px; padding:34px; color:#fff; background:#0058a3; border-bottom:8px solid #ffda1a; }
+.native-dashboard-intro > div:first-child { max-width:760px; }.native-dashboard-intro span { color:#ffda1a; font-size:12px; font-weight:850; letter-spacing:.12em; }.native-dashboard-intro h1 { margin:8px 0 12px; color:#fff; font-size:clamp(30px,4vw,52px); line-height:1.14; }.native-dashboard-intro h1 mark { color:#ffda1a; background:transparent; }.native-dashboard-intro p { margin:0; color:#fff; line-height:1.6; }
+.native-dashboard-actions { display:grid; align-content:center; gap:8px; min-width:220px; }.native-dashboard-actions button { padding:13px 16px; border:1px solid #fff; color:#111; background:#ffda1a; font:inherit; font-weight:800; cursor:pointer; text-align:left; }.native-dashboard-actions button + button { color:#fff; background:transparent; }.native-dashboard-actions i { margin-right:9px; }
+.native-dashboard-shortcuts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; margin:20px 0; background:#d7d7d7; }.native-dashboard-shortcuts button { display:grid; grid-template-columns:auto 1fr; column-gap:14px; align-items:center; min-height:100px; padding:20px; border:0; color:#111; background:#fff; text-align:left; cursor:pointer; font:inherit; }.native-dashboard-shortcuts button:hover { background:#e8f1f8; }.native-dashboard-shortcuts i { grid-row:span 2; color:#0058a3; font-size:25px; }.native-dashboard-shortcuts b { font-size:17px; }.native-dashboard-shortcuts small { color:#5b5b5b; margin-top:5px; }
+.native-dashboard-live { display:grid; grid-template-columns:minmax(270px,.8fr) minmax(0,1.6fr); gap:20px; }.native-dashboard-live .content-section { margin:0; }.native-dashboard-live .dashboard-asset-grid { grid-template-columns:1fr; }.native-dashboard-live .tick-dashboard { min-width:0; }
+.investment-native-module-page,.investment-native-dashboard-page { width:min(1480px,100%); max-width:none; }.investment-native-module-page { padding:28px 0 56px; }
+
+/* The central canvas always owns the full available width.  Side panels are
+   off-canvas, so they must not leave a phantom right-hand column. */
+.messages { width:100%; box-sizing:border-box; }
+.messages > .content-page,
+.investment-practice-page,
+.investment-native-dashboard-page,
+.investment-native-module-page { width:100% !important; max-width:none !important; margin:0 !important; box-sizing:border-box; }
+.investment-practice-page { padding-right:0; }
+.practice-hub-head,.practice-hub-grid,.practice-flow { width:100%; box-sizing:border-box; }
+@media (max-width:900px) { .native-dashboard-intro,.native-dashboard-live { grid-template-columns:1fr; display:grid; }.native-dashboard-actions { min-width:0; grid-template-columns:1fr 1fr; }.native-dashboard-shortcuts { grid-template-columns:1fr; } }
 .domain-badge { border-color: #bfdbfe; }
 .chat-area {
   height: 100vh;

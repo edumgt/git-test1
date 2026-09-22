@@ -102,7 +102,7 @@ class LLMService:
             ],
             "temperature": 0.2,
             # Keep CPU-only responses concise enough to stay interactive.
-            "max_tokens": 320,
+            "max_tokens": 160,
         }
 
         headers = {
