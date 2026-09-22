@@ -73,7 +73,20 @@ class HybridSearchService:
         공백으로 분리한 토큰이 content에 포함된 행을 점수순 반환.
         한국어·영어 모두 언어 설정 없이 동작.
         """
-        tokens = [t.strip() for t in query.split() if len(t.strip()) >= 2]
+        # Korean queries often attach a postposition to the meaningful term
+        # ("펀드와", "ETF의", "금리가").  ILIKE cannot tokenize Korean, so
+        # search both the original token and a conservative stem candidate.
+        tokens: list[str] = []
+        suffixes = ("으로", "에서", "에게", "과", "와", "은", "는", "이", "가", "을", "를", "의", "에", "도", "만", "로", "들")
+        for raw in query.split():
+            token = raw.strip(" ,.!?:;()[]{}\"'")
+            if len(token) >= 2:
+                tokens.append(token)
+            for suffix in suffixes:
+                if token.endswith(suffix) and len(token) - len(suffix) >= 2:
+                    tokens.append(token[:-len(suffix)])
+                    break
+        tokens = list(dict.fromkeys(tokens))
         if not tokens:
             return []
 

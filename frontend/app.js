@@ -1500,14 +1500,11 @@ KOSDAQ|웹젠|게임`,
 
   function openIntegratedLesson(lessonId) {
     if (!lessonId) return;
-    const lessonUrl = `${window.location.protocol}//${window.location.hostname}:8000/?embedded=1&view=${encodeURIComponent(lessonId)}`;
-    stopTickDashboard();
-    stopDashboardAssets();
-    state.activeView = 'learning';
-    $viewButtons.forEach(btn => btn.classList.toggle('active', false));
-    $chatInputArea.classList.add('hidden');
-    $messages.innerHTML = `<article class="content-page integrated-lesson-page"><div class="integrated-lesson-frame"><iframe src="${lessonUrl}" title="통합 학습 과정 ${escHtml(lessonId)}" loading="eager"></iframe></div></article>`;
-    setPanel('left', false);
+    const lessonNumber = {
+      'learn-10-1': '01', 'learn-10-2': '02', 'learn-10-3': '03', 'learn-11': '04',
+      'learn-03': '05', 'learn-05': '06', 'learn-04': '07', 'learn-06': '08', 'learn-07': '09', 'learn-10': '10',
+    }[lessonId];
+    if (lessonNumber) window.location.assign(`/static/lessons/${lessonNumber}.html`);
   }
 
   function renderSimulationGuide() {

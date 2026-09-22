@@ -2510,7 +2510,8 @@ export function learnView(app, docId) {
     // wire TOC clicks
     app.querySelectorAll('.toc-item').forEach(li => {
       li.addEventListener('click', () => {
-        const target = document.getElementById(li.dataset.id);
+        // 문서 밖에 같은 ID가 있더라도 현재 학습 문서 안의 제목으로만 이동한다.
+        const target = mdContent.querySelector(`#${CSS.escape(li.dataset.id)}`);
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         if (window.innerWidth <= 1024) closeToc();
       });

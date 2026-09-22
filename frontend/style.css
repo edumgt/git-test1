@@ -1473,9 +1473,12 @@ body.modal-open { overflow: hidden; }
 @media (max-width:640px) { #screenCaptureFab.screen-capture-fab { right:14px; left:auto; bottom:14px; } #screenCapturePanel.screen-capture-panel { right:14px; left:auto; bottom:66px; } }
 
 /* Account modal must sit above every imported 8000 offcanvas/modal widget. */
-#authModal.auth-modal { z-index:2200; padding:16px; }
-#authModal .auth-modal-backdrop { z-index:0; }
-#authModal .auth-dialog { position:relative; z-index:1; width:min(460px, calc(100vw - 32px)) !important; height:auto !important; min-height:0 !important; max-height:calc(100dvh - 32px) !important; margin:0; padding:30px !important; overflow:auto; box-sizing:border-box; }
+/* Native 8000 CSS also has .auth-modal rules.  This account dialog is a
+   distinct full-viewport overlay, so keep its geometry isolated by its ID. */
+#authModal.auth-modal { position:fixed; inset:0; z-index:2200; display:grid; place-items:center; width:auto; margin:0; padding:16px; background:transparent; border:0; border-radius:0; box-shadow:none; }
+#authModal.auth-modal[hidden] { display:none; }
+#authModal .auth-modal-backdrop { position:absolute; z-index:0; inset:0; display:block; width:auto; margin:0; padding:0; background:rgba(15,23,42,.62); border:0; border-radius:0; box-shadow:none; }
+#authModal .auth-dialog { position:relative; z-index:1; width:min(460px, calc(100vw - 32px)) !important; height:auto !important; min-height:0 !important; max-height:calc(100dvh - 32px) !important; margin:0; padding:30px !important; overflow:auto; box-sizing:border-box; background:#fff; }
 #authModal .auth-dialog form { display:grid; width:100%; gap:12px; }
 #authModal .auth-dialog input { box-sizing:border-box; min-width:0; }
 #authModal .auth-status { min-height:20px; }
