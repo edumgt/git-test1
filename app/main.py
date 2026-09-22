@@ -17,6 +17,7 @@ from app.api.routes.market import router as market_router
 from app.api.routes.backtest import router as backtest_router
 from app.api.routes.simulation import router as simulation_router
 from app.api.routes.auth import router as auth_router
+from app.api.routes.rag_status import router as rag_status_router
 from app.core.config import settings
 from app.core.database import Base, engine
 
@@ -91,6 +92,7 @@ app.include_router(market_router)
 app.include_router(backtest_router)
 app.include_router(simulation_router)
 app.include_router(auth_router)
+app.include_router(rag_status_router)
 app.include_router(chat_router)
 
 # Serve frontend static files

@@ -15,7 +15,7 @@
   if (!button || !modal || !form || !status || !switcher || !nameField) return;
 
   const token = () => localStorage.getItem(tokenKey);
-  const headers = () => ({ 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` });
+  const headers = () => ({ 'Content-Type': 'application/json', ...(token() ? { Authorization: `Bearer ${token()}` } : {}) });
   const request = async (path, options = {}) => {
     const response = await fetch(`${API_BASE}${path}`, { ...options, headers: { ...headers(), ...(options.headers || {}) } });
     const data = response.status === 204 ? null : await response.json().catch(() => ({}));
@@ -46,6 +46,8 @@
   }
   function setMode(isSignup) {
     signup = isSignup; nameField.hidden = !signup;
+    document.querySelector('#authName').required = signup;
+    status.textContent = '';
     document.querySelector('#authTitle').textContent = signup ? '회원가입' : '로그인';
     form.querySelector('button').textContent = signup ? '가입하고 시작하기' : '로그인';
     switcher.textContent = signup ? '이미 계정이 있어요' : '회원가입';
@@ -53,6 +55,7 @@
   }
   button.addEventListener('click', () => user ? showProfile() : showForm());
   document.querySelectorAll('[data-auth-close]').forEach((item) => item.addEventListener('click', () => show(false)));
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !modal.hidden) show(false); });
   switcher.addEventListener('click', () => setMode(!signup));
   form.addEventListener('submit', async (event) => {
     event.preventDefault(); status.textContent = '';

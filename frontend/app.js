@@ -31,6 +31,7 @@
     activeView: 'home',
     activeTheoryDay: 1,
     activeScenario: 'equity',
+    lastRagLatencyMs: null,
     calendarCursor: null,
   };
 
@@ -1456,11 +1457,37 @@ KOSDAQ|웹젠|게임`,
   // Data visualization uses the original 8000 world-market module and its
   // chart APIs; it is rendered directly in the 80 page, not in an iframe.
   function renderDataVisualization() {
-    $messages.innerHTML = '<article class="content-page investment-native-module-page"><div id="investmentNativeVisualization"><div class="backtest-empty"><i class="fa-solid fa-spinner fa-spin"></i><p>시장 데이터를 시각화하고 있습니다.</p></div></div></article>';
+    const visualizations = [
+      ['world', 'fa-earth-asia', '세계 시장', '국가별 시가총액 · 지수'],
+      ['volume', 'fa-cloud', '거래량 클라우드', '평균 대비 거래량'],
+      ['sector', 'fa-table-cells-large', '섹터 클라우드', '거래대금 · 등락률'],
+      ['group', 'fa-sitemap', '그룹사 네트워크', '상장 계열사 연결'],
+      ['tree', 'fa-code-branch', '투자 성향 트리', '의사결정 시각화'],
+      ['regime', 'fa-chart-diagram', '자산배분 국면', '위험선호도 모델'],
+    ];
+    $messages.innerHTML = `<article class="content-page investment-native-module-page data-visualization-page"><header class="compact-menu-head"><strong>데이터 시각화</strong><span>8000 분석 소스의 시장·거래량·섹터·네트워크 시각화 기능을 80 포트에서 직접 실행합니다.</span></header><nav class="data-viz-scroll" aria-label="데이터 시각화 메뉴">${visualizations.map(([id, icon, title, sub], index) => `<button type="button" data-viz="${id}" class="${index === 0 ? 'active' : ''}"><i class="fa-solid ${icon}"></i><b>${title}</b><small>${sub}</small></button>`).join('')}</nav><div id="investmentNativeVisualization" class="data-viz-mount"><div class="backtest-empty"><i class="fa-solid fa-spinner fa-spin"></i><p>시장 데이터를 시각화하고 있습니다.</p></div></div></article>`;
     const mount = document.getElementById('investmentNativeVisualization');
-    import('/static/investment-native/js/views/worldMarkets.js')
-      .then(({ worldMarketsView }) => { if (state.activeView === 'data-visualization') worldMarketsView(mount); })
-      .catch(() => { if (mount) mount.innerHTML = '<div class="backtest-error">데이터 시각화를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</div>'; });
+    const modules = {
+      world: ['/static/investment-native/js/views/worldMarkets.js', 'worldMarketsView'],
+      volume: ['/static/investment-native/js/views/volumeCloud.js', 'volumeCloudView'],
+      sector: ['/static/investment-native/js/views/sectorCloud.js', 'sectorCloudView'],
+      group: ['/static/investment-native/js/views/groupNetwork.js', 'groupNetworkView'],
+      tree: ['/static/investment-native/js/views/investmentTree.js', 'investmentTreeView'],
+      regime: ['/static/investment-native/js/views/portfolioRegime.js', 'portfolioRegimeView'],
+    };
+    let cleanup = null;
+    const show = (id) => {
+      cleanup?.(); cleanup = null;
+      mount.innerHTML = '<div class="backtest-empty"><i class="fa-solid fa-spinner fa-spin"></i><p>시각화 모듈을 준비하고 있습니다.</p></div>';
+      $messages.querySelectorAll('[data-viz]').forEach((button) => button.classList.toggle('active', button.dataset.viz === id));
+      const [path, viewName] = modules[id];
+      import(path).then((module) => {
+        if (state.activeView !== 'data-visualization') return;
+        cleanup = module[viewName](mount) || null;
+      }).catch(() => { if (mount) mount.innerHTML = '<div class="backtest-error">선택한 시각화 모듈을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</div>'; });
+    };
+    $messages.querySelectorAll('[data-viz]').forEach((button) => button.addEventListener('click', () => show(button.dataset.viz)));
+    show('world');
   }
 
   let chartDrawingReady = false;
@@ -2919,6 +2946,7 @@ effective_date: [기준일]
           <h2>금융·투자 RAG 질문</h2>
         </div>
         <p>4일 이론에서 읽은 내용을 바탕으로 궁금한 점을 자유롭게 질문하세요. 답변에 사용한 참고 문서도 함께 확인할 수 있습니다.</p>
+        <section class="rag-runtime" aria-label="현재 RAG 실행 상태"><span><b>연동 LLM</b><strong id="ragModel">확인 중…</strong></span><span><b>최근 답변 시간</b><strong id="ragLatency">${state.lastRagLatencyMs == null ? '아직 없음' : `${(state.lastRagLatencyMs / 1000).toFixed(1)}초`}</strong></span><span><b>현재 CPU 사용률</b><strong id="ragCpu">측정 중…</strong></span></section>
         <section class="rag-source-guide" aria-label="AI Hub 데이터로 RAG 시작하기"><span>AI HUB · RAG 시작하기</span><p>금융·법률 데이터셋은 이용 조건·출처 표기·버전·개인정보 조건을 확인한 뒤, 허용된 원문만 등록합니다. 금융 FAQ는 질문·답변·기준일 단위로, 법률 자료는 법령명·조문·항·호·시행일이 이어지도록 정리하고 <code>source</code>·<code>dataset</code>·<code>version</code>·<code>license</code>·<code>topic</code>·<code>effective_date</code>를 남기세요. 답변에는 출처와 기준일을 표시하고, 개정될 수 있는 금융법률은 최신 공식 원문으로 다시 확인합니다.</p></section>
 
         <section class="rag-flow" aria-label="RAG 답변 과정"><div><i class="fa-solid fa-keyboard"></i><b>질문</b><span>궁금한 점을 입력</span></div><i class="fa-solid fa-arrow-right"></i><div><i class="fa-solid fa-file-lines"></i><b>문서 탐색</b><span>등록 자료에서 근거 찾기</span></div><i class="fa-solid fa-arrow-right"></i><div><i class="fa-solid fa-lightbulb"></i><b>답변</b><span>핵심 내용과 참고 문서</span></div></section>
@@ -2932,6 +2960,21 @@ effective_date: [기준일]
 
     $messages.querySelectorAll('.example-chip').forEach(chip => {
       chip.addEventListener('click', () => sendQuestion(chip.dataset.q));
+    });
+    refreshRagRuntime();
+  }
+
+  function refreshRagRuntime() {
+    fetchLocalBackendJson('/rag/status').then((data) => {
+      const model = document.getElementById('ragModel');
+      const cpu = document.getElementById('ragCpu');
+      if (model) model.textContent = `${data.provider} · ${data.model}`;
+      if (cpu) cpu.textContent = data.cpu_percent == null ? '측정 중…' : `${data.cpu_percent.toFixed(1)}%`;
+    }).catch(() => {
+      const cpu = document.getElementById('ragCpu');
+      if (cpu) cpu.textContent = '측정 불가';
+    }).finally(() => {
+      if (state.activeView === 'learn') setTimeout(refreshRagRuntime, 5000);
     });
   }
 
@@ -2951,6 +2994,7 @@ effective_date: [기준일]
     const typingId = appendTyping();
 
     state.loading = true;
+    const startedAt = performance.now();
     setInputDisabled(true);
 
     try {
@@ -2974,6 +3018,7 @@ effective_date: [기준일]
       }
 
       removeTyping(typingId);
+      state.lastRagLatencyMs = Math.round(performance.now() - startedAt);
       appendMessage('bot', data.answer, data.references || []);
       updateRefPanel(data.references || []);
     } catch (err) {
