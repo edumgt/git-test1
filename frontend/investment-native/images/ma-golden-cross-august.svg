@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc">
+  <title id="title">7월 말부터 8월 초까지의 이동평균선 돌파와 골든크로스 예시</title>
+  <desc id="desc">가상의 주가가 20일 이동평균선을 먼저 돌파하고, 8월에 5일 이동평균선이 20일 이동평균선을 위로 지나 골든크로스가 만들어지는 모습을 보여 주는 교육용 차트다.</desc>
+  <style>
+    .t { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; fill: #1f2937; }
+    .small { font-size: 15px; }
+    .label { font-size: 17px; font-weight: 700; }
+    .note { font-size: 16px; font-weight: 700; }
+  </style>
+  <rect width="1000" height="570" fill="#ffffff"/>
+  <text x="56" y="43" class="t" font-size="23" font-weight="700">가상 일봉 예시: 8월의 MA 돌파와 골든크로스</text>
+  <text x="56" y="70" class="t small" fill="#64748b">실제 종목·수익 신호가 아닌, 선의 순서와 의미를 익히기 위한 학습용 그림입니다.</text>
+
+  <rect x="55" y="94" width="890" height="337" rx="10" fill="#fbfdff" stroke="#dbe5f0"/>
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="92" y1="145" x2="922" y2="145"/>
+    <line x1="92" y1="205" x2="922" y2="205"/>
+    <line x1="92" y1="265" x2="922" y2="265"/>
+    <line x1="92" y1="325" x2="922" y2="325"/>
+    <line x1="92" y1="385" x2="922" y2="385"/>
+  </g>
+  <g class="t small" fill="#64748b" text-anchor="end">
+    <text x="82" y="150">114</text><text x="82" y="210">110</text><text x="82" y="270">106</text><text x="82" y="330">102</text><text x="82" y="390">98</text>
+  </g>
+  <line x1="545" y1="109" x2="545" y2="414" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <text x="518" y="124" class="t small" fill="#64748b">8월</text>
+
+  <!-- price -->
+  <polyline points="105,353 165,370 225,347 285,360 345,332 405,341 465,310 525,292 585,274 645,249 705,223 765,196 825,173 885,148" fill="none" stroke="#475569" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#475569">
+    <circle cx="105" cy="353" r="4"/><circle cx="165" cy="370" r="4"/><circle cx="225" cy="347" r="4"/><circle cx="285" cy="360" r="4"/><circle cx="345" cy="332" r="4"/><circle cx="405" cy="341" r="4"/><circle cx="465" cy="310" r="4"/><circle cx="525" cy="292" r="4"/><circle cx="585" cy="274" r="4"/><circle cx="645" cy="249" r="4"/><circle cx="705" cy="223" r="4"/><circle cx="765" cy="196" r="4"/><circle cx="825" cy="173" r="4"/><circle cx="885" cy="148" r="4"/>
+  </g>
+  <!-- 20 MA -->
+  <path d="M105 302 C180 304, 235 310, 285 307 S385 300, 465 291 S555 275, 585 266 S675 245, 705 230 S795 202, 885 176" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/>
+  <!-- 5 MA -->
+  <path d="M105 337 C165 350, 225 347, 285 341 S375 329, 405 324 S465 310, 525 293 S585 271, 645 244 S735 208, 825 174 S865 158, 885 151" fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- MA price breakout -->
+  <circle cx="465" cy="310" r="9" fill="#ffffff" stroke="#475569" stroke-width="4"/>
+  <path d="M383 217 L450 295" fill="none" stroke="#475569" stroke-width="1.8"/>
+  <rect x="151" y="156" width="245" height="65" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="166" y="182" class="t note">① 가격이 20일선 위로</text>
+  <text x="166" y="205" class="t small">올라섬 = ‘MA 돌파’</text>
+
+  <!-- golden cross -->
+  <circle cx="585" cy="270" r="10" fill="#ffffff" stroke="#f59e0b" stroke-width="4"/>
+  <path d="M656 134 L595 260" fill="none" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="646" y="102" width="248" height="70" rx="8" fill="#fffbeb" stroke="#fbbf24"/>
+  <text x="661" y="130" class="t note">② 8월: 5일선이 20일선을</text>
+  <text x="661" y="153" class="t small">아래에서 위로 통과 = 골든크로스</text>
+
+  <g class="t small" text-anchor="middle" fill="#64748b">
+    <text x="105" y="415">7/17</text><text x="285" y="415">7/23</text><text x="465" y="415">7/29</text><text x="585" y="415">8/1</text><text x="705" y="415">8/5</text><text x="885" y="415">8/9</text>
+  </g>
+  <g class="t small">
+    <line x1="92" y1="470" x2="126" y2="470" stroke="#475569" stroke-width="4"/><text x="136" y="475">주가</text>
+    <line x1="255" y1="470" x2="289" y2="470" stroke="#ef4444" stroke-width="4"/><text x="299" y="475">5일 MA (짧은 선)</text>
+    <line x1="480" y1="470" x2="514" y2="470" stroke="#2563eb" stroke-width="4"/><text x="524" y="475">20일 MA (긴 선)</text>
+  </g>
+  <rect x="55" y="502" width="890" height="45" rx="8" fill="#eff6ff"/>
+  <text x="75" y="530" class="t small">읽는 순서: ① 현재 가격이 평균 위로 회복했는지 → ② 짧은 평균이 긴 평균보다 강해졌는지 → ③ 거래량·뉴스·큰 추세를 함께 확인합니다.</text>
+</svg>

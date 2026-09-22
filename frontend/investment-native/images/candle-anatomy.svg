@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+  <title id="title">캔들의 구성 요소: 양봉과 음봉</title>
+  <desc id="desc">시가·종가·고가·저가·몸통·위꼬리·아래꼬리를 한글과 영어 용어로 함께 표시한 양봉·음봉 캔들 구조 그림이다.</desc>
+  <style>
+    .t { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; fill: #1f2937; }
+    .small { font-size: 14px; }
+  </style>
+  <rect width="1000" height="560" fill="#ffffff"/>
+  <text x="32" y="36" class="t" font-size="21" font-weight="700">캔들의 구성 요소</text>
+  <text x="32" y="58" class="t small" fill="#64748b">같은 부분이라도 양봉·음봉에 따라 시가·종가의 위치가 반대로 바뀝니다.</text>
+
+  <!-- 양봉 (bullish) : left, center x=250 -->
+  <text x="250" y="90" class="t" font-size="17" font-weight="700" text-anchor="middle" fill="#b91c1c">양봉 (Bullish Candle)</text>
+  <line x1="250" y1="120" x2="250" y2="420" stroke="#ef4444" stroke-width="3"/>
+  <rect x="220" y="200" width="60" height="120" fill="#ef4444"/>
+  <text x="250" y="112" class="t small" text-anchor="middle" fill="#64748b">고가 High</text>
+  <text x="250" y="440" class="t small" text-anchor="middle" fill="#64748b">저가 Low</text>
+
+  <!-- left outer labels -->
+  <line x1="220" y1="160" x2="110" y2="160" stroke="#94a3b8"/>
+  <text x="100" y="155" class="t small" text-anchor="end" fill="#64748b">위꼬리</text>
+  <text x="100" y="173" class="t small" text-anchor="end" fill="#64748b">Upper Shadow</text>
+
+  <line x1="220" y1="260" x2="110" y2="260" stroke="#94a3b8"/>
+  <text x="100" y="255" class="t small" text-anchor="end" fill="#64748b">몸통</text>
+  <text x="100" y="273" class="t small" text-anchor="end" fill="#64748b">Body</text>
+
+  <line x1="220" y1="360" x2="110" y2="360" stroke="#94a3b8"/>
+  <text x="100" y="355" class="t small" text-anchor="end" fill="#64748b">아래꼬리</text>
+  <text x="100" y="373" class="t small" text-anchor="end" fill="#64748b">Lower Shadow</text>
+
+  <!-- left inner labels (toward center, short leaders) -->
+  <line x1="280" y1="200" x2="335" y2="200" stroke="#94a3b8"/>
+  <text x="340" y="196" class="t small" fill="#b91c1c" font-weight="700">종가</text>
+  <text x="340" y="212" class="t small" fill="#b91c1c" font-weight="700">Close</text>
+
+  <line x1="280" y1="320" x2="335" y2="320" stroke="#94a3b8"/>
+  <text x="340" y="316" class="t small" fill="#b91c1c" font-weight="700">시가</text>
+  <text x="340" y="332" class="t small" fill="#b91c1c" font-weight="700">Open</text>
+
+  <line x1="500" y1="90" x2="500" y2="460" stroke="#e5e7eb"/>
+
+  <!-- 음봉 (bearish) : right, center x=750 -->
+  <text x="750" y="90" class="t" font-size="17" font-weight="700" text-anchor="middle" fill="#1d4ed8">음봉 (Bearish Candle)</text>
+  <line x1="750" y1="120" x2="750" y2="420" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="720" y="200" width="60" height="120" fill="#3b82f6"/>
+  <text x="750" y="112" class="t small" text-anchor="middle" fill="#64748b">고가 High</text>
+  <text x="750" y="440" class="t small" text-anchor="middle" fill="#64748b">저가 Low</text>
+
+  <!-- right outer labels -->
+  <line x1="780" y1="160" x2="890" y2="160" stroke="#94a3b8"/>
+  <text x="900" y="155" class="t small" text-anchor="start" fill="#64748b">위꼬리</text>
+  <text x="900" y="173" class="t small" text-anchor="start" fill="#64748b">Upper Shadow</text>
+
+  <line x1="780" y1="260" x2="890" y2="260" stroke="#94a3b8"/>
+  <text x="900" y="255" class="t small" text-anchor="start" fill="#64748b">몸통</text>
+  <text x="900" y="273" class="t small" text-anchor="start" fill="#64748b">Body</text>
+
+  <line x1="780" y1="360" x2="890" y2="360" stroke="#94a3b8"/>
+  <text x="900" y="355" class="t small" text-anchor="start" fill="#64748b">아래꼬리</text>
+  <text x="900" y="373" class="t small" text-anchor="start" fill="#64748b">Lower Shadow</text>
+
+  <!-- right inner labels (toward center, short leaders) -->
+  <line x1="720" y1="200" x2="665" y2="200" stroke="#94a3b8"/>
+  <text x="660" y="196" class="t small" text-anchor="end" fill="#1d4ed8" font-weight="700">시가</text>
+  <text x="660" y="212" class="t small" text-anchor="end" fill="#1d4ed8" font-weight="700">Open</text>
+
+  <line x1="720" y1="320" x2="665" y2="320" stroke="#94a3b8"/>
+  <text x="660" y="316" class="t small" text-anchor="end" fill="#1d4ed8" font-weight="700">종가</text>
+  <text x="660" y="332" class="t small" text-anchor="end" fill="#1d4ed8" font-weight="700">Close</text>
+
+  <rect x="32" y="480" width="936" height="56" rx="8" fill="#f8fafc"/>
+  <text x="52" y="503" class="t small">위꼬리(Upper Shadow/Wick)·아래꼬리(Lower Shadow/Wick)는 합쳐서 그림자(Shadow) 또는 꼬리(Wick)라고도 부릅니다.</text>
+  <text x="52" y="522" class="t small" fill="#64748b">양봉은 종가가 시가보다 높고(종가 위), 음봉은 시가가 종가보다 높습니다(시가 위) — 몸통 위아래 위치가 서로 반대입니다.</text>
+</svg>

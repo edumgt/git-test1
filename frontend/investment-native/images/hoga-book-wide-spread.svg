@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660" role="img" aria-labelledby="title desc">
+  <title id="title">스프레드가 넓은 호가창 예시</title>
+  <desc id="desc">거래가 적은 종목처럼 매도1호가 10,600원과 매수1호가 9,500원의 차이가 1,100원으로 넓고, 각 호가의 잔량도 적어 듬성듬성 쌓인 교육용 호가창 그림이다.</desc>
+  <style>
+    .t { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; fill: #1f2937; }
+    .small { font-size: 15px; }
+    .label { font-size: 17px; font-weight: 700; }
+  </style>
+  <rect width="1000" height="660" fill="#ffffff"/>
+  <text x="56" y="40" class="t" font-size="23" font-weight="700">호가창 예시 ② 스프레드가 넓은 경우</text>
+  <text x="56" y="64" class="t small" fill="#64748b">거래가 적은 종목은 호가 사이 간격과 잔량이 이렇게 듬성듬성 비어 보일 수 있습니다.</text>
+  <rect x="56" y="76" width="14" height="14" fill="#3b82f6"/><text x="76" y="88" class="t small">매도(파는 사람) 잔량</text>
+  <rect x="230" y="76" width="14" height="14" fill="#ef4444"/><text x="250" y="88" class="t small">매수(사는 사람) 잔량</text>
+
+  <rect x="70" y="100" width="860" height="480" rx="10" fill="#fbfdff" stroke="#dbe5f0"/>
+  <text x="110" y="122" class="t small" fill="#64748b">매도잔량(주)</text>
+  <text x="500" y="122" class="t label" text-anchor="middle">호가(원)</text>
+  <text x="890" y="122" class="t small" fill="#64748b" text-anchor="end">매수잔량(주)</text>
+  <line x1="90" y1="134" x2="930" y2="134" stroke="#dbe5f0"/>
+
+  <!-- ask rows: 매도5 ~ 매도1 (thin, spaced) -->
+  <rect x="100" y="134" width="800" height="30" fill="#eff6ff"/>
+  <rect x="250" y="139" width="130" height="24" rx="3" fill="#3b82f6"/>
+  <text x="242" y="156" class="t small" text-anchor="end" fill="#1d4ed8">40</text>
+  <text x="500" y="156" class="t label" text-anchor="middle" fill="#1d4ed8">11,800</text>
+
+  <rect x="100" y="168" width="800" height="30" fill="#eff6ff"/>
+  <rect x="299" y="173" width="81" height="24" rx="3" fill="#3b82f6"/>
+  <text x="291" y="190" class="t small" text-anchor="end" fill="#1d4ed8">25</text>
+  <text x="500" y="190" class="t label" text-anchor="middle" fill="#1d4ed8">11,500</text>
+
+  <rect x="100" y="202" width="800" height="30" fill="#eff6ff"/>
+  <rect x="282" y="207" width="98" height="24" rx="3" fill="#3b82f6"/>
+  <text x="274" y="224" class="t small" text-anchor="end" fill="#1d4ed8">30</text>
+  <text x="500" y="224" class="t label" text-anchor="middle" fill="#1d4ed8">11,200</text>
+
+  <rect x="100" y="236" width="800" height="30" fill="#eff6ff"/>
+  <rect x="331" y="241" width="49" height="24" rx="3" fill="#3b82f6"/>
+  <text x="323" y="258" class="t small" text-anchor="end" fill="#1d4ed8">15</text>
+  <text x="500" y="258" class="t label" text-anchor="middle" fill="#1d4ed8">10,900</text>
+
+  <rect x="100" y="270" width="800" height="30" fill="#dbeafe"/>
+  <rect x="315" y="275" width="65" height="24" rx="3" fill="#2563eb"/>
+  <text x="307" y="292" class="t small" text-anchor="end" fill="#1d4ed8" font-weight="700">20</text>
+  <text x="500" y="292" class="t label" text-anchor="middle" fill="#1d4ed8" font-weight="700">10,600</text>
+  <text x="860" y="292" class="t small" text-anchor="end" fill="#2563eb" font-weight="700">매도1</text>
+
+  <!-- wide divider: emphasizes the gap -->
+  <rect x="90" y="304" width="840" height="90" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"/>
+  <text x="500" y="342" text-anchor="middle" class="t" font-size="19" font-weight="700" fill="#334155">호가 차이(스프레드) 1,100원</text>
+  <text x="500" y="368" text-anchor="middle" class="t small" fill="#64748b">매도1 10,600원 · 매수1 9,500원 — 잔량도 적어 간격이 넓습니다</text>
+
+  <!-- bid rows: 매수1 ~ 매수5 (thin, spaced) -->
+  <rect x="100" y="394" width="800" height="30" fill="#fee2e2"/>
+  <rect x="620" y="399" width="59" height="24" rx="3" fill="#dc2626"/>
+  <text x="500" y="416" class="t label" text-anchor="middle" fill="#b91c1c" font-weight="700">9,500</text>
+  <text x="687" y="416" class="t small" fill="#b91c1c" font-weight="700">18</text>
+  <text x="140" y="416" class="t small" fill="#dc2626" font-weight="700">매수1</text>
+
+  <rect x="100" y="428" width="800" height="30" fill="#fef2f2"/>
+  <rect x="620" y="433" width="72" height="24" rx="3" fill="#ef4444"/>
+  <text x="500" y="450" class="t label" text-anchor="middle" fill="#b91c1c">9,200</text>
+  <text x="700" y="450" class="t small" fill="#b91c1c">22</text>
+
+  <rect x="100" y="462" width="800" height="30" fill="#fef2f2"/>
+  <rect x="620" y="467" width="39" height="24" rx="3" fill="#ef4444"/>
+  <text x="500" y="484" class="t label" text-anchor="middle" fill="#b91c1c">8,900</text>
+  <text x="667" y="484" class="t small" fill="#b91c1c">12</text>
+
+  <rect x="100" y="496" width="800" height="30" fill="#fef2f2"/>
+  <rect x="620" y="501" width="98" height="24" rx="3" fill="#ef4444"/>
+  <text x="500" y="518" class="t label" text-anchor="middle" fill="#b91c1c">8,600</text>
+  <text x="726" y="518" class="t small" fill="#b91c1c">30</text>
+
+  <rect x="100" y="530" width="800" height="30" fill="#fef2f2"/>
+  <rect x="620" y="535" width="33" height="24" rx="3" fill="#ef4444"/>
+  <text x="500" y="552" class="t label" text-anchor="middle" fill="#b91c1c">8,300</text>
+  <text x="661" y="552" class="t small" fill="#b91c1c">10</text>
+
+  <rect x="70" y="596" width="860" height="55" rx="8" fill="#fff7ed"/>
+  <text x="90" y="620" class="t small" font-weight="700">거래량이 적은 종목은 호가 사이 간격이 넓고 잔량도 적습니다.</text>
+  <text x="90" y="641" class="t small" fill="#92400e">시장가 주문이 여러 호가를 지나며 체결되어 예상보다 불리한 가격에 거래될 수 있습니다.</text>
+</svg>

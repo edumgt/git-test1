@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-labelledby="title desc">
+  <title id="title">스프레드가 좁은 호가창 예시</title>
+  <desc id="desc">매도 5단계와 매수 5단계의 잔량이 고르게 쌓여 있고, 매도1호가 10,000원과 매수1호가 9,900원의 차이가 100원으로 좁은 교육용 호가창 그림이다.</desc>
+  <style>
+    .t { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; fill: #1f2937; }
+    .small { font-size: 15px; }
+    .label { font-size: 17px; font-weight: 700; }
+  </style>
+  <rect width="1000" height="620" fill="#ffffff"/>
+  <text x="56" y="40" class="t" font-size="23" font-weight="700">호가창 예시 ① 스프레드가 좁은 경우</text>
+  <text x="56" y="64" class="t small" fill="#64748b">실제 시세가 아닌, 잔량과 호가 차이의 모양을 익히기 위한 학습용 그림입니다.</text>
+  <rect x="56" y="76" width="14" height="14" fill="#3b82f6"/><text x="76" y="88" class="t small">매도(파는 사람) 잔량</text>
+  <rect x="230" y="76" width="14" height="14" fill="#ef4444"/><text x="250" y="88" class="t small">매수(사는 사람) 잔량</text>
+
+  <rect x="70" y="100" width="860" height="420" rx="10" fill="#fbfdff" stroke="#dbe5f0"/>
+  <text x="110" y="122" class="t small" fill="#64748b">매도잔량(주)</text>
+  <text x="500" y="122" class="t label" text-anchor="middle">호가(원)</text>
+  <text x="890" y="122" class="t small" fill="#64748b" text-anchor="end">매수잔량(주)</text>
+  <line x1="90" y1="134" x2="930" y2="134" stroke="#dbe5f0"/>
+
+  <!-- ask rows: 매도5 ~ 매도1 -->
+  <rect x="100" y="134" width="800" height="30" fill="#eff6ff"/>
+  <rect x="313" y="139" width="67" height="24" rx="3" fill="#3b82f6"/>
+  <text x="305" y="156" class="t small" text-anchor="end" fill="#1d4ed8">320</text>
+  <text x="500" y="156" class="t label" text-anchor="middle" fill="#1d4ed8">10,400</text>
+
+  <rect x="100" y="168" width="800" height="30" fill="#eff6ff"/>
+  <rect x="295" y="173" width="85" height="24" rx="3" fill="#3b82f6"/>
+  <text x="287" y="190" class="t small" text-anchor="end" fill="#1d4ed8">410</text>
+  <text x="500" y="190" class="t label" text-anchor="middle" fill="#1d4ed8">10,300</text>
+
+  <rect x="100" y="202" width="800" height="30" fill="#eff6ff"/>
+  <rect x="264" y="207" width="116" height="24" rx="3" fill="#3b82f6"/>
+  <text x="256" y="224" class="t small" text-anchor="end" fill="#1d4ed8">560</text>
+  <text x="500" y="224" class="t label" text-anchor="middle" fill="#1d4ed8">10,200</text>
+
+  <rect x="100" y="236" width="800" height="30" fill="#eff6ff"/>
+  <rect x="228" y="241" width="152" height="24" rx="3" fill="#3b82f6"/>
+  <text x="220" y="258" class="t small" text-anchor="end" fill="#1d4ed8">730</text>
+  <text x="500" y="258" class="t label" text-anchor="middle" fill="#1d4ed8">10,100</text>
+
+  <rect x="100" y="270" width="800" height="30" fill="#dbeafe"/>
+  <rect x="195" y="275" width="185" height="24" rx="3" fill="#2563eb"/>
+  <text x="187" y="292" class="t small" text-anchor="end" fill="#1d4ed8" font-weight="700">890</text>
+  <text x="500" y="292" class="t label" text-anchor="middle" fill="#1d4ed8" font-weight="700">10,000</text>
+  <text x="860" y="292" class="t small" text-anchor="end" fill="#2563eb" font-weight="700">매도1</text>
+
+  <!-- divider: current price / spread -->
+  <rect x="90" y="304" width="840" height="32" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+  <text x="500" y="325" text-anchor="middle" class="t small" fill="#64748b">현재가 10,000 · 호가 차이(스프레드) 100원</text>
+
+  <!-- bid rows: 매수1 ~ 매수5 -->
+  <rect x="100" y="336" width="800" height="30" fill="#fee2e2"/>
+  <rect x="620" y="341" width="179" height="24" rx="3" fill="#dc2626"/>
+  <text x="500" y="358" class="t label" text-anchor="middle" fill="#b91c1c" font-weight="700">9,900</text>
+  <text x="807" y="358" class="t small" fill="#b91c1c" font-weight="700">860</text>
+  <text x="140" y="358" class="t small" fill="#dc2626" font-weight="700">매수1</text>
+
+  <rect x="100" y="370" width="800" height="30" fill="#fef2f2"/>
+  <rect x="620" y="375" width="146" height="24" rx="3" fill="#ef4444"/>
+  <text x="500" y="392" class="t label" text-anchor="middle" fill="#b91c1c">9,800</text>
+  <text x="774" y="392" class="t small" fill="#b91c1c">700</text>
+
+  <rect x="100" y="404" width="800" height="30" fill="#fef2f2"/>
+  <rect x="620" y="409" width="112" height="24" rx="3" fill="#ef4444"/>
+  <text x="500" y="426" class="t label" text-anchor="middle" fill="#b91c1c">9,700</text>
+  <text x="740" y="426" class="t small" fill="#b91c1c">540</text>
+
+  <rect x="100" y="438" width="800" height="30" fill="#fef2f2"/>
+  <rect x="620" y="443" width="81" height="24" rx="3" fill="#ef4444"/>
+  <text x="500" y="460" class="t label" text-anchor="middle" fill="#b91c1c">9,600</text>
+  <text x="709" y="460" class="t small" fill="#b91c1c">390</text>
+
+  <rect x="100" y="472" width="800" height="30" fill="#fef2f2"/>
+  <rect x="620" y="477" width="62" height="24" rx="3" fill="#ef4444"/>
+  <text x="500" y="494" class="t label" text-anchor="middle" fill="#b91c1c">9,500</text>
+  <text x="690" y="494" class="t small" fill="#b91c1c">300</text>
+
+  <rect x="70" y="536" width="860" height="60" rx="8" fill="#eff6ff"/>
+  <text x="90" y="560" class="t small" font-weight="700">호가 차이(스프레드) = 매도1호가 10,000원 − 매수1호가 9,900원 = 100원</text>
+  <text x="90" y="582" class="t small" fill="#64748b">매수·매도 잔량이 고르게 쌓여 있어 시장가로 주문해도 예상한 가격 근처에서 체결되기 쉽습니다.</text>
+</svg>

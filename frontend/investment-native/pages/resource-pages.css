@@ -1,0 +1,278 @@
+/* resource-pages.css — 유튜브 정적 페이지 전용 스타일.
+   공통 카드/그리드는 ../styles.css의 .card, .grid-3을 그대로 사용한다. */
+
+.resource-hero {
+  margin-bottom: 20px;
+}
+.resource-hero h1 {
+  font-size: 1.4rem;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.resource-hero p {
+  color: var(--text-muted);
+  font-size: .92rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.resource-category {
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 6px;
+}
+.resource-card h3 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+.resource-card p {
+  font-size: .85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 14px;
+}
+.resource-card .resource-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+.resource-card .resource-link:hover { text-decoration: underline; }
+
+.resource-safety-note {
+  display: flex; align-items: flex-start; gap: 9px;
+  margin: 0 0 20px; padding: 12px 14px;
+  border: 1px solid #bfdbfe; border-radius: 9px;
+  background: #f0f7ff; color: #1e3a5f; font-size: .86rem; line-height: 1.5;
+}
+.resource-safety-note i { color: var(--primary); margin-top: 2px; }
+.resource-module, .video-module-block { margin: 0 0 28px; }
+.resource-module-head {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 20px;
+  margin: 0 0 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.resource-module-head h2 { margin: 3px 0 0; font-size: 1.08rem; }
+.resource-module-head p { max-width: 440px; margin: 0; font-size: .84rem; color: var(--text-muted); line-height: 1.5; }
+.resource-module-kicker { color: var(--primary); font-size: .78rem; font-weight: 800; }
+
+.resource-doc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.resource-doc-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--surface-soft);
+  border-radius: 8px;
+  font-size: .85rem;
+}
+.resource-doc-list .doc-file {
+  color: var(--text-muted);
+  font-family: monospace;
+  white-space: nowrap;
+}
+
+.resource-steps {
+  margin: 0;
+  padding-left: 20px;
+  font-size: .88rem;
+  line-height: 1.9;
+  color: var(--text-muted);
+}
+
+.resource-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: .9rem;
+  text-decoration: none;
+}
+.resource-cta:hover { opacity: .92; }
+
+.ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ghost-btn:hover { background: var(--surface-soft); color: var(--text); }
+
+/* ── 유튜브 자체 플레이어 ── */
+.yt-player-card { margin-bottom: 24px; }
+#yt-player-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+#yt-player { position: absolute; inset: 0; width: 100%; height: 100%; }
+.yt-player-empty {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: #9aa0a6; font-size: .88rem; margin: 0;
+}
+.yt-player-empty.hidden { display: none; }
+.now-playing-title {
+  margin: 10px 2px 0;
+  font-size: .85rem;
+  color: var(--text-muted);
+  min-height: 1.2em;
+}
+
+/* 영상 선택 후에는 콘텐츠 영역 안에서만 재생한다. 화면 크기가 바뀌어도
+   JavaScript가 16:9 크기를 다시 계산하므로 본문 스크롤이 생기지 않는다. */
+body[data-page="youtube"].is-video-playing .content-main {
+  overflow: hidden;
+  padding: 16px 24px;
+}
+body[data-page="youtube"].is-video-playing #page-content { height: 100%; }
+body[data-page="youtube"].is-video-playing .resource-hero,
+body[data-page="youtube"].is-video-playing .yt-watch-history { display: none; }
+body[data-page="youtube"].is-video-playing .yt-player-card {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+body[data-page="youtube"].is-video-playing #yt-player-frame {
+  flex: 0 0 auto;
+  align-self: center;
+  margin: auto;
+}
+
+@media (max-width: 640px) {
+  body[data-page="youtube"].is-video-playing .content-main { padding: 10px; }
+  body[data-page="youtube"].is-video-playing .yt-player-card { padding: 12px; }
+}
+
+/* ── 시청 기록 테이블 ── */
+.watch-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .84rem;
+}
+.watch-history-table th, .watch-history-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.watch-history-table th { color: var(--text-subtle); font-weight: 600; white-space: nowrap; }
+.watch-history-table td.wh-title { max-width: 340px; }
+.watch-history-table td:nth-child(2), .watch-history-table td:nth-child(3), .watch-history-table td:nth-child(4) { white-space: nowrap; color: var(--text-muted); }
+
+/* ── 영상 카드 ── */
+.video-topic-block { margin-bottom: 26px; }
+.video-module-block { margin-bottom: 34px; }
+.video-topic-label { font-size: 1rem; margin: 2px 0 12px; }
+.video-card { display: flex; flex-direction: column; cursor: default; }
+.video-card.now-playing { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-light); }
+.video-thumb-wrap { position: relative; border-radius: 8px; overflow: hidden; margin-bottom: 10px; background: #000; aspect-ratio: 16/9; }
+.video-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+.video-length {
+  position: absolute; right: 6px; bottom: 6px;
+  background: rgba(0,0,0,.75); color: #fff;
+  font-size: .72rem; padding: 1px 6px; border-radius: 4px;
+}
+.video-title {
+  font-size: .92rem; margin: 0 0 6px; line-height: 1.4;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.video-channel { font-size: .8rem; color: var(--text-muted); margin: 0 0 12px; }
+.video-play-btn { width: 100%; justify-content: center; border: none; cursor: pointer; margin-top: auto; }
+
+/* ── 영상 목록 offcanvas (우측에서 슬라이드 인) ── */
+.video-list-toggle {
+  position: fixed;
+  top: calc(var(--topbar-h) + 16px);
+  right: 20px;
+  z-index: 55;
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  font-size: .82rem; font-weight: 600;
+  cursor: pointer;
+}
+.video-list-toggle:hover { background: var(--surface-hover); }
+.video-list-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(15,23,42,.35);
+  z-index: 58;
+  backdrop-filter: blur(2px);
+}
+.video-list-overlay.show { display: block; }
+.video-list-panel {
+  position: fixed;
+  top: var(--topbar-h);
+  right: 0;
+  width: 420px;
+  max-width: 92vw;
+  height: calc(100vh - var(--topbar-h));
+  overflow-y: auto;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  padding: 18px 18px 32px;
+  box-shadow: var(--shadow-lg);
+  z-index: 59;
+  transform: translateX(100%);
+  transition: transform .22s cubic-bezier(.4,0,.2,1);
+}
+.video-list-panel.open { transform: translateX(0); }
+.video-list-hdr { display: flex; align-items: center; margin-bottom: 14px; }
+.video-list-title {
+  font-size: .95rem; font-weight: 700;
+  display: flex; align-items: center; gap: 8px;
+}
+.video-list-close {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border: none; border-radius: 6px;
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  cursor: pointer;
+  margin-left: auto;
+}
+.video-list-close:hover { background: var(--surface-hover); color: var(--text); }
+.video-list-panel .grid-3 { grid-template-columns: 1fr; }
+
+@media (max-width: 860px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .video-list-panel { width: 92vw; }
+  .notebook-topic-grid { grid-template-columns: 1fr; }
+  .notebook-quick-steps > i { transform: rotate(90deg); }
+  .resource-module-head { display: block; }
+  .resource-module-head p { margin-top: 8px; }
+}

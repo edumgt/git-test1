@@ -656,6 +656,8 @@ KOSDAQ|웹젠|게임`,
   $closeLeftPanel.addEventListener('click', () => setPanel('left', false));
   $offcanvasBackdrop.addEventListener('click', () => closePanels());
   $messages.addEventListener('click', event => {
+    const practiceLink = event.target.closest('[data-practice-view]');
+    if (practiceLink) setView(practiceLink.dataset.practiceView);
     const term = event.target.closest('[data-glossary-term]');
     if (term) openGlossary(Number(term.dataset.glossaryTerm));
     if (event.target.closest('[data-tick-guide-open]')) openTickGuide();
@@ -739,6 +741,9 @@ KOSDAQ|웹젠|게임`,
     stopTickDashboard();
     stopDashboardAssets();
     state.activeView = view;
+    window.dispatchEvent(new CustomEvent('finance:view', { detail: view }));
+    // 메뉴 전환 중 이전 화면이 한 프레임이라도 남지 않도록 먼저 비웁니다.
+    $messages.replaceChildren();
     $viewButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.view === view));
     $chatInputArea.classList.toggle('hidden', view !== 'learn');
     $clearChatBtn?.classList.toggle('hidden', view !== 'learn');
@@ -753,6 +758,7 @@ KOSDAQ|웹젠|게임`,
       closePanels();
       requestAnimationFrame(() => $simulationPanel.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     }
+    if (view === 'investment-practice') renderInvestmentPracticeHub();
     if (view === 'portfolio-simulation') renderPortfolioSimulation();
     if (view === 'basis') renderBasisWorkflow();
     if (view === 'backtest') renderBacktestWorkflow();
@@ -1417,7 +1423,7 @@ KOSDAQ|웹젠|게임`,
 
   function renderHome() {
     const dashboardUrl = `${window.location.protocol}//${window.location.hostname}:8000/?embedded=1`;
-    $messages.innerHTML = `<article class="content-page integrated-dashboard-page"><header class="simulation-guide-head"><div><div class="content-kicker">INVESTMENT ANALYSIS DASHBOARD</div><h1>투자 분석 <mark>대시보드</mark></h1></div><p class="content-lead">8000번 투자 분석 웹앱의 시장·기업 대시보드를 이 홈에서 바로 확인합니다.</p></header><div class="integrated-dashboard-frame"><iframe src="${dashboardUrl}" title="투자 분석 대시보드" loading="eager"></iframe></div><p class="content-disclaimer">대시보드의 시세와 분석 결과는 학습용 참고 정보이며 투자 권유가 아닙니다.</p></article>`;
+    $messages.innerHTML = `<article class="content-page integrated-dashboard-page"><div class="integrated-dashboard-frame"><iframe src="${dashboardUrl}" title="투자 분석 대시보드" loading="eager"></iframe></div></article>`;
   }
 
   function openIntegratedLesson(lessonId) {
@@ -1428,7 +1434,7 @@ KOSDAQ|웹젠|게임`,
     state.activeView = 'learning';
     $viewButtons.forEach(btn => btn.classList.toggle('active', false));
     $chatInputArea.classList.add('hidden');
-    $messages.innerHTML = `<article class="content-page integrated-lesson-page"><header class="simulation-guide-head"><div><div class="content-kicker">INTEGRATED LEARNING · ${escHtml(lessonId.replace('learn-', ''))}</div><h1>통합 <mark>학습 과정</mark></h1></div><p class="content-lead">LNB의 10개 과정은 하나의 중앙 RAG 지식베이스와 연결됩니다.</p></header><div class="integrated-lesson-frame"><iframe src="${lessonUrl}" title="통합 학습 과정 ${escHtml(lessonId)}" loading="eager"></iframe></div></article>`;
+    $messages.innerHTML = `<article class="content-page integrated-lesson-page"><div class="integrated-lesson-frame"><iframe src="${lessonUrl}" title="통합 학습 과정 ${escHtml(lessonId)}" loading="eager"></iframe></div></article>`;
     setPanel('left', false);
   }
 
@@ -1436,6 +1442,10 @@ KOSDAQ|웹젠|게임`,
     $messages.innerHTML = `<article class="content-page simulation-page"><header class="simulation-guide-head"><div><div class="content-kicker">MARKET SHOCK WORKBENCH</div><h1>시장 충격 <mark>시뮬레이션</mark></h1></div><p class="content-lead">다양한 시장 충격 시나리오를 골라 주식/ETF·채권·대체자산이 각각 어떻게 반응하는지 비교합니다.</p></header><div class="simulation-workbench" id="simulationMount"></div></article>`;
     document.getElementById('simulationMount').appendChild($simulationPanel);
     renderScenarioResult();
+  }
+
+  function renderInvestmentPracticeHub() {
+    $messages.innerHTML = `<article class="content-page investment-practice-page"><header class="practice-hub-head"><div><span>INVESTMENT PRACTICE</span><h1>투자 <mark>실습</mark></h1><p>포트폴리오 설계, 시장 충격 점검, 전략 검증을 하나의 실습 흐름으로 이어갑니다.</p></div></header><section class="practice-hub-grid" aria-label="투자 실습 세부 메뉴"><button data-practice-view="portfolio-simulation"><i class="fa-solid fa-chart-pie"></i><span>01 · 포트폴리오 계획</span><strong>목표 금액 · 납입 · 위험성향</strong><small>가상 경로로 장기 투자 결과 범위를 확인합니다.</small></button><button data-practice-view="simulation"><i class="fa-solid fa-bolt"></i><span>02 · 시장 충격 점검</span><strong>자산배분 스트레스 테스트</strong><small>급락·금리·인플레이션 시나리오를 비교합니다.</small></button><button data-practice-view="backtest"><i class="fa-solid fa-flask"></i><span>03 · 전략 검증</span><strong>LEAN 백테스트 리포트</strong><small>규칙과 과거 성과를 분리해 검토합니다.</small></button></section><section class="practice-flow"><span>포트폴리오 구성</span><i class="fa-solid fa-arrow-right"></i><span>시장 충격 확인</span><i class="fa-solid fa-arrow-right"></i><span>전략 검증</span></section></article>`;
   }
 
   function renderPortfolioSimulation() {
@@ -2943,7 +2953,7 @@ effective_date: [기준일]
       <div class="msg ${role}" id="${id}">
         <div class="msg-avatar">${isUser ? '<i class="fa-solid fa-user"></i>' : '<i class="fa-solid fa-robot"></i>'}</div>
         <div>
-          <div class="msg-bubble">${formatContent(content)}</div>
+          <div class="msg-bubble">${isUser ? formatInlineContent(content) : formatContent(content)}</div>
           <div class="msg-meta">
             <span>${time}</span>
             ${refBtnHtml}
@@ -3163,6 +3173,16 @@ effective_date: [기준일]
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/\n/g, '<br>');
+  }
+
+  // Keep a submitted question visually continuous; long questions scroll within
+  // their bubble instead of increasing the chat row height.
+  function formatInlineContent(text) {
+    return String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/[\r\n]+/g, ' ');
   }
 
   function showUploadStatus(type, msg) {

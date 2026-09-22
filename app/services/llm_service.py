@@ -101,7 +101,8 @@ class LLMService:
                 {"role": "user", "content": "\n\n".join(user_parts)},
             ],
             "temperature": 0.2,
-            "max_tokens": 700,
+            # Keep CPU-only responses concise enough to stay interactive.
+            "max_tokens": 320,
         }
 
         headers = {
@@ -110,7 +111,7 @@ class LLMService:
         }
 
         try:
-            with httpx.Client(timeout=60.0) as client:
+            with httpx.Client(timeout=settings.llm_timeout_seconds) as client:
                 response = client.post(
                     f"{self.base_url}/chat/completions",
                     json=payload,
@@ -152,7 +153,7 @@ class LLMService:
         }
 
         try:
-            with httpx.Client(timeout=60.0) as client:
+            with httpx.Client(timeout=settings.llm_timeout_seconds) as client:
                 response = client.post(
                     f"{self.base_url}/chat/completions",
                     json=payload,

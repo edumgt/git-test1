@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title2 desc2">
+  <title id="title2">월봉과 10개월 이동평균선으로 장기 추세를 보는 예시</title>
+  <desc id="desc2">가상 종목의 월봉 13개와 10개월 이동평균선을 함께 보여 준다. 초반에는 가격이 10개월선 아래에 있다가 위로 올라서고, 상승 중 눌림목이 10개월선에 닿았지만 다시 위로 올라가는 모습을 담은 교육용 차트다.</desc>
+  <style>
+    .t { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; fill: #1f2937; }
+    .small { font-size: 15px; }
+    .label { font-size: 17px; font-weight: 700; }
+    .note { font-size: 16px; font-weight: 700; }
+  </style>
+  <rect width="1000" height="570" fill="#ffffff"/>
+  <text x="56" y="43" class="t" font-size="23" font-weight="700">가상 월봉 예시: 10개월 이동평균선으로 보는 장기 추세</text>
+  <text x="56" y="70" class="t small" fill="#64748b">실제 종목·수익 신호가 아닌, 월봉과 장기 이동평균선을 함께 읽는 순서를 익히기 위한 학습용 그림입니다.</text>
+
+  <rect x="55" y="94" width="890" height="337" rx="10" fill="#fbfdff" stroke="#dbe5f0"/>
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="92" y1="145" x2="922" y2="145"/>
+    <line x1="92" y1="205" x2="922" y2="205"/>
+    <line x1="92" y1="265" x2="922" y2="265"/>
+    <line x1="92" y1="325" x2="922" y2="325"/>
+    <line x1="92" y1="385" x2="922" y2="385"/>
+  </g>
+  <g class="t small" fill="#64748b" text-anchor="end">
+    <text x="82" y="150">45,000</text><text x="82" y="210">41,000</text><text x="82" y="270">37,000</text><text x="82" y="330">33,000</text><text x="82" y="390">29,000</text>
+  </g>
+
+  <!-- 10-month moving average -->
+  <path d="M140,340 C170,340 170,342 200,342 C230,342 230,344 260,344 C290,344 290,346 320,346 C350,346 350,347 380,347 C410,347 410,343 440,343 C470,343 470,333 500,333 C530,333 530,320 560,320 C590,320 590,308 620,308 C650,308 650,298 680,298 C710,298 710,288 740,288 C770,288 770,276 800,276 C830,276 830,262 860,262" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- monthly candles: down=#2563eb, up=#e11d48 (양봉/음봉 국내 관례) -->
+  <g stroke-width="2">
+    <line x1="140" y1="328" x2="140" y2="350" stroke="#2563eb"/>
+    <rect x="127" y="335" width="26" height="10" fill="#2563eb"/>
+    <line x1="200" y1="338" x2="200" y2="368" stroke="#2563eb"/>
+    <rect x="187" y="345" width="26" height="15" fill="#2563eb"/>
+    <line x1="260" y1="348" x2="260" y2="365" stroke="#e11d48"/>
+    <rect x="247" y="352" width="26" height="8" fill="#e11d48"/>
+    <line x1="320" y1="345" x2="320" y2="373" stroke="#2563eb"/>
+    <rect x="307" y="352" width="26" height="13" fill="#2563eb"/>
+    <line x1="380" y1="340" x2="380" y2="368" stroke="#e11d48"/>
+    <rect x="367" y="345" width="26" height="20" fill="#e11d48"/>
+    <line x1="440" y1="302" x2="440" y2="348" stroke="#e11d48"/>
+    <rect x="427" y="308" width="26" height="37" fill="#e11d48"/>
+    <line x1="500" y1="276" x2="500" y2="311" stroke="#e11d48"/>
+    <rect x="487" y="282" width="26" height="26" fill="#e11d48"/>
+    <line x1="560" y1="252" x2="560" y2="285" stroke="#e11d48"/>
+    <rect x="547" y="258" width="26" height="24" fill="#e11d48"/>
+    <line x1="620" y1="250" x2="620" y2="300" stroke="#2563eb"/>
+    <rect x="607" y="258" width="26" height="37" fill="#2563eb"/>
+    <line x1="680" y1="290" x2="680" y2="312" stroke="#2563eb"/>
+    <rect x="667" y="295" width="26" height="10" fill="#2563eb"/>
+    <line x1="740" y1="255" x2="740" y2="308" stroke="#e11d48"/>
+    <rect x="727" y="260" width="26" height="45" fill="#e11d48"/>
+    <line x1="800" y1="216" x2="800" y2="255" stroke="#e11d48"/>
+    <rect x="787" y="225" width="26" height="35" fill="#e11d48"/>
+    <line x1="860" y1="190" x2="860" y2="228" stroke="#e11d48"/>
+    <rect x="847" y="195" width="26" height="30" fill="#e11d48"/>
+  </g>
+
+  <!-- callout 1: crossing back above the 10-month MA -->
+  <circle cx="440" cy="343" r="9" fill="#ffffff" stroke="#475569" stroke-width="4"/>
+  <path d="M300 172 L410 305" fill="none" stroke="#475569" stroke-width="1.8"/>
+  <rect x="151" y="122" width="300" height="65" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="166" y="148" class="t note">① 가격이 10개월선 위로 올라섬</text>
+  <text x="166" y="171" class="t small">= 장기 추세가 상승으로 바뀌었을 수 있음</text>
+
+  <!-- callout 2: pullback touches the 10-month MA and bounces -->
+  <circle cx="680" cy="298" r="10" fill="#ffffff" stroke="#f59e0b" stroke-width="4"/>
+  <path d="M660 375 L678 312" fill="none" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="520" y="378" width="320" height="65" rx="8" fill="#fffbeb" stroke="#fbbf24"/>
+  <text x="535" y="404" class="t note">② 눌림목이 10개월선에 닿음</text>
+  <text x="535" y="427" class="t small">종가가 다시 선 위로 올라오는지 확인</text>
+
+  <g class="t small" text-anchor="middle" fill="#64748b">
+    <text x="140" y="452">1월</text><text x="260" y="452">3월</text><text x="380" y="452">5월</text><text x="500" y="452">7월</text><text x="620" y="452">9월</text><text x="740" y="452">11월</text><text x="860" y="452">익년 1월</text>
+  </g>
+
+  <g class="t small">
+    <line x1="92" y1="478" x2="126" y2="478" stroke="#e11d48" stroke-width="6"/><text x="136" y="483">양봉(상승월)</text>
+    <line x1="265" y1="478" x2="299" y2="478" stroke="#2563eb" stroke-width="6"/><text x="309" y="483">음봉(하락월)</text>
+    <line x1="440" y1="478" x2="474" y2="478" stroke="#f59e0b" stroke-width="4"/><text x="484" y="483">10개월 이동평균선</text>
+  </g>
+  <rect x="55" y="502" width="890" height="55" rx="8" fill="#eff6ff"/>
+  <text x="75" y="524" class="t small">읽는 순서: ① 차트를 월봉으로 바꿔 최근 1~2년의 큰 흐름을 본다 → ② 가격이 10개월 이동평균선 위·아래 어디에 있는지 본다</text>
+  <text x="75" y="545" class="t small">→ ③ 눌림목이 선에 닿아도 종가가 다시 위로 올라오는지, 거래량·기업 소식도 함께 확인한다.</text>
+</svg>

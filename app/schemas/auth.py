@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from pydantic import BaseModel, Field
 
 
@@ -34,3 +34,14 @@ class CalendarEventCreate(BaseModel):
 
 class CalendarEventResponse(CalendarEventCreate):
     id: int
+
+
+class ActivityCreate(BaseModel):
+    action: str = Field(default="view", min_length=1, max_length=40, pattern=r"^[a-z0-9_-]+$")
+    view: str = Field(default="", max_length=80)
+    detail: str = Field(default="", max_length=160)
+
+
+class ActivityResponse(ActivityCreate):
+    id: int
+    created_at: datetime

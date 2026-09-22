@@ -1,0 +1,104 @@
+<nav class="sidebar-nav">
+
+        <!-- 대시보드 -->
+        <a href="../index.html?view=home" class="nav-item nav-home" data-view="home">
+          <i class="fa-solid fa-house"></i><span>대시보드</span>
+        </a>
+        <!-- ─────── 기초학습 ─────── -->
+        <div class="nav-section">
+          <button class="nav-section-hdr" onclick="toggleNav('review')">
+            <span><i class="fa-solid fa-book-bookmark"></i>기초학습</span>
+            <i class="fa-solid fa-chevron-down nav-chev" id="chev-review"></i>
+          </button>
+          <div class="nav-children" id="nav-review">
+            <a href="../index.html?view=learn-10-1" class="nav-item" data-view="learn-10-1"><i class="fa-solid fa-circle-dot"></i>법인과 회사 구조 1: 시작하기</a>
+            <a href="../index.html?view=learn-10-2" class="nav-item" data-view="learn-10-2"><i class="fa-solid fa-circle-dot"></i>법인과 회사 구조 2: 운영·자금</a>
+            <a href="../index.html?view=learn-10-3" class="nav-item" data-view="learn-10-3"><i class="fa-solid fa-circle-dot"></i>법인과 회사 구조 3: 세무·회계</a>
+            <a href="../index.html?view=learn-11" class="nav-item" data-view="learn-11"><i class="fa-solid fa-circle-dot"></i>거시경제와 주식시장</a>
+          </div>
+        </div>
+
+        <!-- ─────── 학습 ─────── -->
+        <div class="nav-section">
+          <button class="nav-section-hdr" onclick="toggleNav('learn')">
+            <span><i class="fa-solid fa-book-open-reader"></i>학습</span>
+            <i class="fa-solid fa-chevron-down nav-chev" id="chev-learn"></i>
+          </button>
+          <div class="nav-children" id="nav-learn">
+            <a href="../index.html?view=learn-03" class="nav-item" data-view="learn-03"><i class="fa-solid fa-circle-dot"></i>주식 1</a>
+            <a href="../index.html?view=learn-05" class="nav-item" data-view="learn-05"><i class="fa-solid fa-circle-dot"></i>주식 2<span class="nav-badge-hot">HOT</span></a>
+            <a href="../index.html?view=learn-04" class="nav-item" data-view="learn-04"><i class="fa-solid fa-circle-dot"></i>주식 3</a>
+            <a href="../index.html?view=learn-06" class="nav-item" data-view="learn-06"><i class="fa-solid fa-circle-dot"></i>주식 4</a>
+            <a href="../index.html?view=learn-07" class="nav-item" data-view="learn-07"><i class="fa-solid fa-circle-dot"></i>주식 5</a>
+          </div>
+        </div>
+
+        <!-- ─────── 퀴즈 ─────── -->
+        <div class="nav-section">
+          <button class="nav-section-hdr" onclick="toggleNav('quiz')">
+            <span><i class="fa-solid fa-circle-question"></i>퀴즈</span>
+            <i class="fa-solid fa-chevron-down nav-chev" id="chev-quiz"></i>
+          </button>
+          <div class="nav-children" id="nav-quiz">
+            <a href="../index.html?view=quiz-home" class="nav-item" data-view="quiz-home"><i class="fa-solid fa-calendar-check"></i>문항 관리/응시</a>
+            <a href="../index.html?view=vocabulary-exam" class="nav-item" data-view="vocabulary-exam"><i class="fa-solid fa-spell-check"></i>단어장 30문제 시험</a>
+            <div class="nav-group-label">주식 모듈별 20문항</div>
+            <a href="../index.html?view=quiz-day-1" class="nav-item" data-view="quiz-day-1"><i class="fa-solid fa-list-check"></i>주식 1</a>
+            <a href="../index.html?view=quiz-day-2" class="nav-item" data-view="quiz-day-2"><i class="fa-solid fa-list-check"></i>주식 2</a>
+            <a href="../index.html?view=quiz-day-3" class="nav-item" data-view="quiz-day-3"><i class="fa-solid fa-list-check"></i>주식 3</a>
+            <a href="../index.html?view=quiz-day-4" class="nav-item" data-view="quiz-day-4"><i class="fa-solid fa-list-check"></i>주식 4</a>
+            <a href="../index.html?view=quiz-day-5" class="nav-item" data-view="quiz-day-5"><i class="fa-solid fa-list-check"></i>주식 5</a>
+          </div>
+        </div>
+
+        <!-- ─────── 데이터 시각화 ─────── -->
+        <div class="nav-section">
+          <button class="nav-section-hdr" onclick="toggleNav('visualization')">
+            <span><i class="fa-solid fa-chart-pie"></i>데이터 시각화</span>
+            <i class="fa-solid fa-chevron-down nav-chev" id="chev-visualization"></i>
+          </button>
+          <div class="nav-children" id="nav-visualization">
+            <a href="../index.html?view=server-resources" class="nav-item" data-view="server-resources"><i class="fa-solid fa-server"></i>서버 리소스</a>
+            <a href="../index.html?view=world-markets" class="nav-item" data-view="world-markets"><i class="fa-solid fa-earth-americas"></i>세계증시현황</a>
+            <a href="../index.html?view=asset-classes" class="nav-item" data-view="asset-classes"><i class="fa-solid fa-layer-group"></i>다양한 기초자산 차트</a>
+            <a href="../index.html?view=today-gainers" class="nav-item" data-view="today-gainers"><i class="fa-solid fa-arrow-trend-up"></i>금일 상승종목</a>
+            <a href="../index.html?view=today-sobujang" class="nav-item" data-view="today-sobujang"><i class="fa-solid fa-microchip"></i>금일 소부장 종목</a>
+            <a href="../index.html?view=global-capital-map" class="nav-item" data-view="global-capital-map"><i class="fa-solid fa-globe"></i>세계 거대자금 지도</a>
+            <a href="../index.html?view=volume-cloud" class="nav-item" data-view="volume-cloud"><i class="fa-solid fa-cloud"></i>거래량 클라우드</a>
+            <a href="../index.html?view=sector-cloud" class="nav-item" data-view="sector-cloud"><i class="fa-solid fa-cloud-arrow-up"></i>섹터별 클라우드</a>
+          </div>
+        </div>
+
+        <!-- ─────── 포트폴리오 ─────── -->
+        <div class="nav-section">
+          <button class="nav-section-hdr" onclick="toggleNav('portfolio')">
+            <span><i class="fa-solid fa-briefcase"></i>포트폴리오</span>
+            <i class="fa-solid fa-chevron-down nav-chev" id="chev-portfolio"></i>
+          </button>
+          <div class="nav-children" id="nav-portfolio">
+            <a href="../index.html?view=portfolio-combination" class="nav-item" data-view="portfolio-combination"><i class="fa-solid fa-traffic-light"></i>포트폴리오 조합</a>
+            <a href="../index.html?view=portfolio-guide" class="nav-item" data-view="portfolio-guide"><i class="fa-solid fa-compass"></i>포트폴리오 추천</a>
+            <a href="../index.html?view=portfolio-regime" class="nav-item" data-view="portfolio-regime"><i class="fa-solid fa-chart-diagram"></i>자산배분 위험선호도(R1~R5)</a>
+            <a href="../index.html?view=portfolio-simulation" class="nav-item" data-view="portfolio-simulation"><i class="fa-solid fa-chart-area"></i>포트폴리오 시뮬레이션</a>
+          </div>
+        </div>
+        <div class="nav-section">
+          <button class="nav-section-hdr" onclick="toggleNav('quant')">
+            <span><i class="fa-solid fa-chart-simple"></i>Quant</span>
+            <i class="fa-solid fa-chevron-down nav-chev" id="chev-quant"></i>
+          </button>
+          <div class="nav-children" id="nav-quant">
+            <a href="../index.html?view=quant-lean" class="nav-item" data-view="quant-lean"><i class="fa-solid fa-flask"></i>LEAN 백테스트 리포트</a>
+          </div>
+        </div>
+        <a href="../index.html?view=chart-drawing" class="nav-item" data-view="chart-drawing">
+          <i class="fa-solid fa-pencil"></i><span>드로잉 차트</span>
+        </a>
+        <a href="../index.html?view=rag-chat" class="nav-item" data-view="rag-chat">
+          <i class="fa-solid fa-comments"></i><span>RAG</span>
+        </a>
+        <a href="../index.html?view=llm-bench" class="nav-item" data-view="llm-bench">
+          <i class="fa-solid fa-cloud-bolt"></i><span>LLM 서빙 비교(AWS)</span>
+        </a>
+
+      </nav>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480" role="img" aria-labelledby="title desc">
+  <title id="title">긴 꼬리 캔들과 도지 모양 예시</title>
+  <desc id="desc">위꼬리가 긴 양봉, 아래꼬리가 긴 음봉, 시가와 종가가 거의 같아 몸통이 매우 짧은 도지를 나란히 보여 주는 교육용 캔들 그림이다.</desc>
+  <style>
+    .t { font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; fill: #1f2937; }
+    .small { font-size: 14px; }
+    .label { font-size: 16px; font-weight: 700; }
+  </style>
+  <rect width="1000" height="480" fill="#ffffff"/>
+  <text x="56" y="36" class="t" font-size="22" font-weight="700">캔들 모양 예시: 긴 꼬리와 도지</text>
+  <text x="56" y="58" class="t small" fill="#64748b">몸통은 시가·종가 사이, 꼬리는 장중 고가·저가까지의 움직임을 보여 줍니다. 실제 시세가 아닌 학습용 예시입니다.</text>
+  <rect x="56" y="72" width="14" height="14" fill="#ef4444"/><text x="76" y="84" class="t small">양봉 (종가&gt;시가)</text>
+  <rect x="210" y="72" width="14" height="14" fill="#3b82f6"/><text x="230" y="84" class="t small">음봉 (종가&lt;시가)</text>
+  <rect x="360" y="72" width="14" height="14" fill="#94a3b8"/><text x="380" y="84" class="t small">도지 (시가≈종가)</text>
+
+  <!-- panel 1: long upper wick (양봉) -->
+  <line x1="180" y1="121" x2="180" y2="274" stroke="#ef4444" stroke-width="3"/>
+  <rect x="162" y="235" width="36" height="26" fill="#ef4444"/>
+  <text x="146" y="125" class="t small" text-anchor="end" fill="#64748b">고가</text>
+  <text x="146" y="239" class="t small" text-anchor="end" fill="#b91c1c">종가</text>
+  <text x="146" y="265" class="t small" text-anchor="end" fill="#b91c1c">시가</text>
+  <text x="146" y="278" class="t small" text-anchor="end" fill="#64748b">저가</text>
+
+  <!-- panel 2: long lower wick (음봉) -->
+  <line x1="500" y1="183" x2="500" y2="339" stroke="#3b82f6" stroke-width="3"/>
+  <rect x="482" y="209" width="36" height="26" fill="#3b82f6"/>
+
+  <!-- panel 3: doji -->
+  <line x1="820" y1="139" x2="820" y2="321" stroke="#64748b" stroke-width="3"/>
+  <rect x="802" y="227" width="36" height="4" fill="#94a3b8"/>
+
+  <line x1="56" y1="360" x2="944" y2="360" stroke="#e5e7eb"/>
+
+  <text x="180" y="398" class="t label" text-anchor="middle">위꼬리가 긴 캔들</text>
+  <text x="180" y="420" class="t small" text-anchor="middle" fill="#64748b">장중 고가까지 올랐다가</text>
+  <text x="180" y="438" class="t small" text-anchor="middle" fill="#64748b">매도 물량에 눌려 내려온 모습</text>
+
+  <text x="500" y="398" class="t label" text-anchor="middle">아래꼬리가 긴 캔들</text>
+  <text x="500" y="420" class="t small" text-anchor="middle" fill="#64748b">장중 저가까지 내렸다가</text>
+  <text x="500" y="438" class="t small" text-anchor="middle" fill="#64748b">매수세가 들어와 올라온 모습</text>
+
+  <text x="820" y="398" class="t label" text-anchor="middle">도지 (Doji)</text>
+  <text x="820" y="420" class="t small" text-anchor="middle" fill="#64748b">시가와 종가가 거의 같아</text>
+  <text x="820" y="438" class="t small" text-anchor="middle" fill="#64748b">몸통이 매우 짧은 모양</text>
+
+  <text x="500" y="465" class="t small" text-anchor="middle" fill="#94a3b8">한 번의 꼬리·도지만으로 다음 방향을 단정할 수는 없습니다. 거래량·추세·뉴스를 함께 확인하세요.</text>
+</svg>

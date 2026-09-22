@@ -8,8 +8,8 @@ from fastapi import APIRouter, Depends, Header, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.models.user import PersonalCalendarEvent, User, UserSession
-from app.schemas.auth import AuthResponse, CalendarEventCreate, CalendarEventResponse, LoginRequest, SignupRequest, UserResponse
+from app.models.user import PersonalCalendarEvent, User, UserActivity, UserSession
+from app.schemas.auth import ActivityCreate, ActivityResponse, AuthResponse, CalendarEventCreate, CalendarEventResponse, LoginRequest, SignupRequest, UserResponse
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -97,3 +97,16 @@ def delete_event(event_id: int, user: User = Depends(current_user), db: Session 
     event = db.query(PersonalCalendarEvent).filter(PersonalCalendarEvent.id == event_id, PersonalCalendarEvent.user_id == user.id).first()
     if not event: raise HTTPException(status_code=404, detail="일정을 찾을 수 없습니다.")
     db.delete(event); db.commit()
+
+
+@router.post("/activity", response_model=ActivityResponse, status_code=status.HTTP_201_CREATED)
+def record_activity(payload: ActivityCreate, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    activity = UserActivity(user_id=user.id, **payload.model_dump())
+    db.add(activity); db.commit(); db.refresh(activity)
+    return activity
+
+
+@router.get("/activity", response_model=list[ActivityResponse])
+def list_activity(limit: int = 30, user: User = Depends(current_user), db: Session = Depends(get_db)):
+    safe_limit = max(1, min(limit, 100))
+    return db.query(UserActivity).filter(UserActivity.user_id == user.id).order_by(UserActivity.created_at.desc(), UserActivity.id.desc()).limit(safe_limit).all()

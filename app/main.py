@@ -95,6 +95,7 @@ app.include_router(chat_router)
 
 # Serve frontend static files
 _frontend_dir = os.path.join(os.path.dirname(__file__), "..", "frontend")
+_investment_frontend_dir = os.path.join(_frontend_dir, "investment-native")
 _data_dir = Path(os.path.join(os.path.dirname(__file__), "..", "data")).resolve()
 _learning_text_extensions = {".txt", ".md", ".mdx"}
 
@@ -155,8 +156,32 @@ def read_learning_document(path: str):
         raise HTTPException(status_code=500, detail="학습 문서를 읽을 수 없습니다.") from error
 
 
+@app.api_route("/api/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
+async def proxy_investment_api(path: str, request: Request):
+    """Expose the migrated investment API through the single port-80 origin."""
+    upstream_url = f"{settings.investment_api_base.rstrip('/')}/api/{path}"
+    forwarded_headers = {
+        key: value for key, value in request.headers.items()
+        if key.lower() not in {"host", "content-length", "connection", "accept-encoding"}
+    }
+    try:
+        upstream = requests.request(
+            request.method, upstream_url, params=request.query_params,
+            data=await request.body(), headers=forwarded_headers, timeout=60,
+        )
+    except requests.RequestException as error:
+        raise HTTPException(status_code=502, detail="투자 분석 API에 연결하지 못했습니다.") from error
+    response_headers = {
+        key: value for key, value in upstream.headers.items()
+        if key.lower() not in {"content-length", "connection", "content-encoding", "transfer-encoding"}
+    }
+    return Response(content=upstream.content, status_code=upstream.status_code, headers=response_headers)
+
+
 if os.path.isdir(_frontend_dir):
     app.mount("/static", StaticFiles(directory=_frontend_dir), name="static")
+    if os.path.isdir(_investment_frontend_dir):
+        app.mount("/investment-static", StaticFiles(directory=_investment_frontend_dir), name="investment-static")
 
     @app.get("/", include_in_schema=False)
     def serve_index():

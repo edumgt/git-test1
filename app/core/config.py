@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     app_name: str = "Domain RAG MVP"
     app_env: str = "dev"
+    investment_api_base: str = "http://investment-backend:8000"
 
     qdrant_host: str = "localhost"
     qdrant_port: int = 6333
@@ -57,6 +58,8 @@ class Settings(BaseSettings):
     lean_remote_workdir: str = "/home/ubuntu/lean-workflows"
     lean_docker_image: str = "quantconnect/lean:latest"
     lean_timeout_seconds: int = 300
+    # Local Ollama models on CPU need a longer generation window than vLLM/GPU.
+    llm_timeout_seconds: int = 180
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
