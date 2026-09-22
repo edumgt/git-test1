@@ -609,6 +609,7 @@ KOSDAQ|웹젠|게임`,
   const $clearChatBtn = document.getElementById('clearChatBtn');
   const $closeRefBtn = document.getElementById('closeRefBtn');
   const $theoryDayButtons = Array.from(document.querySelectorAll('[data-theory-day]'));
+  const $integratedLessonButtons = Array.from(document.querySelectorAll('[data-integrated-lesson]'));
   const $simPromptBtn = document.getElementById('simPromptBtn');
   const $simScenarioResult = document.getElementById('simScenarioResult');
   const $simScenarioButtons = Array.from(document.querySelectorAll('.sim-scenario'));
@@ -642,9 +643,12 @@ KOSDAQ|웹젠|게임`,
   $theoryDayButtons.forEach(btn => {
     btn.addEventListener('click', () => openTheoryDay(Number(btn.dataset.theoryDay)));
   });
+  $integratedLessonButtons.forEach(btn => {
+    btn.addEventListener('click', () => openIntegratedLesson(btn.dataset.integratedLesson));
+  });
 
   $viewButtons.forEach(btn => {
-    btn.addEventListener('click', () => setView(btn.dataset.view));
+    if (btn.dataset.view) btn.addEventListener('click', () => setView(btn.dataset.view));
   });
 
   $openLeftPanel.addEventListener('click', () => togglePanel('left'));
@@ -740,6 +744,7 @@ KOSDAQ|웹젠|게임`,
     $clearChatBtn?.classList.toggle('hidden', view !== 'learn');
 
     if (view === 'home') renderHome();
+    if (view === 'minute-chart') renderMinuteChart();
     if (view === 'stocks') renderStocksView();
     if (view === 'learn') showWelcome();
     if (view === 'theory') renderTheoryIndex();
@@ -748,6 +753,7 @@ KOSDAQ|웹젠|게임`,
       closePanels();
       requestAnimationFrame(() => $simulationPanel.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     }
+    if (view === 'portfolio-simulation') renderPortfolioSimulation();
     if (view === 'basis') renderBasisWorkflow();
     if (view === 'backtest') renderBacktestWorkflow();
     if (view === 'calendar') renderCalendarView();
@@ -1394,9 +1400,10 @@ KOSDAQ|웹젠|게임`,
       </button>`;
   }
 
-  function renderHome() {
+  function renderMinuteChart() {
     $messages.innerHTML = `
-      <article class="content-page home-page">
+      <article class="content-page minute-chart-page">
+        <header class="simulation-guide-head"><div><div class="content-kicker">INTRADAY · 1 MINUTE BARS</div><h1>실시간 <mark>분봉차트</mark></h1></div><p class="content-lead">학습에 등장하는 자산 시세와 공개 API 기반 1분봉 차트를 별도 화면에서 확인합니다.</p></header>
         <div class="home-live-layout">
           <div class="home-live-assets">${renderDashboardAssetSection()}</div>
           <div class="home-live-chart">${renderTickChartSection()}</div>
@@ -1408,10 +1415,61 @@ KOSDAQ|웹젠|게임`,
     initTickDashboard();
   }
 
+  function renderHome() {
+    const dashboardUrl = `${window.location.protocol}//${window.location.hostname}:8000/?embedded=1`;
+    $messages.innerHTML = `<article class="content-page integrated-dashboard-page"><header class="simulation-guide-head"><div><div class="content-kicker">INVESTMENT ANALYSIS DASHBOARD</div><h1>투자 분석 <mark>대시보드</mark></h1></div><p class="content-lead">8000번 투자 분석 웹앱의 시장·기업 대시보드를 이 홈에서 바로 확인합니다.</p></header><div class="integrated-dashboard-frame"><iframe src="${dashboardUrl}" title="투자 분석 대시보드" loading="eager"></iframe></div><p class="content-disclaimer">대시보드의 시세와 분석 결과는 학습용 참고 정보이며 투자 권유가 아닙니다.</p></article>`;
+  }
+
+  function openIntegratedLesson(lessonId) {
+    if (!lessonId) return;
+    const lessonUrl = `${window.location.protocol}//${window.location.hostname}:8000/?embedded=1&view=${encodeURIComponent(lessonId)}`;
+    stopTickDashboard();
+    stopDashboardAssets();
+    state.activeView = 'learning';
+    $viewButtons.forEach(btn => btn.classList.toggle('active', false));
+    $chatInputArea.classList.add('hidden');
+    $messages.innerHTML = `<article class="content-page integrated-lesson-page"><header class="simulation-guide-head"><div><div class="content-kicker">INTEGRATED LEARNING · ${escHtml(lessonId.replace('learn-', ''))}</div><h1>통합 <mark>학습 과정</mark></h1></div><p class="content-lead">LNB의 10개 과정은 하나의 중앙 RAG 지식베이스와 연결됩니다.</p></header><div class="integrated-lesson-frame"><iframe src="${lessonUrl}" title="통합 학습 과정 ${escHtml(lessonId)}" loading="eager"></iframe></div></article>`;
+    setPanel('left', false);
+  }
+
   function renderSimulationGuide() {
     $messages.innerHTML = `<article class="content-page simulation-page"><header class="simulation-guide-head"><div><div class="content-kicker">MARKET SHOCK WORKBENCH</div><h1>시장 충격 <mark>시뮬레이션</mark></h1></div><p class="content-lead">다양한 시장 충격 시나리오를 골라 주식/ETF·채권·대체자산이 각각 어떻게 반응하는지 비교합니다.</p></header><div class="simulation-workbench" id="simulationMount"></div></article>`;
     document.getElementById('simulationMount').appendChild($simulationPanel);
     renderScenarioResult();
+  }
+
+  function renderPortfolioSimulation() {
+    $messages.innerHTML = `<article class="content-page portfolio-simulation-page"><header class="simulation-guide-head"><div><div class="content-kicker">MONTE CARLO · PORTFOLIO PLAN</div><h1>포트폴리오 <mark>시뮬레이션</mark></h1></div><p class="content-lead">5,000개의 가상 시장 경로에서 투자 계획이 만들 수 있는 결과 범위를 확인합니다.</p></header><section class="portfolio-simulation-explainer"><i class="fa-solid fa-dice"></i><div><strong>한 가지 미래를 예측하지 않습니다</strong><p>보수적(10%), 중간(50%), 긍정적(90%) 결과를 함께 비교해 투자 기간과 납입 계획을 점검하세요.</p></div></section><div class="portfolio-simulation-layout"><section class="portfolio-simulation-form"><h2>내 투자 계획</h2><label>구성 성향<select id="portfolioProfile"><option value="stable">안정 중심</option><option value="balanced" selected>균형 중심</option><option value="growth">성장 중심</option></select></label><label>처음 투자할 금액<input id="portfolioInitial" type="number" min="0" step="100000" value="10000000" /></label><label>매달 더할 금액<input id="portfolioMonthly" type="number" min="0" step="10000" value="500000" /></label><label>투자 기간<select id="portfolioYears"><option value="3">3년</option><option value="5">5년</option><option value="10" selected>10년</option><option value="20">20년</option></select></label><button class="content-cta" id="runPortfolioSimulation"><i class="fa-solid fa-play"></i> 가상 시나리오 보기</button></section><section class="portfolio-simulation-result" id="portfolioSimulationResult"><div class="backtest-empty"><i class="fa-solid fa-chart-area"></i><p>투자 계획을 입력해 결과 범위를 확인하세요.</p></div></section></div><p class="content-disclaimer">교육용 가정에 따른 가상 결과이며 실제 수익률, 세금, 수수료, 물가 및 개인 상황을 반영하지 않습니다. 미래 성과를 보장하지 않습니다.</p></article>`;
+    document.getElementById('runPortfolioSimulation').addEventListener('click', runPortfolioSimulation);
+    runPortfolioSimulation();
+  }
+
+  function won(value) { return `${Math.round(Number(value || 0)).toLocaleString('ko-KR')}원`; }
+
+  function portfolioScenarioChart(points) {
+    if (!points?.length) return '';
+    const width = 760, height = 240, pad = 24;
+    const values = points.flatMap(point => [point.cautious, point.middle, point.positive]);
+    const min = Math.min(...values), max = Math.max(...values), range = Math.max(1, max - min);
+    const x = index => pad + index / Math.max(1, points.length - 1) * (width - pad * 2);
+    const y = value => pad + (1 - (value - min) / range) * (height - pad * 2);
+    const line = key => points.map((point, index) => `${x(index).toFixed(1)},${y(point[key]).toFixed(1)}`).join(' ');
+    const band = `${line('positive')} ${[...points].reverse().map((point, index) => `${x(points.length - index - 1).toFixed(1)},${y(point.cautious).toFixed(1)}`).join(' ')}`;
+    return `<div class="portfolio-scenario-chart"><svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" role="img" aria-label="가상 시장 시나리오별 포트폴리오 가치 흐름"><polygon points="${band}" class="portfolio-scenario-band"/><polyline points="${line('positive')}" class="portfolio-scenario-line positive"/><polyline points="${line('middle')}" class="portfolio-scenario-line middle"/><polyline points="${line('cautious')}" class="portfolio-scenario-line cautious"/></svg><div><span>시작</span><span>${points.at(-1).year}년 후</span></div></div>`;
+  }
+
+  async function runPortfolioSimulation() {
+    const button = document.getElementById('runPortfolioSimulation');
+    const result = document.getElementById('portfolioSimulationResult');
+    const payload = { profile: document.getElementById('portfolioProfile').value, initial_amount: Number(document.getElementById('portfolioInitial').value), monthly_amount: Number(document.getElementById('portfolioMonthly').value), years: Number(document.getElementById('portfolioYears').value) };
+    if (!Number.isFinite(payload.initial_amount) || !Number.isFinite(payload.monthly_amount) || payload.initial_amount < 0 || payload.monthly_amount < 0) { result.innerHTML = '<div class="backtest-error">투자 금액은 0원 이상의 숫자로 입력해 주세요.</div>'; return; }
+    button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 가상 경로 생성 중';
+    result.innerHTML = '<div class="backtest-empty"><i class="fa-solid fa-spinner fa-spin"></i><p>5,000개의 가상 시장 경로를 만들고 있습니다.</p></div>';
+    try {
+      const data = await fetchLocalBackendJson('/simulations/portfolio', payload => payload && payload.summary && Array.isArray(payload.points), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      result.innerHTML = `<header><span>가상 시장 경로 5,000회</span><h2>${escHtml(data.profile_label)} 구성의 ${data.years}년 시뮬레이션</h2><p>${escHtml(data.explanation)}</p></header><div class="portfolio-scenario-legend"><span class="cautious">보수적 흐름</span><span class="middle">중간 흐름</span><span class="positive">긍정적 흐름</span></div>${portfolioScenarioChart(data.points)}<div class="portfolio-scenario-summary"><article><span>보수적 흐름</span><strong>${won(data.summary.cautious)}</strong><small>10% 지점의 참고 범위</small></article><article class="main"><span>중간 흐름</span><strong>${won(data.summary.middle)}</strong><small>50% 지점의 참고 범위</small></article><article><span>긍정적 흐름</span><strong>${won(data.summary.positive)}</strong><small>90% 지점의 참고 범위</small></article></div><p class="portfolio-total-paid">내가 넣은 돈의 합계: <b>${won(data.total_paid)}</b></p>`;
+    } catch (error) { result.innerHTML = `<div class="backtest-error">${escHtml(error.message || '시뮬레이션을 실행하지 못했습니다.')}</div>`; }
+    finally { button.disabled = false; button.innerHTML = '<i class="fa-solid fa-play"></i> 가상 시나리오 보기'; }
   }
 
   const basisState = {
@@ -1731,18 +1789,45 @@ KOSDAQ|웹젠|게임`,
     { id: 'spy-dca', title: '해외 ETF · S&P 500 적립식', tag: '분산', ticker: 'SPY', strategy: 'dca', start: '2020-01-01', compareStart: '2017-01-01', interval: 21, note: '지수 ETF에서도 환율·세금 전의 가격 기반 성과를 학습합니다.', focus: '개별 기업 대신 넓은 미국 주식시장 ETF를 정액으로 샀을 때 가격 흐름과 분산의 의미를 확인합니다.', method: 'SPY를 21거래일마다 같은 금액으로 매수하는 가격 데이터 기반의 가상 적립식 계산입니다.', read: '개별 종목 예시보다 낙폭이 줄었는지, 그리고 장기 기간·다른 시작일에도 결과가 유지되는지 확인해 보세요.', caution: '이 화면은 달러 가격만 사용합니다. 원화 투자자는 환율, 환전 비용, 세금과 실제 ETF 비용을 별도로 반영해야 합니다.' },
   ];
 
+  const LEAN_REPORTS = [
+    { symbol: 'hyundai', label: '현대자동차', caption: '이동평균 추세추종' },
+    { symbol: 'samsung', label: '삼성전자', caption: '매수 후 보유' },
+    { symbol: 'samsung-em', label: '삼성전기', caption: '매수 후 보유' },
+  ];
+
   function renderBacktestWorkflow() {
     const today = new Date().toISOString().slice(0, 10);
     const strategyOptions = BACKTEST_STRATEGIES.map(s => `<option value="${s.value}">${escHtml(s.label)}</option>`).join('');
     const examples = BACKTEST_EXAMPLES.map((e, index) => `<button class="backtest-example ${index === 0 ? 'selected' : ''}" data-example="${e.id}" type="button"><span>${escHtml(e.tag)}</span><strong>${escHtml(e.title)}</strong><small>${escHtml(e.note)}</small><i class="fa-solid fa-arrow-right"></i></button>`).join('');
     $messages.innerHTML = `<article class="content-page backtest-page"><header class="backtest-page-head"><div class="content-kicker">QUANTCONNECT LEAN · YFINANCE WORKFLOW</div><h1>LEAN <mark>투자 판단 실습</mark></h1><p class="content-lead">테스트 하나를 고르고, 무엇을 검증하는지부터 결과 해석까지 순서대로 확인합니다.</p></header><div class="backtest-workspace"><aside class="backtest-examples" aria-label="바로 실행할 수 있는 백테스트 예시"><div><span>TEST LIBRARY</span><h2>확인할 상황 선택</h2><p>선택하면 오른쪽에 테스트의 질문과 해석 기준이 표시됩니다.</p></div><div class="backtest-example-grid">${examples}</div></aside><main class="backtest-main"><section class="backtest-test-detail" id="backtestTestDetail" aria-live="polite"></section><section class="backtest-canvas" aria-label="백테스트 설정"><div class="workflow-node input"><span>01 · 전략</span><select id="btStrategy" aria-label="예시 전략 선택">${strategyOptions}</select><small id="btStrategyHint">${escHtml(BACKTEST_STRATEGIES[0].hint)}</small></div><i class="fa-solid fa-arrow-right"></i><div class="workflow-node input"><span>02 · 종목 / ETF</span><input id="btTicker" value="005930.KS" maxlength="12" aria-label="종목 티커" /><small>한국: 005930.KS · 미국 ETF: SPY</small></div><i class="fa-solid fa-arrow-right"></i><div class="workflow-node input"><span>03 · 검증 기간</span><div><input id="btStart" type="date" value="2023-01-01" /><input id="btEnd" type="date" value="${today}" /></div><small>전략 성과를 계산할 기간</small></div><i class="fa-solid fa-arrow-right"></i><div class="workflow-node input"><span>04 · 비교 기간</span><div><input id="btCompareStart" type="date" value="2022-01-01" /><input id="btCompareEnd" type="date" value="${today}" /></div><small>다른 시장 국면에서도 확인</small></div><i class="fa-solid fa-arrow-right"></i><div class="workflow-node engine"><span>05 · 실행 엔진</span><strong><i class="fa-brands fa-docker"></i> LEAN</strong><small>가격 데이터 → 원격 Docker</small></div></section><section class="backtest-parameters" aria-label="전략 세부 조건"><label>단기 이동평균 <input id="btShortWindow" type="number" min="2" max="120" value="20" /></label><label>장기 이동평균 <input id="btLongWindow" type="number" min="5" max="300" value="60" /></label><label>적립 간격(거래일) <input id="btDcaInterval" type="number" min="1" max="120" value="21" /></label><label>돌파 기준(거래일) <input id="btBreakoutWindow" type="number" min="5" max="120" value="20" /></label><small>선택한 전략에 해당하는 값만 계산에 반영됩니다.</small></section><div class="backtest-actions"><button class="content-cta" id="runBacktest"><i class="fa-solid fa-play"></i> 이 조건으로 검증하기</button><span>교육용 과거 검증이며 투자 권유가 아닙니다.</span></div></main></div><section class="backtest-result" id="backtestResult"><div class="backtest-empty"><i class="fa-solid fa-diagram-project"></i><p>왼쪽 테스트를 고른 뒤 조건을 확인하고 실행하세요.</p></div></section></article>`;
+    const reportChoices = LEAN_REPORTS.map((report, index) => `<button class="lean-report-choice ${index === 0 ? 'selected' : ''}" type="button" data-lean-report="${report.symbol}"><b>${escHtml(report.label)}</b><small>${escHtml(report.caption)}</small></button>`).join('');
+    document.querySelector('.backtest-page-head').insertAdjacentHTML('afterend', `<section class="lean-report-library" aria-label="저장된 LEAN 실행 결과"><div><span>COMPLETED LEAN RUNS</span><h2>저장된 실제 실행 결과</h2><p>8000번 LEAN 앱에서 생성한 완료 리포트를 이 화면에서 바로 확인합니다.</p></div><div class="lean-report-choices">${reportChoices}</div></section>`);
     document.getElementById('runBacktest').addEventListener('click', runBacktest);
     document.getElementById('btStrategy').addEventListener('change', (event) => {
       const chosen = BACKTEST_STRATEGIES.find(s => s.value === event.target.value);
       document.getElementById('btStrategyHint').textContent = chosen ? chosen.hint : '';
     });
     document.querySelectorAll('[data-example]').forEach(button => button.addEventListener('click', () => applyBacktestExample(button.dataset.example)));
+    document.querySelectorAll('[data-lean-report]').forEach(button => button.addEventListener('click', () => loadLeanReport(button.dataset.leanReport)));
     applyBacktestExample(BACKTEST_EXAMPLES[0].id);
+    loadLeanReport(LEAN_REPORTS[0].symbol);
+  }
+
+  async function loadLeanReport(symbol) {
+    const result = document.getElementById('backtestResult');
+    if (!result) return;
+    document.querySelectorAll('[data-lean-report]').forEach(button => button.classList.toggle('selected', button.dataset.leanReport === symbol));
+    result.innerHTML = '<div class="backtest-empty"><i class="fa-solid fa-spinner fa-spin"></i><p>저장된 LEAN 실행 결과를 불러오고 있습니다.</p></div>';
+    try {
+      const report = await fetchLocalBackendJson(`/backtests/reports/${encodeURIComponent(symbol)}`, payload => payload && payload.statistics && Array.isArray(payload.equity_curve));
+      const stats = report.statistics || {};
+      const points = report.equity_curve.map(point => ({ value: Number(point.equity) })).filter(point => Number.isFinite(point.value));
+      const status = report.status === 'Completed' ? '완료' : (report.status || '상태 미상');
+      result.innerHTML = `<div class="backtest-result-head"><span>QUANTCONNECT LEAN · ${escHtml(status)}</span><h2>${escHtml(report.label)} (${escHtml(report.code)}) 실행 결과</h2></div><section class="backtest-summary"><span><i class="fa-solid fa-file-circle-check"></i> 저장된 실행 리포트</span><strong>${escHtml(report.strategy_name)}</strong><p>${escHtml(report.strategy_note)}</p><small>검증 기간 ${escHtml(String(report.start_date || '-').slice(0, 10))} ~ ${escHtml(String(report.end_date || '-').slice(0, 10))} · 주문 ${escHtml(String(report.order_count ?? '-'))}건</small></section><div class="backtest-metrics"><article><span>순이익</span><strong class="${String(stats['Net Profit'] || '').startsWith('-') ? 'down' : 'up'}">${escHtml(stats['Net Profit'] || '-')}</strong></article><article><span>연환산 수익률</span><strong>${escHtml(stats['Compounding Annual Return'] || '-')}</strong></article><article><span>최대 낙폭</span><strong class="down">${escHtml(stats.Drawdown || '-')}</strong></article><article><span>샤프 비율</span><strong>${escHtml(stats['Sharpe Ratio'] || '-')}</strong></article><article><span>승률</span><strong>${escHtml(stats['Win Rate'] || '-')}</strong></article><article><span>총 주문</span><strong>${escHtml(stats['Total Orders'] || String(report.order_count ?? '-'))}</strong></article><article><span>시작 자산</span><strong>${escHtml(stats['Start Equity'] || '-')}</strong></article><article><span>종료 자산</span><strong>${escHtml(stats['End Equity'] || '-')}</strong></article></div><canvas id="backtestChart" width="900" height="250" aria-label="LEAN 자산 곡선"></canvas><p class="backtest-disclaimer">저장된 LEAN 실행 리포트입니다. 과거 성과는 미래 수익을 보장하지 않으며 투자 권유가 아닙니다.</p>`;
+      drawBacktestChart(points);
+    } catch (error) {
+      result.innerHTML = `<div class="backtest-error"><i class="fa-solid fa-triangle-exclamation"></i>${escHtml(error.message || '저장된 LEAN 결과를 불러오지 못했습니다.')}</div>`;
+    }
   }
 
   function applyBacktestExample(id) {
@@ -3121,7 +3206,7 @@ effective_date: [기준일]
 
   renderScenarioResult();
   const requestedView = new URLSearchParams(window.location.search).get('view');
-  const initialView = ['home', 'stocks', 'learn', 'simulation', 'basis', 'backtest', 'calendar'].includes(requestedView)
+  const initialView = ['home', 'minute-chart', 'stocks', 'learn', 'simulation', 'portfolio-simulation', 'basis', 'backtest', 'calendar'].includes(requestedView)
     ? requestedView
     : 'home';
   setView(initialView);
