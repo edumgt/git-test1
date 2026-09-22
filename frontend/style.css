@@ -2203,6 +2203,14 @@ html,body { background:#f5f5f5; color:#111; }.app-layout { grid-template-columns
 .integrated-dashboard-frame iframe, .integrated-lesson-frame iframe { width: 100%; min-height: calc(100dvh - 73px); border: 0; background: #fff; box-shadow: none; }
 @media (max-width: 1080px) { .integrated-dashboard-page, .integrated-lesson-page, .integrated-dashboard-frame, .integrated-lesson-frame, .integrated-dashboard-frame iframe, .integrated-lesson-frame iframe { min-height: calc(100dvh - 58px); } }
 
+/* Lessons live in the portal content area; they do not render a second GNB/LNB. */
+.lesson-content-page { max-width: 1240px; }
+.lesson-document { margin-top: 22px; padding: clamp(22px, 4vw, 46px); color: #222; border: 1px solid #d7d7d7; background: #fff; box-shadow: 0 2px 8px rgba(0,55,113,.08); font-size: 16px; line-height: 1.85; }
+.lesson-document h2 { margin: 46px 0 18px; padding: 0 0 11px; color: #0058a3; border-bottom: 2px solid #ffda1a; font-size: 25px; line-height: 1.35; scroll-margin-top: 86px; }
+.lesson-document h3 { margin: 32px 0 12px; color: #111; font-size: 19px; line-height: 1.45; scroll-margin-top: 86px; }
+.lesson-document p { margin: 0 0 15px; }.lesson-document ul,.lesson-document ol { margin: 0 0 18px 22px; }.lesson-document li { margin: 5px 0; }.lesson-document blockquote { margin: 20px 0; padding: 14px 18px; border-left: 4px solid #0058a3; background: #e8f1f8; }.lesson-document table { display: block; width: 100%; margin: 20px 0; overflow-x: auto; border-collapse: collapse; }.lesson-document th,.lesson-document td { padding: 10px; border: 1px solid #d7d7d7; text-align: left; vertical-align: top; }.lesson-document th { color: #fff; background: #0058a3; }.lesson-intro { color: #4f4f4f; }.lesson-loading,.lesson-load-error { margin: 0; color: #5b5b5b; }.lesson-load-error { color: #b42318; }.lesson-outline { display: grid; gap: 2px; margin: 0 0 34px; padding: 16px 18px; border-left: 4px solid #ffda1a; background: #f7f7f7; }.lesson-outline b { margin-bottom: 5px; color: #0058a3; font-size: 14px; }.lesson-outline a { color: #333; font-size: 14px; text-decoration: none; }.lesson-outline a:hover { color: #0058a3; text-decoration: underline; }.lesson-outline a.sub { padding-left: 14px; color: #5b5b5b; }
+@media (max-width: 640px) { .lesson-document { margin-top: 14px; padding: 22px 18px; font-size: 15px; }.lesson-document h2 { margin-top: 34px; font-size: 21px; }.lesson-document h3 { font-size: 17px; } }
+
 /* Compact document headers: menu name plus one functional sentence only. */
 .simulation-guide-head,
 .practice-hub-head,

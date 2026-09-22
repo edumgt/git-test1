@@ -33,7 +33,18 @@
     activeScenario: 'equity',
     lastRagLatencyMs: null,
     calendarCursor: null,
+    activeLesson: null,
   };
+
+  const INTEGRATED_LESSONS = [
+    ['01', ['10-1'], '법인과 회사 구조 1: 시작하기 전에'],
+    ['02', ['10-2'], '법인과 회사 구조 2: 운영·자금·신용보증'],
+    ['03', ['10-3'], '법인과 회사 구조 3: 세무·회계의 기초'],
+    ['04', ['11'], '거시경제와 주식시장 읽기'],
+    ['05', ['03'], '주식 기초'], ['06', ['05'], '주식 분석'], ['07', ['04'], '가치와 재무 읽기'],
+    ['08', ['06', 'theory-1'], '거래 전략 · LEAN · 선물·옵션'],
+    ['09', ['07', 'theory-2', 'theory-3'], '펀드 · ETF · 채권 · 코인'], ['10', ['theory-4'], '자산배분 · 퀀트'],
+  ];
 
   const tickState = {
     name: '삼성전자',
@@ -650,7 +661,10 @@ KOSDAQ|웹젠|게임`,
   });
 
   $viewButtons.forEach(btn => {
-    if (btn.dataset.view) btn.addEventListener('click', () => setView(btn.dataset.view));
+    if (btn.dataset.view) btn.addEventListener('click', () => {
+      if (btn.dataset.view === 'learn') state.activeLesson = null;
+      setView(btn.dataset.view);
+    });
   });
 
   $openLeftPanel.addEventListener('click', () => togglePanel('left'));
@@ -756,7 +770,15 @@ KOSDAQ|웹젠|게임`,
     if (view === 'quiz') renderQuiz();
     if (view === 'data-visualization') renderDataVisualization();
     if (view === 'stocks') renderStocksView();
-    if (view === 'learn') showWelcome();
+    if (view === 'learn') {
+      state.activeLesson = null;
+      $integratedLessonButtons.forEach(button => button.classList.remove('active'));
+      showWelcome();
+    }
+    if (view === 'lessons') {
+      if (state.activeLesson) renderIntegratedLesson(state.activeLesson);
+      else renderTheoryIndex();
+    }
     if (view === 'theory') renderTheoryIndex();
     if (view === 'simulation') {
       renderSimulationGuide();
@@ -1504,7 +1526,69 @@ KOSDAQ|웹젠|게임`,
       'learn-10-1': '01', 'learn-10-2': '02', 'learn-10-3': '03', 'learn-11': '04',
       'learn-03': '05', 'learn-05': '06', 'learn-04': '07', 'learn-06': '08', 'learn-07': '09', 'learn-10': '10',
     }[lessonId];
-    if (lessonNumber) window.location.assign(`/static/lessons/${lessonNumber}.html`);
+    if (!lessonNumber) return;
+    // 학습 단원도 포털을 새 상태로 열어 GNB의 기존 화면 상태와 섞이지 않게 한다.
+    window.location.assign(`/static/lessons/${lessonNumber}.html`);
+  }
+
+  function loadMarkedForLesson() {
+    if (window.marked) return Promise.resolve();
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/marked@11/marked.min.js';
+      script.onload = resolve;
+      script.onerror = () => reject(new Error('학습 문서 렌더러를 불러오지 못했습니다.'));
+      document.head.append(script);
+    });
+  }
+
+  function theoryLessonSource(sourceId) {
+    const day = Number(sourceId.replace('theory-', ''));
+    const source = window.THEORY_DAYS?.find(item => item.day === day);
+    if (!source) throw new Error('통합 학습 데이터를 불러오지 못했습니다.');
+    return `<section class="lesson-source"><h2>${escHtml(source.title)}</h2><p class="lesson-intro">${escHtml(source.subtitle)}</p>${source.lessons.map(([heading, paragraphs]) => `<section><h3>${escHtml(heading)}</h3>${paragraphs.map(paragraph => `<p>${escHtml(paragraph)}</p>`).join('')}</section>`).join('')}</section>`;
+  }
+
+  async function renderIntegratedLesson(lessonNumber) {
+    const lesson = INTEGRATED_LESSONS.find(([number]) => number === lessonNumber);
+    if (!lesson) { state.activeLesson = null; showWelcome(); return; }
+    const [, sourceIds, title] = lesson;
+    const lessonIds = { '01':'learn-10-1', '02':'learn-10-2', '03':'learn-10-3', '04':'learn-11', '05':'learn-03', '06':'learn-05', '07':'learn-04', '08':'learn-06', '09':'learn-07', '10':'learn-10' };
+    $integratedLessonButtons.forEach(button => button.classList.toggle('active', button.dataset.integratedLesson === lessonIds[lessonNumber]));
+    $messages.innerHTML = `<article class="content-page lesson-content-page"><header class="compact-menu-head"><strong>학습 ${lessonNumber} · ${escHtml(title)}</strong><span>통합 학습 과정의 ${lessonNumber}단원입니다.</span></header><div class="lesson-document"><p class="lesson-loading"><i class="fa-solid fa-spinner fa-spin"></i> 학습 내용을 불러오는 중입니다.</p></div></article>`;
+    try {
+      await loadMarkedForLesson();
+      const sources = await Promise.all(sourceIds.map(async sourceId => {
+        if (sourceId.startsWith('theory-')) return theoryLessonSource(sourceId);
+        const response = await fetch(`/static/lessons/content/${sourceId}.md`);
+        if (!response.ok) throw new Error('학습 원문을 불러오지 못했습니다.');
+        return window.marked.parse(await response.text());
+      }));
+      if (state.activeView !== 'learn' || state.activeLesson !== lessonNumber) return;
+      const documentRoot = $messages.querySelector('.lesson-document');
+      documentRoot.innerHTML = sources.join('');
+      documentRoot.querySelectorAll('h1').forEach(heading => {
+        const replacement = document.createElement('h2');
+        replacement.textContent = heading.textContent;
+        heading.replaceWith(replacement);
+      });
+      const headings = [...documentRoot.querySelectorAll('h2, h3')];
+      headings.forEach((heading, index) => { heading.id = `lesson-${lessonNumber}-section-${index + 1}`; });
+      if (headings.length) {
+        const outline = document.createElement('nav');
+        outline.className = 'lesson-outline';
+        outline.setAttribute('aria-label', '학습 목차');
+        outline.innerHTML = `<b>이 단원에서 다루는 내용</b>${headings.map(heading => `<a class="${heading.tagName === 'H3' ? 'sub' : ''}" href="#${heading.id}">${escHtml(heading.textContent)}</a>`).join('')}`;
+        outline.querySelectorAll('a').forEach(link => link.addEventListener('click', event => {
+          event.preventDefault();
+          documentRoot.querySelector(link.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }));
+        documentRoot.prepend(outline);
+      }
+    } catch (error) {
+      const documentRoot = $messages.querySelector('.lesson-document');
+      if (documentRoot) documentRoot.innerHTML = `<p class="lesson-load-error">${escHtml(error.message)} 새로고침 후 다시 시도해 주세요.</p>`;
+    }
   }
 
   function renderSimulationGuide() {
@@ -3312,10 +3396,13 @@ effective_date: [기준일]
   }
 
   renderScenarioResult();
-  const requestedView = new URLSearchParams(window.location.search).get('view');
-  const initialView = ['home', 'minute-chart', 'stocks', 'learn', 'simulation', 'portfolio-simulation', 'basis', 'backtest', 'calendar'].includes(requestedView)
+  const queryParams = new URLSearchParams(window.location.search);
+  const requestedView = queryParams.get('view');
+  const requestedLesson = queryParams.get('lesson');
+  if (INTEGRATED_LESSONS.some(([number]) => number === requestedLesson)) state.activeLesson = requestedLesson;
+  const initialView = ['home', 'minute-chart', 'stocks', 'learn', 'lessons', 'simulation', 'portfolio-simulation', 'basis', 'backtest', 'calendar'].includes(requestedView)
     ? requestedView
-    : 'home';
+    : state.activeLesson ? 'lessons' : 'home';
   setView(initialView);
   $topKLabel.textContent = state.topK;
 })();
